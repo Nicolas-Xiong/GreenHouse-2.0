@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/dynamic_plot.js') }}"></script>
+    <div id="main" style="width: 100%;height:80%;"></div>
+    <center>
+    <table width="300" border="0">
+  <tr>
+    <th scope="row">实时光照度（klux）</th>
+    <td id="td"></td>
+  </tr>
+  </table>
+  </center>
+  <script type="text/javascript">
+  	var myChart = echarts.init(document.getElementById('main'));
+  	myChart.showLoading();
+  </script>
+
+{% endblock %}

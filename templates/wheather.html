@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+{% block content %}
+   <script type="text/javascript" src="{{ url_for('static', filename='js/weather_plot2.js') }}"></script>
+   <center>
+    <h2 id="position"></h2>
+   </center>
+   <div id="main1" style="width: 100%;height:80%;"></div>
+	
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('main1'));
+		myChart1.showLoading();
+    </script>
+
+
+{% endblock %}
