@@ -4,13 +4,12 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
 verify_ssl = true
 
 [dev-packages]
-coverage = "*"
 
 [packages]
-flask = "*"
-python-dotenv = "*"
 flask-sqlalchemy = "*"
+flask = "*"
 flask-login = "*"
+bs4 = "*"
 requests = "*"
 
 [requires]

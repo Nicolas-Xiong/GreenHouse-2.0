@@ -1,0 +1,5 @@
+默认源在pipenv install时自动获取
+
+如果安装不成功，试试把Windows Defender关掉
+
+https://pypi.tuna.tsinghua.edu.cn/simple/

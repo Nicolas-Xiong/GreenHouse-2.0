@@ -7,7 +7,7 @@ git remote add origin git@github.com:Nicolas-Xiong/watchlist.git # ×¢Òâ¸ü»»µØÖ·Ö
 #ÉÏ´«Èı¼şÌ×
 git add .
 git commit -m "***"
-git push
+git push £¨Ê×´ÎÓÃ£ºgit push -u origin master Õâ¾ÍÊÇÈ«²¿´úÂë£¬²»Òª°Ñmaster¸Ä³ÉµØÖ·£¡£©
 
 
 #¿ËÂ¡´úÂë,ÓÃÓÚÊ×´ÎÀ­È¡

@@ -3,7 +3,6 @@
 {% block content %}
       <center>
     <h3>{{ movies|length }} <a>个标题</a></h3>
-	  </center>
 	{% if current_user.is_authenticated %}
 	<form method="post">    
 	    影视名称 <input type="text" name="title" autocomplete="off" required>    
@@ -11,9 +10,11 @@
 		<input class="btn" type="submit" name="submit" value="添加"> 
 	</form>
 	{% endif %}
+	 </center>
     <ul class="movie-list">
         {% for movie in movies %}  
-        <li>{{ movie.title }} - {{ movie.year }}
+        <li>    
+		       {{ movie.title }} - {{ movie.year }}
 		       <span class="float-right">
 				   {% if current_user.is_authenticated %} 
 				   <form class="inline-form" method="post" action="{{ url_for('delete', movie_id=movie.id) }}">

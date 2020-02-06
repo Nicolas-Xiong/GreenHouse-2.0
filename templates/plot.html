@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<script type="text/javascript" src="{{ url_for('static', filename='js/dynamic_plot.js') }}"></script>
-    <div id="main" style="width: 100%;height:80%;"></div>
+	<!-- <script type="text/javascript" src="{{ url_for('static', filename='js/dynamic_plot1.js') }}"></script> -->
+    <div id="main" style="width: 80%;height:80%;margin:5px auto;"></div>
     <center>
     <table width="300" border="0">
-  <tr>
+  <tr style="color:#fff">
     <th scope="row">实时光照度（klux）</th>
     <td id="td"></td>
   </tr>
@@ -14,6 +14,73 @@
   <script type="text/javascript">
   	var myChart = echarts.init(document.getElementById('main'));
   	myChart.showLoading();
+	var data = [20];
+	var time = [];
+	
+	function addData(shift) {
+		if (data[data.length-1]>10 && data[data.length-1]<40){
+	    data.push((Math.random() - 0.5) + data[data.length - 1]);
+		}
+		else{
+			data.push(data[data.length-2]);
+		}
+		
+	    if (shift){ 
+	        data.shift();
+			}
+	}
+	
+	//添加初始数据
+	for (var i = 1; i < 120; i++) {
+	    addData();
+	}
+	//生成x轴轴标数据
+	for (var j = 120; j >= 0 ; j--) {
+	    time.push(j+'秒前')
+	}
+	
+	setInterval(function () {
+		myChart.hideLoading();
+		document.getElementById("td").innerHTML = data[data.length - 1].toFixed(3);
+	    addData(true);
+	    myChart.setOption({
+			title: {
+				left: 'center',
+				text: '大棚光照度',
+				textStyle: {
+				  color: "#fff"
+				},
+			},
+	        xAxis: {
+	            data: time,
+				axisLabel: {
+				  textStyle: {
+				    color: "#fff"
+				  },
+				},
+	        },
+	    	yAxis: {
+	        	boundaryGap: [0, '40%'],
+	        	type: 'value',
+				axisLabel: {
+				  textStyle: {
+				    color: "#fff"
+				  },
+				},
+	    	},
+	        series: [{
+	            name:'光照度（klux）',
+				type:'line',
+	            //smooth:true,
+	            symbol: 'none',
+	            stack: 'a',
+	            areaStyle: {
+	                normal: {}
+	            },
+	            data: data
+	        }]
+	    });
+	}, 1000);
   </script>
 
 {% endblock %}

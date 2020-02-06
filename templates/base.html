@@ -12,22 +12,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css"> 
 	{% endblock %}
 </head> 
-<body class="body-background" background="{{url_for('static', filename='images/snow.jpg')}}">
+<body class="body-background" background="{{url_for('static', filename='images/bg.png')}}">
 	{% for message in get_flashed_messages() %}    
 	     <div class="alert">{{ message }}</div> 
 	{% endfor %}
-    <nav>        
-	      <ul>          
-		        <li><a href="{{ url_for('wheather') }}">天气</a></li>
-		        <li><a href="{{ url_for('plot_') }}">数据</a></li>
-				<li><a href="{{ url_for('index') }}">影视</a></li>
+    <nav>  
+		  <div>
+	      <ul>  
+				<li class="nav-left" ><a href="{{ url_for('navigation') }}">主页</a></li>
+		        <li class="nav-left" ><a href="{{ url_for('wheather') }}">天气</a></li>
+		        <li class="nav-left" ><a href="{{ url_for('plot_') }}">模拟数据</a></li>
 			    {% if current_user.is_authenticated %} 
-			      <li><a href="{{ url_for('settings') }}">设置</a></li>   
-				  <li><a href="{{ url_for('logout') }}">退出</a></li>  
+				  <li class="nav-left" ><a href="{{ url_for('index') }}">影视</a></li>
+			      <li class="nav-left" ><a href="{{ url_for('settings') }}">设置</a></li>   
+				  <li class="log-in-out" ><a href="{{ url_for('logout') }}">退出</a></li>  
 				{% else %}    
-				  <li><a href="{{ url_for('login') }}">登录</a></li> 
+				  <li class="log-in-out"><a href="{{ url_for('login') }}">登录</a></li> 
 				{% endif %}
-		  </ul>    
+		  </ul>  
+		  </div>
 	</nav>    
 	{% block content %}{% endblock %}
     <footer class="foot-background" >

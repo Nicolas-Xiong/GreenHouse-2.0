@@ -29,7 +29,11 @@ setInterval(function () {
     addData(true);
     myChart.setOption({
 		title: {
-			text: '大棚光照度'
+			left: 'center',
+			text: '大棚光照度',
+			textStyle: {
+			  color: "#fff"
+			},
 		},
         xAxis: {
             data: time

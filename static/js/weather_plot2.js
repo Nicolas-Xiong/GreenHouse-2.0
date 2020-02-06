@@ -11,17 +11,19 @@
 		            title: [{
 						left: 'center',
 		                text: '温度 湿度',
+						color: '#ff0000'//
 		            },{
 						top: '50%',
 						left: 'center',
-						text: '空气质量'
+						text: '空气质量',
+						color: '#ff0000'//红色
 					}],
 					tooltip: [{
 						trigger: 'axis', 						
 						axisPointer: {  //坐标轴指示器，坐标轴触发有效，
 						    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
 							crossStyle: {
-						        color: '#fff'//白色
+						        color: '#ffffff'//白色
 							}
 						},
 						// formatter(params){
@@ -55,6 +57,7 @@
 						{
 							type:'value',
 							name: '温度',
+							color: '#ff0000',//红色
 							axisLabel: {
 							formatter: '{value} ℃'
 						}
@@ -63,12 +66,14 @@
 							name: '湿度',
 							min: 0,
 							max: 100,
+							color: '#ff0000',//红色
 							axisLabel: {
 							formatter: '{value} %'
 							}
                          },{
 							type:'value',
 							name: '空气质量',
+							color: '#ff0000',//红色
 							gridIndex:1,
 						}],
 					series: [{//默认第一个图第一个轴
