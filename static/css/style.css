@@ -1,3 +1,9 @@
+/*取消默认的边距和填充*/
+*{ 
+	margin:0; 
+	padding:0;
+}  
+
 /* 页面整体 */ 
 body {    
     margin: auto;    
@@ -51,7 +57,8 @@ input[name=year] {
 input[name=title] {    
 	width: 50px; 
 	}	
-
+ul li{ list-style:none;}
+a{ text-decoration:none;}
 		
     
 
@@ -146,62 +153,29 @@ input[name=title] {
 
 /*导航栏设置*/
 .nav-left{float: left; }
-.log-in-out{float: right; background:url(../static/images/admin.jpg) no-repeat 0px 13px;padding-left:13px;} 
-
-
-*{ margin:0; padding:0;}
-
-ul li{ list-style:none;} /*去掉列表前面的点*/
-a{ text-decoration:none;}/*去掉连接的文本修饰*/
-
-.index-con{ width:1000px; height:450px; margin:140px auto 0; position:relative;}
-.index-con li{ width:335px; float:left; margin:0 10px 5px 0; position:relative;}
-*html .index-con li{margin:0 10px 10px 0;}
-*html .index-con .in-zxl{ margin-top:-10px;}
-.index-con li a{font-size:30px; color:#fff!important; line-height:63px; zoom:1; position:relative;}
-.in-kct a{height:300px;  display:block; text-align:center;}
-.in-kct a{ background:#b01e00;}
-.in-kct i{ width:150px; height:150px; display:block; background:url(../static/images/course-icon.png) no-repeat; float:left;;margin:40px 95px 0 95px; }
-*html .in-kct i{margin:45px 45px 15px 45px; }
-.in-quest a{ background:#28b779;}
-.in-quest i{background:url(../static/images/quest-icon.png) no-repeat;}
-.index-con .in-jbk a{width:310px; height:145px; display:block; background:#00bfff; display:block;line-height:145px;}
-.in-jbk i{ width:60px; height:53px; display:block; float:left; background:url(../static/images/mryl.png) no-repeat; margin:50px 30px 0 55px; }
-*html .in-jbk i{ margin:38px 25px 0 20px;}
-.index-con .in-report a{ display:block; background:#ff8000;}
-.in-report i{ width:64px; height:64px; background:url(../static/images/yl.png) no-repeat; margin:42px 30px 0 49px;}
-.index-con .in-client a{ height:130px; display:block; background:#691bb8; line-height:130px;}
-.in-client i{width:58px; height:55px; background:url(../static/images/chart.png) no-repeat; margin:38px 30px 0 52px;}
-*html .in-client i{ margin:40px 30px 0 22px;}
-.index-con .in-zxl a{ height:130px; line-height:130px;display:block; background:#ff8000; margin-top:5px;  overflow:hidden; } 
-*html .index-con .in-zxl a{ margin-top:10px;}
-.in-zxl i{width:64px; height:56px; display:block; float:left;}
-.in-forma i{background:url(../static/images/forma-icon.png) no-repeat 0 3px; margin:37px 25px 0 95px;}
-.index-con .in-means a{ background:#1f64cd;}
-.in-means i{  background:url(../static/images/means-icon.png) no-repeat; margin:40px 25px 0 95px;}
-.in-forma i,.in-means i{ *margin:40px 35px 0 75px; }
-
-
-
-.index-con .in-jbk{ height:130px; position:absolute; top:0; right:-10px;}
-.index-con .in-plan{ width:310px; height:145px; position:absolute; top:0; right:-10px;  z-index:5}
-.index-con .in-report{ width:310px; height:145px; position:absolute; top:154px; right:-10px; z-index:5}
-.index-con .in-client{ width:310px; height:130px; position:absolute; top:310px; right:-10px; z-index:5}
-.index-con .in-jbk i.hide,.index-con .in-zxl i.hide{ visibility:hidden}
-.index-con .in-kct .ch{ position:absolute; bottom:40px; left:110px;}
-.index-con .in-jbk .ch1{ position:absolute; top:0; left:140px;}
-.index-con .in-zxl .ch2{ position:absolute; top:0; left:180px;}
+.log-in-out{float: right; background:url(../images/admin.jpg) no-repeat 0px 13px;padding-left:13px;} 
 
 
 
 
+.in-kct .image{ width:150px; height:150px; background:url(../images/course-icon.png) no-repeat;}
+.in-kct .image2{ width:150px; height:150px; background:url(../images/quest-icon.png) no-repeat;}
+.in-kct .ch{font-size:30px; text-align: center; color:#fff!important;}/*!important 实现禁止改变*/
 
+.in-jbk .image{ width:57px; height:56px; background:url(../images/forma-icon.png) no-repeat;}
+.in-jbk .image2{ width:60px; height:59px; background:url(../images/means-icon.png) no-repeat;}
+.in-jbk .ch{font-size:30px; text-align: center; color:#fff!important;}/*!important 实现禁止改变*/
+
+.in-zxl .image{ width:59px; height:56px; background:url(../images/mryl.png) no-repeat;}
+.in-zxl .image2{ width:56px; height:55px; background:url(../images/yl.png) no-repeat;}
+.in-zxl .image3{ width:60px; height:53px; background:url(../images/chart.png) no-repeat;}
+.in-zxl .ch{font-size:30px; text-align: center; color:#fff!important;}/*!important 实现禁止改变*/
 
 
 
 /*动作*/
 .in-kct .in-block .smaller{animation:scale 1s .1s ease-in-out both normal; -moz-animation:scale 1s .1s ease-in-out both normal; -webkit-animation:scale 1s .1s ease-in-out both normal; -o-animation:scale 1s .1s ease-in-out both normal}
-.in-kct .in-block .bigger{animation:scale1 1s .1s ease-in-out both normal; -moz-animation:scale1 1s .1s ease-in-out both normal; -webkit-animation:scale1 1s .1s ease-in-out both normal; -o-animation:scale1 1s .1s ease-in-out both normal;}
+.bigger{animation:scale1 1s .1s ease-in-out both normal; -moz-animation:scale1 1s .1s ease-in-out both normal; -webkit-animation:scale1 1s .1s ease-in-out both normal; -o-animation:scale1 1s .1s ease-in-out both normal;}
 .show{animation:show 1s .1s ease-in-out both normal; -moz-animation:show 1s .1s ease-in-out both normal; -webkit-animation:show 1s .1s ease-in-out both normal; -o-animation:show 1s .1s ease-in-out both normal;}
 .toLeft1{animation:toLeft1 1s .1s ease-in-out both normal; -moz-animation:toLeft1 1s .1s ease-in-out both normal; -webkit-animation:toLeft1 1s .1s ease-in-out both normal; -o-animation:toLeft1 1s .1s ease-in-out both normal;}
 .toRight1{animation:toRight1 1s .1s ease-in-out both normal; -moz-animation:toRight1 1s .1s ease-in-out both normal; -webkit-animation:toRight1 1s .1s ease-in-out both normal; -o-animation:toRight1 1s .1s ease-in-out both normal;}
