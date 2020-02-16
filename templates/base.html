@@ -8,6 +8,7 @@
     <title>{{ user.name }}'s web application</title> 
 	<script type="text/javascript" src="{{ url_for('static', filename='js/echarts.common.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
@@ -21,7 +22,8 @@
     <nav>  
 		  <div>
 	      <ul>  
-				<li class="nav-left" ><a href="{{ url_for('navigation') }}" style="color:#ffffff!important;">主页</a></li>
+				<li class="nav-left" ><a href="{{ url_for('db_data') }}" style="color:#ffffff!important;">数据库</a></li>
+				<li class="nav-left" ><a href="{{ url_for('navigation') }}" style="color:#ffffff!important;">界面</a></li>
 		        <li class="nav-left" ><a href="{{ url_for('wheather') }}" style="color:#ffffff!important;">天气</a></li>
 		        <li class="nav-left" ><a href="{{ url_for('plot_') }}" style="color:#ffffff!important;">模拟数据</a></li>
 			    {% if current_user.is_authenticated %} 

@@ -101,7 +101,7 @@ a{ text-decoration:none;}
 	}
 
 /*输入框格式*/	
-.btn {    
+.btn_ {    
 	font-size: 12px;    
 	padding: 3px 5px;    
 	text-decoration: none;    
@@ -111,7 +111,7 @@ a{ text-decoration:none;}
 	border: 1px solid #555555;    
 	border-radius: 5px; 
 	}
-.btn:hover {    
+.btn_:hover {    
 	text-decoration: none;    
 	background-color: black;    
 	color: white;    
@@ -151,6 +151,9 @@ a{ text-decoration:none;}
 	height: 100%;	
 }
 
+
+
+
 /*导航栏设置*/
 .nav-left{float: left; }
 .log-in-out{float: right; background:url(../images/admin.jpg) no-repeat 0px 13px;padding-left:13px;} 
@@ -176,7 +179,7 @@ a{ text-decoration:none;}
 /*动作*/
 .in-kct .in-block .smaller{animation:scale 1s .1s ease-in-out both normal; -moz-animation:scale 1s .1s ease-in-out both normal; -webkit-animation:scale 1s .1s ease-in-out both normal; -o-animation:scale 1s .1s ease-in-out both normal}
 .bigger{animation:scale1 1s .1s ease-in-out both normal; -moz-animation:scale1 1s .1s ease-in-out both normal; -webkit-animation:scale1 1s .1s ease-in-out both normal; -o-animation:scale1 1s .1s ease-in-out both normal;}
-.show{animation:show 1s .1s ease-in-out both normal; -moz-animation:show 1s .1s ease-in-out both normal; -webkit-animation:show 1s .1s ease-in-out both normal; -o-animation:show 1s .1s ease-in-out both normal;}
+.show_{animation:show 1s .1s ease-in-out both normal; -moz-animation:show 1s .1s ease-in-out both normal; -webkit-animation:show 1s .1s ease-in-out both normal; -o-animation:show 1s .1s ease-in-out both normal;}
 .toLeft1{animation:toLeft1 1s .1s ease-in-out both normal; -moz-animation:toLeft1 1s .1s ease-in-out both normal; -webkit-animation:toLeft1 1s .1s ease-in-out both normal; -o-animation:toLeft1 1s .1s ease-in-out both normal;}
 .toRight1{animation:toRight1 1s .1s ease-in-out both normal; -moz-animation:toRight1 1s .1s ease-in-out both normal; -webkit-animation:toRight1 1s .1s ease-in-out both normal; -o-animation:toRight1 1s .1s ease-in-out both normal;}
 .toLeft2{animation:toLeft2 1s .1s ease-in-out both normal; -moz-animation:toLeft2 1s .1s ease-in-out both normal; -webkit-animation:toLeft2 1s .1s ease-in-out both normal; -o-animation:toLeft2 1s .1s ease-in-out both normal;}

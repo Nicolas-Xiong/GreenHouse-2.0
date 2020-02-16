@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %} 
+<center>
 <h3>编辑</h3> 
 <form method="post">    
     <a>影视名称</a> <input type="text" name="title" autocomplete="off" required value="{{ movie.title }}">    
     <a>影视年代</a> <input type="text" name="year" autocomplete="off" required value="{{ movie.year }}">    
-    <input class="btn" type="submit" name="submit" value="更新"> 
+    <input class="btn_" type="submit" name="submit" value="更新"> 
 </form> 
+</center>
 {% endblock %}

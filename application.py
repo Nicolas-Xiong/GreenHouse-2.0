@@ -17,7 +17,7 @@ from flask_login import logout_user
 from flask_login import login_required, current_user
 from bs4 import BeautifulSoup
 import requests#这个是用来获取其他网站的数据，与flask自带request不一样
-from datetime import timedelta
+import datetime 
 import os
 import sys
 import click
@@ -40,10 +40,11 @@ app=Flask(__name__)
  
 app.secret_key='d'     #按错误提示加的密钥
 app.config['DEBUG']=True
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(seconds=1)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(seconds=1)
 
 #从环境变量中读取密钥，如果没有读取到，则使用默认值
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev')
+#设置数据库路径
 app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(os.path.dirname(app.root_path), os.getenv('DATABASE_FILE', 'data.db'))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 关闭对模型修改的监控
 db = SQLAlchemy(app)  # 初始化扩展，传入程序实例 app
@@ -59,7 +60,7 @@ def inject_user():           #这个函数返回的变量（以字典键值对�
     user = User.query.first()    
     return dict(user=user)
 
-@app.route('/')
+@app.route('/navigation', methods=['GET'])
 def navigation():
     return render_template('navigation.html')
 
@@ -69,9 +70,13 @@ def plot_():
     return render_template('plot.html')
 
 
-@app.route('/wheather')
+@app.route('/wheather', methods=['GET'])
 def wheather():
     return render_template('wheather.html')
+
+@app.route('/', methods=['GET'])
+def db_data():
+    return render_template('db_data.html')
 
 
 @app.route('/index', methods=['GET', 'POST'])
@@ -80,7 +85,8 @@ def index():
     if request.method == 'POST':  # 判断是否是 POST 请求    
         if not current_user.is_authenticated:  # 如果当前用户未认证            
             return redirect(url_for('index'))  # 重定向到主页
-        # 获取表单数据        
+        # 获取表单数据     
+        #id=datetime.datetime.now()
         title = request.form.get('title')  # 传入表单对应输入字段的 name 值        
         year = request.form.get('year')
       # 验证数据        
@@ -199,9 +205,33 @@ def weather():
     
     return jsonify(dic)  #以json字符串格式发送数据
 
+@app.route('/databse',methods=['POST','GET'])   #用于输出传输json到前端
+def database():
+    
+    weather_ = Weather_.query.all()
+    #获取列表
+    temperature=[]
+    datetime_=[]
+    humidity=[]
+    air_quality=[]
+    for t in weather_:
+        if t.id == 0:
+            continue
+        datetime_.append(t.Date+' '+t.Time)#获取时间列表
+        temperature.append(t.Temperature) #获取温度列表
+        humidity.append(t.Humidity) #获取湿度列表
+        air_quality.append(t.Air_quality)#获取空气质量列表
+        
+        #翻转列表，重构字典格式
+    dic={}
+    dic['time']=datetime_#反向赋值
+    dic['temperature']=temperature  
+    dic['humidity']=humidity
+    dic['air_quality']=air_quality
+    
+    return jsonify(dic)
 
-
-
+ 
 @app.errorhandler(404)  # 传入要处理的错误代码 
 def page_not_found(e):  # 接受异常对象作为参数      
     return render_template('404.html'), 404  # 返回模板和状态码
@@ -285,6 +315,16 @@ class Movie(db.Model):  # 表名将会是 movie
     id = db.Column(db.Integer, primary_key=True)  # 主键    
     title = db.Column(db.String(60))  # 电影标题    
     year = db.Column(db.String(4))  # 电影年份
+
+class Weather_(db.Model):  #db.Model创建模型，db.Column创建模型属性    
+    id = db.Column(db.Integer, primary_key=True)  # 主键   
+    Date = db.Column(db.String(10))  #日期
+    Time = db.Column(db.String(4))  # 时间    
+    Temperature = db.Column(db.String(4))  # 温度
+    Humidity = db.Column(db.String(4))  # 湿度
+    Air_quality = db.Column(db.String(4))  # 空气质量
+    
+
 
 
 
