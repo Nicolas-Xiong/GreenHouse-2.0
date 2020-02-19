@@ -24,7 +24,7 @@ c = db.cursor()
 
 id_Cursor = c.execute("SELECT id FROM weather_")
 if len(list(id_Cursor))==0 :
-    #执行SQL语句，为company表添加数据
+    #执行SQL语句，为weather_表添加数据
     c.execute("INSERT INTO weather_ (id ,date ,time,temperature ,humidity ,air_quality) \
               VALUES (0, 0, 25, 0, 0 ,0 )");
     db.commit()
@@ -77,32 +77,22 @@ while 1:
           #数据写入数据库
           id_Cursor = c.execute("SELECT MAX(id) FROM weather_")  #获取weather_中的id数据
           id_tuple=id_Cursor.fetchall()[0]  #fetchall()获取id_Cursor中列表套元组格式的数据
+          id=id_tuple[0]
           print("已添加id数:"+str(id_tuple[0]))
           
-          id=id_tuple[0]
-          last_data_Cursor = c.execute("SELECT id, date, time, temperature, humidity, air_quality FROM weather_ WHERE id LIKE'"+str(id)+"'")
-          last_data=last_data_Cursor.fetchall()[0]
+          data_today_Cursor=c.execute("SELECT time FROM weather_ WHERE date LIKE'"+str(today)+"'")
+          status=0
+          for data_today in data_today_Cursor:
+              if data_today[0] == time_[1]:
+                  status=1
 
-          if last_data[2] == time_[1]:
+          if status :
               print("时间数据重复，数据未写入")
           else:
               c.execute("INSERT INTO weather_ (id, date, time, temperature, humidity, air_quality) \
                          VALUES ('"+str(id+1)+"', '"+str(today)+"', '"+str(time_[1])+"', '"+str(temperature[1])+"', '"+str(humidity[1])+"', '"+str(air_quality[1])+"')");   
               db.commit()
               print("数据库写入成功")
-
-          #显示存入数据库的数据
-          cursor = c.execute("SELECT id, date, time, temperature, humidity, air_quality FROM weather_")
-          for row in cursor:
-              if row[0] == 0:
-                  continue
-              print ("ID = ", row[0])  #id数据
-              print ("DATE = ", row[1])  #日期数据
-              print ("TIME = ", row[2])  #时间数据
-              print ("TEMPERATURE = ", row[3])  #温度数据
-              print ("HUMIDITY = ", row[4])   #湿度数据
-              print ("AIR_QUANLITY = ", row[5], "\n")  #空气质量数据
-          print ("数据库内容显示成功");
           
           #关闭数据库连接
           db.close()
