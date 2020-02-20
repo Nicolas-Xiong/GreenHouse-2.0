@@ -81,9 +81,13 @@ while 1:
           print("已添加id数:"+str(id_tuple[0]))
           
           data_today_Cursor=c.execute("SELECT time FROM weather_ WHERE date LIKE'"+str(today)+"'")
+          data_last_Cursor=c.execute("SELECT time FROM weather_ WHERE id LIKE'"+str(id)+"'")
           status=0
-          for data_today in data_today_Cursor:
+          for data_today in data_today_Cursor:   #与今天任何一个时间相同，不写入
               if data_today[0] == time_[1]:
+                  status=1
+          for data_last in data_last_Cursor:     #与上个时间相同，不写入
+              if data_last[0] == time_[1]:
                   status=1
 
           if status :
