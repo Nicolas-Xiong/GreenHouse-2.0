@@ -26,11 +26,13 @@ id_Cursor = c.execute("SELECT id FROM weather_")
 if len(list(id_Cursor))==0 :
     #执行SQL语句，为weather_表添加数据
     c.execute("INSERT INTO weather_ (id ,date ,time,temperature ,humidity ,air_quality) \
-              VALUES (0, 0, 25, 0, 0 ,0 )");
+              VALUES (0, 0, 0, 0, 0 ,0 )");
     db.commit()
     print ("weather_表添加数据成功");
 
 db.close()
+
+today_first=datetime.date.today()  #保存开始运行程序的日期
 
 
 while 1:
@@ -52,15 +54,11 @@ while 1:
           json_=json.loads(wheather_data)#化json数据为字典
         
           #整理出天气数据列表
-          temperature=[]
-          time_=[]
-          humidity=[]
-          air_quality=[]
-          for t in json_['od']['od2']:
-              time_.append(t['od21'])#获取时间列表
-              temperature.append(t['od22']) #获取温度列表
-              humidity.append(t['od27']) #获取湿度列表
-              air_quality.append(t['od28'])#获取空气质量列表
+          temperature=[t['od22'] for t in json_['od']['od2']]
+          time_=[t['od21'] for t in json_['od']['od2']]
+          humidity=[t['od27'] for t in json_['od']['od2']]
+          air_quality=[t['od28'] for t in json_['od']['od2']]
+          
               
           #由于最新空气质量为空，故取前一小时数据，造成0点才可得到昨天23点的数据，故需要日期更正
           today=datetime.date.today()
@@ -80,15 +78,15 @@ while 1:
           id=id_tuple[0]
           print("已添加id数:"+str(id_tuple[0]))
           
-          data_today_Cursor=c.execute("SELECT time FROM weather_ WHERE date LIKE'"+str(today)+"'")
-          data_last_Cursor=c.execute("SELECT time FROM weather_ WHERE id LIKE'"+str(id)+"'")
+          data_today_Cursor=c.execute("SELECT time FROM weather_ WHERE date ='"+str(today)+"'")
+          data_today=data_today_Cursor.fetchall()  #立马取出数值，存入一个变量，不然会清空
           status=0
-          for data_today in data_today_Cursor:   #与今天任何一个时间相同，不写入
-              if data_today[0] == time_[1]:
+          if today_first != datetime.date.today():
+               if time_[1] != '00' and data_today[0][0] != '00':  #除第一天，某天数据不是以00开始的，不写入
                   status=1
-          for data_last in data_last_Cursor:     #与上个时间相同，不写入
-              if data_last[0] == time_[1]:
-                  status=1
+          for data in data_today:   #与今天任何一个时间相同，不写入
+               if data[0] == time_[1]:
+                   status=1
 
           if status :
               print("时间数据重复，数据未写入")
