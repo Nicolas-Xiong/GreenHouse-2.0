@@ -82,7 +82,7 @@ while 1:
           data_today=data_today_Cursor.fetchall()  #立马取出数值，存入一个变量，不然会清空
           status=0
           if today_first != datetime.date.today():
-               if time_[1] != '00' and data_today[0][0] != '00':  #除第一天，某天数据不是以00开始的，不写入
+               if time_[1] != '00' and len(data_today) == 0:  #除第一天，某天数据不是以00开始的，不写入
                   status=1
           for data in data_today:   #与今天任何一个时间相同，不写入
                if data[0] == time_[1]:
