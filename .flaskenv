@@ -1,2 +1,2 @@
 FLASK_ENV=development
-FLASK_APP=application.py
+FLASK_APP=~/GreenHouse-2.0/application.py
