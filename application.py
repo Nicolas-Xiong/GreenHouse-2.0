@@ -6,7 +6,7 @@ Created on Sat Jan 11 07:37:07 2020
 """
 
 from flask import Flask
-from flask import request, url_for, redirect, flash,jsonify,Response
+from flask import request, url_for, redirect,jsonify,Response
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy# 导入扩展类
 from sqlalchemy import func

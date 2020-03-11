@@ -15,8 +15,8 @@ python-dotenv = "*"
 numpy = "*"
 pandas = "*"
 opencv-python ="*"
- 
 dotenv = "*"
+python-opencv = "*"
 
 [requires]
 python_version = "3.6"
