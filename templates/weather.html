@@ -147,20 +147,16 @@
 				<div class="col-md-6">
 					<div class="card">
 						{% if current_user.is_authenticated %}
-						<div class="row ">
-							<div class="col-md-8 ">
+						<div class="row m-t-20 m-b-20">
+							<div class="col-md-12 ">
 								<form method="POST">
-								<div class="custom-control custom-control-inline">
-									<ul>
-										<li class="search-box">
-											<input class="form-control" type="text" name="search" placeholder="搜索城市">
-										</li>
-									</ul>
-								</div>
-								<button type="submit" class="btn btn-outline-success btn-rounded">搜索</button>
+									<div class='input-group date custom-control custom-control-inline' >
+										<input type='text' class="form-control" name="search" placeholder="搜索城市"/>
+										<button type="submit" class="btn btn-outline-success" style="margin-left: 20px;margin-right: 20px;">确定</button>
+									</div>
 								</form>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-12">
 								{% if status_error==1 %} 
 								<div class="alert  alert-dismissible m-t-10">
 									<font color="#00ff00"><b>没找到~</b></font>
@@ -175,8 +171,8 @@
 						</div>
 						<div class="row ">
 							<div class="col-md-6 col-6">
-								<h4 class="text-muted" style="margin-left:10px;">天气</h4>
-								<h4 class="display-2 text-muted" style="text-align:center;"><img src="../static/images/weather/{{now.cond_code}}.png" alt=""><small>{{now.cond_txt}}</small></h4>
+								<h4 class="text-muted" style="margin-left:10px;">天气<small>&nbsp;<font style="color:#00ff00;">{{now.cond_txt}}</font></small></h4>
+								<h4 class="display-2 text-muted" style="text-align:center;"><img src="../static/images/weather/{{now.cond_code}}.png" alt=""></h4>
 							</div>
 							<div class="col-md-6 col-6">
 								<h4 class="text-muted" style="margin-left:10px;">温度</h4>
@@ -223,9 +219,14 @@
 														<img src="../static/images/weather/{{forecast[0].cond_code_d}}.png" alt="">
 													</div>
 													<div class="info">
-														<p class="m-0"><b>白天：天气&nbsp;{{forecast[0].cond_txt_d}}</b></p>
-														<p class="m-0"><b>{{forecast[0].sr}}日出&nbsp;&nbsp;{{forecast[0].ss}}日落</b></p>
+														<p class="m-0"><b>白天</b></p>
+														<p class="m-0"><b>天气&nbsp;{{forecast[0].cond_txt_d}}</b></p>
 													</div>
+												</div>
+											</li>
+											<li class="list-item">
+												<div class="client-item">
+													<p class="m-0"><b>{{forecast[0].sr}}日出{{forecast[0].ss}}日落</b></p>
 												</div>
 											</li>
 											<li class="list-item">
@@ -248,9 +249,14 @@
 														<img src="../static/images/weather/{{forecast[0].cond_code_n}}.png" alt="">
 													</div>
 													<div class="info">
-														<p class="m-0"><b>夜晚：天气&nbsp;{{forecast[0].cond_txt_n}}</b></p>
-														<p class="m-0"><b>{{forecast[0].ms}}月落&nbsp;&nbsp;{{forecast[0].mr}}月出</b></p>
+														<p class="m-0"><b>夜晚</b></p>
+														<p class="m-0"><b>天气&nbsp;{{forecast[0].cond_txt_n}}</b></p>
 													</div>
+												</div>
+											</li>
+											<li class="list-item">
+												<div class="client-item">
+													<p class="m-0"><b>{{forecast[0].ms}}月落{{forecast[0].mr}}月出</b></p>
 												</div>
 											</li>
 											<li class="list-item">
@@ -284,9 +290,14 @@
 														<img src="../static/images/weather/{{forecast[1].cond_code_d}}.png" alt="">
 													</div>
 													<div class="info">
-														<p class="m-0"><b>白天：天气&nbsp;{{forecast[1].cond_txt_d}}</b></p>
-														<p class="m-0"><b>{{forecast[0].sr}}日出&nbsp;&nbsp;{{forecast[1].ss}}日落</b></p>
+														<p class="m-0"><b>白天</b></p>
+														<p class="m-0"><b>天气&nbsp;{{forecast[1].cond_txt_d}}</b></p>
 													</div>
+												</div>
+											</li>
+											<li class="list-item">
+												<div class="client-item">
+													<p class="m-0"><b>{{forecast[0].sr}}日出{{forecast[1].ss}}日落</b></p>
 												</div>
 											</li>
 											<li class="list-item">
@@ -309,9 +320,14 @@
 														<img src="../static/images/weather/{{forecast[1].cond_code_n}}.png" alt="">
 													</div>
 													<div class="info">
-														<p class="m-0"><b>夜晚：天气&nbsp;{{forecast[1].cond_txt_n}}</b></p>
-														<p class="m-0"><b>{{forecast[1].ms}}月落&nbsp;&nbsp;{{forecast[1].mr}}月出</b></p>
+														<p class="m-0"><b>夜晚</b></p>
+														<p class="m-0"><b>天气&nbsp;{{forecast[1].cond_txt_n}}</b></p>
 													</div>
+												</div>
+											</li>
+											<li class="list-item">
+												<div class="client-item">
+													<p class="m-0"><b>{{forecast[1].ms}}月落{{forecast[1].mr}}月出</b></p>
 												</div>
 											</li>
 											<li class="list-item">
@@ -345,9 +361,14 @@
 														<img src="../static/images/weather/{{forecast[2].cond_code_d}}.png" alt="">
 													</div>
 													<div class="info">
-														<p class="m-0"><b>白天：天气&nbsp;{{forecast[2].cond_txt_d}}</b></p>
-														<p class="m-0"><b>{{forecast[2].sr}}日出&nbsp;&nbsp;{{forecast[2].ss}}日落</b></p>
+														<p class="m-0"><b>白天</b></p>
+														<p class="m-0"><b>天气&nbsp;{{forecast[2].cond_txt_d}}</b></p>
 													</div>
+												</div>
+											</li>
+											<li class="list-item">
+												<div class="client-item">
+													<p class="m-0"><b>{{forecast[2].sr}}日出{{forecast[2].ss}}日落</b></p>
 												</div>
 											</li>
 											<li class="list-item">
@@ -370,9 +391,14 @@
 														<img src="../static/images/weather/{{forecast[2].cond_code_n}}.png" alt="">
 													</div>
 													<div class="info">
-														<p class="m-0"><b>夜晚：天气&nbsp;{{forecast[2].cond_txt_n}}</b></p>
-														<p class="m-0"><b>{{forecast[2].ms}}月落&nbsp;&nbsp;{{forecast[2].mr}}月出</b></p>
+														<p class="m-0"><b>夜晚</b></p>
+														<p class="m-0"><b>天气&nbsp;{{forecast[2].cond_txt_n}}</b></p>	
 													</div>
+												</div>
+											</li>
+											<li class="list-item">
+												<div class="client-item">
+													<p class="m-0"><b>{{forecast[2].ms}}月落{{forecast[2].mr}}月出</b></p>
 												</div>
 											</li>
 											<li class="list-item">
