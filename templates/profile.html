@@ -1,0 +1,238 @@
+{% extends 'navigation_2.html' %}
+
+{% block a %} 
+<div class="side-nav expand-lg">
+			<div class="side-nav-inner">
+				<ul class="side-nav-menu">
+					<li class="side-nav-header">
+						<h2 style="color:#c5c5c5">导航栏</h2>
+					</li>
+					<li class="nav-item dropdown">
+						<a href="#" class="dropdown-toggle">
+							<span class="icon-holder">
+								<i class="lni-dashboard"></i>
+							</span>
+							<span class="title">近期数据</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li>
+								<a href="navigation_2">一小时内</a>
+							</li>
+							<li>
+								<a href="navigation_2_2">一天内</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+							<span class="icon-holder">
+								<i class="lni-camera"></i>
+							</span>
+							<span class="title">视频监控</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li>
+								<a href="video">窗口一</a>
+							</li>
+							<li>
+								<a href="video_2">窗口二</a>
+							</li>
+							<li>
+								<a href="video_3">窗口三</a>
+							</li>
+							<li>
+								<a href="video_4">窗口四</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+							<span class="icon-holder">
+								<i class="lni-cloud"></i>
+							</span>
+							<span class="title">天气预报</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+						<li>
+							<a href="weather_true">天气</a>
+						</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+						<span class="icon-holder">
+							<i class="lni-timer"></i>
+						</span>
+						<span class="title">历史数据</span>
+						<span class="arrow">
+						<i class="lni-chevron-right"></i>
+						</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li>
+								<a href="temperature">历史温度</a>
+							</li>
+							<li >
+								<a href="humidity">历史湿度</a>
+							</li>
+							<li >
+								<a href="lux">历史光照度</a>
+							</li>
+							<li>
+								<a href="carbon">历史CO2含量</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown  open">
+						<a class="dropdown-toggle" href="#">
+							<span class="icon-holder">
+								<i class="lni-files"></i>
+							</span>
+							<span class="title">特殊页面</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+					<ul class="dropdown-menu sub-down">
+						<li class="active">
+							<a href="profile">简介</a>
+						</li>
+						<li>
+							<a href="settings">设置</a>
+						</li>
+						<li>
+							<a href="login">登录</a>
+						</li>
+						<li>
+							<a href="sign_up">注册</a>
+						</li>
+						<li>
+							<a href="forgot_password">忘记密码</a>
+						</li>
+						<li>
+							<a href="_404">404错误</a>
+						</li>
+					</ul>
+					</li>
+					</ul>
+			</div>
+		</div>
+{% endblock %}
+
+{% block b %} 
+<div class="breadcrumb-wrapper row">
+	<div class="col-12 col-lg-3 col-md-6">
+		<h4 class="page-title">简介</h4>
+	</div>
+	<div class="col-12 col-lg-9 col-md-6">
+		<ol class="breadcrumb float-right">
+			<li><a href="profile">特殊页面</a></li>
+			<li class="active">/ 简介</li>
+		</ol>
+	</div>
+</div>
+{% endblock %}
+
+{% block c %} 
+<div class="row">
+
+	<div class="col-12 col-md-4">
+		<div class="profile-bg m-t-20">
+			<div class="user-profile">
+				<figure class="profile-wall-img">
+					<img class="img-fluid" src="../static/images/profile/user-bg.jpg" alt="User Wall">
+				</figure>
+				<div class="profile-body">
+					<figure class="profile-user-avatar">
+						<img src="../static/images/profile/user0.png" alt="User Wall">
+					</figure>
+					<h3 class="profile-user-name">熊子臣&nbsp;Nicolas&nbsp;Xiong</h3>
+					<small class="profile-user-address">湖北&nbsp;武汉&nbsp;华中农业大学</small>
+					<div class="profile-user-description">
+						<h3>研究内容</h3>
+						<p>1.对国内外温室信息管理系统组成及功能进行调研，根据作物生长环境信息实时监控的数据, 实现园艺温室信息的科学决策与管理, 设计开发智慧园艺温室信息管理系统平台。
+						</p>
+						<p>2.实现对温室温度、湿度、光照度、CO2 含量和视频信息的采集和存储, 具有数据采集、数据存储、基础信息维护、数据分析和数据输出等功能。
+						</p>
+						<p>3.掌握一门编程语言软件如Java或Python进行系统开发，研发出人机界面友好、五大功能实现的智慧园艺温室信息管理系统平台。
+						</p>
+						<h3>基本要求</h3>
+						<p>1.论文撰写的格式、字数和页数要达到学校和学院的基本要求，外文翻译要求不少于6000个印刷符号，且为和选题相关的完整的文献。
+						</p>
+						<p>2.毕业论文不少于10000字。要求查阅中、英文文献资料不少于20篇，其中外文文献不少于5篇。
+						</p>
+						<p>3.软件设计的课题要求答辩时能演示软件运行情况。
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-12 col-md-8">
+		<div class="timeline-view bg-white p-20 m-t-20">
+			<h4 class="box-title">用户列表</h4>
+			<div class="row">
+				<div class="col-12">
+					<div id="activity" class="m-t-20">
+						<ul class="timeline timeline-hairline">
+							<li class="timeline-inverted">
+								<div class="timeline-circle rounded-circle text-primary text-center">
+										<img class="img-fluid" src="../static/images/profile/user0.png">
+								</div>
+								<div class="timeline-entry">
+									<div class="card">
+										<div class="card-body timeline-entry-content">
+											<p class="mb-0"><span class="text-success">用户名：</span>Nicolas&nbsp;Xiong</p>
+											<p class="mb-0"><span class="text-success">权限：</span>管理员</p>
+											<p class="mb-0"><span class="text-success">QQ：</span>3494775639</p>
+											<p class="mb-0"><span class="text-success">个人简介：</span>哈喽，我是熊子臣，这个网站的管理员，这是我的毕业设计</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							{% for user_ in users %}  
+							<li class="timeline-inverted">
+								<div class="timeline-circle rounded-circle text-primary text-center">
+										<img class="img-fluid" src="../static/images/profile/user{{user_.number}}.png">
+								</div>
+								<div class="timeline-entry">
+									<div class="card">
+										<div class="card-body timeline-entry-content">
+											<p class="mb-0"><span class="text-success">用户名：</span>{{user_.username}}</p>
+											<p class="mb-0"><span class="text-success">权限：</span>{{user_.authority}}</p>
+											<p class="mb-0"><span class="text-success">注册时间：</span>{{user_.date}}</p>
+											<p class="mb-0"><span class="text-success">个人简介：</span>{{user_.profile}}</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+
+
+
+{% block d %} 
+
+{% endblock %}
+
+
+
+

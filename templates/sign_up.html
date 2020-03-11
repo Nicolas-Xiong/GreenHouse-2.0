@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>智慧园艺温室信息管理系统</title>
+<link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+
+<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="../static/fonts/line-icons.css">
+
+<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+
+<link rel="stylesheet" type="text/css" href="../static/css/responsive.css">
+</head>
+<body>
+	<div class="wrapper-page">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-5 col-md-12 col-xs-12">
+					<div class='m-b-20 text-center'><h1>智慧园艺温室信息管理系统</h1></div>
+					<div class="card">
+						<div class="card-header border-bottom text-center">
+							<h4 class="card-title">创建账号</h4>
+						</div>
+						<div class="card-body">
+							<form class="form-horizontal m-t-20" method="POST">
+								<div class="form-group">
+									<input class="form-control" type="email" name="email" placeholder="邮箱，用于重置密码">
+								</div>
+								<div class="form-group">
+									<input class="form-control" type="text" name="username" placeholder="用户名">
+								</div>
+								<div class="form-group">
+									<input class="form-control" type="password" name="password" placeholder="密码">
+								</div>
+								<div class="form-group">
+								  <select class="form-control p-1" type="text" name="sex">
+									<option>性别，用于头像选择</option>
+								    <option>男</option>
+								    <option>女</option>
+								  </select>
+								</div>
+								{% if status_error==1 %}
+								<div class="alert alert-warning alert-dismissible">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+									<font color="#ff0820">存在未输入或者输入过长的空格!</font>
+								</div>
+								{% elif status_error==2 %}
+								<div class="alert alert-warning alert-dismissible">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+									<font color="#ff0820"><b>性别</b>请选择男或女!</font>
+								</div>
+								{% elif status_error==3 %}
+								 <div class="alert alert-warning alert-dismissible">
+								 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								 	<font color="#ff0820"><b>邮箱</b>已被注册!</font>
+								 </div>
+								 {% elif status_error==4 %}
+								  <div class="alert alert-warning alert-dismissible">
+								  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								  	<font color="#ff0820"><b>用户名</b>已被注册!</font>
+								  </div>
+								{% endif %}
+								<div class="form-group text-center m-t-20">
+									<button class="btn btn-common btn-block" type="submit">创建账号</button>
+								</div>
+							<div class="form-group m-t-10 mb-0">
+								<div class="text-center">
+									<a href="login" class="text-muted">已经有账号了?</a>
+								</div>
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div id="preloader">
+<div class="loader" id="loader-1"></div>
+</div>
+
+
+<script src="../static/js/jquery-min.js"></script>
+<script src="../static/js/popper.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jquery.app.js"></script>
+<script src="../static/js/main.js"></script>
+</body>
+
+<!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban -->
+</html>

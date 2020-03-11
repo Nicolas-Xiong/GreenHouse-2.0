@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>智慧园艺温室信息管理系统</title>
+	<link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/fonts/line-icons.css">
+	<link rel="stylesheet" href="../static/plugins/morris/morris.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/responsive.css">
+	<link href="../static/css/bootstrap-datetimepicker.css" rel="stylesheet">
+	<link href="../static/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../static/css/animate.min.css" rel="stylesheet">
+	<link href="../static/css/prettify-1.0.css" rel="stylesheet">
+	<link href="../static/css/base.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../static/css/default.css">
+</head>
+<body>
+<div class="app header-default side-nav-dark">
+	<div class="layout">
+
+		<div class="header navbar">
+			<div class="header-container">
+				<div class="nav-logo" style="margin-left: 10px;">
+					<a href="navigation_2">
+						<b><img src="../static/images/logo.jpg" alt=""></b>
+						<span class="logo">
+							<img src="../static/images/logo-text.png" alt="">
+						</span>
+					</a>
+				</div>
+				<ul class="nav-left">
+					<li>
+						<a class="sidenav-fold-toggler" href="javascript:void(0);">
+							<i class="lni-menu"></i>
+						</a>
+						<a class="sidenav-expand-toggler" href="javascript:void(0);">
+							<i class="lni-menu"></i>
+						</a>
+					</li>
+				</ul>
+				<ul class="nav-right">
+					{% if current_user.is_authenticated %}
+					<li class="user-profile dropdown dropdown-animated scale-left">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<img class="profile-img img-fluid" src="../static/images/avatar/user{{user.number}}.png" alt="">
+						</a>
+					<ul class="dropdown-menu dropdown-md">
+						<li>
+							<ul class="list-media">
+								<li class="list-item avatar-info">
+									<div class="media-img">
+										<img src="../static/images/avatar/user{{user.number}}.png" alt="">
+									</div>
+									<div class="info">
+										<span class="title text-semibold">{{user.username}}</span>
+										<span class="sub-title">{{user.authority}}</span>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li role="separator" class="divider"></li>
+						<li>
+							<a href="profile">
+								<i class="lni-user"></i>
+								<span>简介</span>
+							</a>
+						</li>
+						<li>
+							<a href="settings">
+								<i class="lni-cog"></i>
+								<span>设置</span>
+							</a>
+						</li>
+						<li>
+							<a href="logout">
+								<i class="lni-lock"></i>
+								<span>登出</span>
+							</a>
+						</li>
+					</ul>
+					{% else %} 
+					<li class="user-profile dropdown dropdown-animated scale-left">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<img class="profile-img img-fluid" src="../static/images/avatar/unlogin.png" alt="">
+						</a>
+					<ul class="dropdown-menu dropdown-md">
+						<li>
+							<ul class="list-media">
+								<li class="list-item avatar-info">
+									<div class="media-img">
+										<img src="../static/images/avatar/unlogin.png" alt="">
+									</div>
+									<div class="info">
+										<span class="title text-semibold">游客</span>
+										<span class="sub-title">参观者</span>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li role="separator" class="divider"></li>
+						<li>
+							<a href="profile">
+								<i class="lni-user"></i>
+								<span>简介</span>
+							</a>
+						</li>
+						<li>
+							<a href="logout">
+								<i class="lni-lock"></i>
+								<span>登录</span>
+							</a>
+						</li>
+					</ul>
+					{% endif %}
+					</li>
+				</ul>
+			</div>
+		</div>
+{% block a %}
+		<div class="side-nav expand-lg">
+			<div class="side-nav-inner">
+				<ul class="side-nav-menu">
+					<li class="side-nav-header">
+						<h2 style="color:#c5c5c5">导航栏</h2>
+					</li>
+					<li class="nav-item dropdown open">
+						<a href="#" class="dropdown-toggle">
+							<span class="icon-holder">
+								<i class="lni-dashboard"></i>
+							</span>
+							<span class="title">近期数据</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li class="active">
+								<a href="navigation_2">一小时内</a>
+							</li>
+							<li>
+								<a href="navigation_2_2">一天内</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+							<span class="icon-holder">
+								<i class="lni-camera"></i>
+							</span>
+							<span class="title">视频监控</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li>
+								<a href="video">窗口一</a>
+							</li>
+							<li>
+								<a href="video_2">窗口二</a>
+							</li>
+							<li>
+								<a href="video_3">窗口三</a>
+							</li>
+							<li>
+								<a href="video_4">窗口四</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+							<span class="icon-holder">
+								<i class="lni-cloud"></i>
+							</span>
+							<span class="title">天气预报</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+						<li>
+							<a href="weather_true">天气</a>
+						</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+						<span class="icon-holder">
+							<i class="lni-timer"></i>
+						</span>
+						<span class="title">历史数据</span>
+						<span class="arrow">
+						<i class="lni-chevron-right"></i>
+						</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li>
+								<a href="temperature">历史温度</a>
+							</li>
+							<li>
+								<a href="humidity">历史湿度</a>
+							</li>
+							<li>
+								<a href="lux">历史光照度</a>
+							</li>
+							<li>
+								<a href="carbon">历史CO2含量</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+							<span class="icon-holder">
+								<i class="lni-files"></i>
+							</span>
+							<span class="title">特殊页面</span>
+							<span class="arrow">
+								<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+					<ul class="dropdown-menu sub-down">
+						<li>
+							<a href="profile">简介</a>
+						</li>
+						<li>
+							<a href="settings">设置</a>
+						</li>
+						<li>
+							<a href="login">登录</a>
+						</li>
+						<li>
+							<a href="sign_up">注册</a>
+						</li>
+						<li>
+							<a href="forgot_password">忘记密码</a>
+						</li>
+						<li>
+							<a href="_404">404错误</a>
+						</li>
+					</ul>
+					</li>
+					</ul>
+			</div>
+		</div>
+{% endblock %}
+
+
+		<div class="page-container">
+
+		<div class="main-content">
+			<div class="container-fluid">
+{% block b %}
+				<div class="breadcrumb-wrapper row">
+					<div class="col-12 col-lg-3 col-md-6">
+						<h4 class="page-title">一小时内</h4>
+					</div>
+					<div class="col-12 col-lg-9 col-md-6">
+						<ol class="breadcrumb float-right">
+							<li><a href="navigation_2">近期数据</a></li>
+							<li class="active">/ 一小时内</li>
+						</ol>
+					</div>
+				</div>
+{% endblock %}
+			</div>
+						
+			<div class="container-fluid">
+{% block c %}
+			<div class="row">
+				<div class="col-lg-3 col-md-6 col-xs-12">
+					<div class="info-box bg-warning">
+						<div class="icon-box">
+							<img class="img-fluid" src="../static/images/data-icon/temperature.png">
+						</div>
+						<div class="info-box-content" style="text-align: center;">
+							<h4 class="number"><span  id="data">25</span>&nbsp;℃</h4>
+							<p class="info-text">一分钟内温度</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-xs-12">
+					<div class="info-box bg-success">
+						<div class="icon-box">
+							<img class="img-fluid" src="../static/images/data-icon/humidity.png">
+						</div>
+						<div class="info-box-content" style="text-align: center;">
+							<h4 class="number"><span  id="data1">90</span>&nbsp;%</h4>
+							<p class="info-text">一分钟内湿度</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-xs-12">
+					<div class="info-box bg-info">
+						<div class="icon-box">
+							<img class="img-fluid" src="../static/images/data-icon/lux.png">
+						</div>
+						<div class="info-box-content" style="text-align: center;">
+							<h4 class="number"><span  id="data2">50</span>&nbsp;klux</h4>
+							<p class="info-text">一分钟内光照度</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-xs-12">
+					<div class="info-box bg-purple">
+						<div class="icon-box">
+							<img class="img-fluid" src="../static/images/data-icon/co2.png">
+						</div>
+						<div class="info-box-content" style="text-align: center;">
+							<h4 class="number"><span  id="data3">774</span>&nbsp;ppm</h4>
+							<p class="info-text">一分钟内CO2含量</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title">温度</h5>
+						</div>
+						<div id="main" style="height: 300px"></div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title">湿度</h5>
+						</div>
+						<div id="main1" style="height: 300px"></div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title">光照度</h5>
+						</div>
+						<div id="main2" style="height: 300px"></div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title">CO2含量</h5>
+						</div>
+						<div id="main3" style="height: 300px"></div>
+					</div>
+				</div>
+			</div>
+{% endblock %}
+			</div>
+
+
+		<footer class="content-footer">
+			<small>&copy; 2020 <a>Nicolas Xiong</a></small>
+		</footer>
+
+		</div>
+	</div>
+</div>
+
+<div id="preloader">
+<div class="loader" id="loader-1"></div>
+</div>
+
+
+<script src="../static/js/jquery-min.js"></script>
+<script src="../static/js/popper.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jquery.app.js"></script>
+<script src="../static/js/main.js"></script>
+<script src="../static/js/echarts.common.js"></script>
+
+<script src="../static/plugins/morris/morris.min.js"></script>
+<script src="../static/plugins/raphael/raphael-min.js"></script>
+<script src="../static/js/dashborad1.js"></script>
+
+{% block d %}
+ <script type="text/javascript">
+  	var myChart = echarts.init(document.getElementById('main'));
+	var myChart1 = echarts.init(document.getElementById('main1'));
+	var myChart2 = echarts.init(document.getElementById('main2'));
+	var myChart3 = echarts.init(document.getElementById('main3'));
+  	myChart.showLoading({color: '#00ff00'});
+	myChart1.showLoading({color: '#00ff00'});
+	myChart2.showLoading({color: '#00ff00'});
+	myChart3.showLoading({color: '#00ff00'});
+
+	//生成x轴轴标数据
+	var time = [];
+	for (var j = 60; j >= 0 ; j--) {
+	    time.push(j+'分钟前')
+	}
+	
+	setInterval( function(){$.get('/data_hour',function (dic) {
+		myChart.hideLoading({color: '#00ff00'});
+		myChart1.hideLoading({color: '#00ff00'});
+		myChart2.hideLoading({color: '#00ff00'});
+		myChart3.hideLoading({color: '#00ff00'});
+		document.getElementById("data").innerHTML = dic.temperature[dic.temperature.length - 1].toFixed(0);
+		document.getElementById("data1").innerHTML = dic.humidity[dic.humidity.length - 1].toFixed(0);
+		document.getElementById("data2").innerHTML = dic.lux[dic.lux.length - 1].toFixed(2);
+		document.getElementById("data3").innerHTML = dic.co2[dic.co2.length - 1].toFixed(0);
+	    myChart.setOption({
+			legend: {
+			    data: ['温度(℃)'],
+				textStyle: {
+				  color: "#000000"
+				},
+			},
+	        xAxis: {
+	            data: time,
+				axisLabel: {
+				  textStyle: {
+				    color: "#000000"
+				  },
+				},
+	        },
+	    	yAxis: {
+	        	boundaryGap: [0, '40%'],
+	        	type: 'value',
+				min: 0,
+				max: 40,
+				axisLabel: {
+				  textStyle: {
+				    color: "#000000"
+				  },
+				formatter: '{value}',
+				},
+	    	},
+	        series: [{
+	            name:'温度(℃)',
+				type:'line',
+	            symbol: 'none',
+				smooth:true,
+	            stack: 'a',
+	            color: ['#00ff00'], //折线颜色
+	            areaStyle: {
+	                color: '#00ff00' //折线下方色块颜色
+	            },
+	            data: dic.temperature
+	        }]
+	    });
+		myChart1.setOption({
+			legend: {
+			    data: ['湿度(%)'],
+				textStyle: {
+				  color: "#000000"
+				},
+			},
+		    xAxis: {
+		        data: time,
+				axisLabel: {
+				  textStyle: {
+				    color: "#000000"
+				  },
+				},
+		    },
+			yAxis: {
+		    	boundaryGap: [0, '40%'],
+		    	type: 'value',
+				min: 0,
+				max: 100,
+				axisLabel: {
+				  textStyle: {
+				    color: "#000000"
+				  },
+				  formatter: '{value}',
+				},
+			},
+		    series: [{
+		        name:'湿度(%)',
+				type:'line',
+		        //smooth:true,
+		        symbol: 'none',
+				smooth:true,
+		        stack: 'a',
+		        color: ['#00ff00'], //折线颜色
+		        areaStyle: {
+		            color: '#00ff00' //折线下方色块颜色
+		        },
+		        data: dic.humidity
+		    }]
+		});
+		myChart2.setOption({
+			legend: {
+			    data: ['光照度(klux)'],
+				textStyle: {
+				  color: "#000000"
+				},
+			},
+		    xAxis: {
+		        data: time,
+				axisLabel: {
+				  textStyle: {
+				    color: "#000000"
+				  },
+				},
+		    },
+			yAxis: {
+		    	boundaryGap: [0, '40%'],
+		    	type: 'value',
+				min: 0,
+				max: 80,
+				axisLabel: {
+				  textStyle: {
+				    color: "#000000"
+				  },
+				  formatter: '{value}',
+				},
+			},
+		    series: [{
+		        name:'光照度(klux)',
+				type:'line',
+		        symbol: 'none',
+				smooth:true,
+		        stack: 'a',
+		        color: ['#00ff00'], //折线颜色
+		        areaStyle: {
+		            color: '#00ff00' //折线下方色块颜色
+		        },
+		        data: dic.lux
+		    }]
+		});
+		myChart3.setOption({
+			legend: {
+			    data: ['CO2含量(ppm)'],
+				textStyle: {
+				  color: "#000000"
+				},
+			},
+		    xAxis: {
+		        data: time,
+				axisLabel: {
+				  textStyle: {
+				    color: "#000000"
+				  },
+				},
+		    },
+			yAxis: {
+		    	boundaryGap: [0, '40%'],
+		    	type: 'value',
+				min: 0,
+				max: 800,
+				axisLabel: {
+				  textStyle: {
+				    color: "#000000"
+				  },
+				  formatter: '{value}',
+				},
+			},
+		    series: [{
+		        name:'CO2含量(ppm)',
+				type:'line',
+		        //smooth:true,
+		        symbol: 'none',
+				smooth:true,
+		        stack: 'a',
+		        color: ['#00ff00'], //折线颜色
+		        areaStyle: {
+		            color: '#00ff00' //折线下方色块颜色
+		        },
+		        data: dic.co2
+		    }]
+		});
+	})}, 1000);
+  </script>
+{% endblock %}
+
+</body>
+
+</html>
