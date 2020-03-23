@@ -559,8 +559,9 @@ def weather_data_get(weather_type,location):     #天气数据获取函数
     dictionary=json.loads(text)
     request_data = dictionary['HeWeather6'][0]
     #print(request_data['status'])
-    app.logger.info(request_data['status'])
+    app.logger.info(request_data['status'])   #输出通知日志
     if request_data['status'] != 'ok':
+        app.logger.error(request_data['status'])   #输出错误日志
         return 'status_error'
     
     if weather_type == 'now':
@@ -589,6 +590,7 @@ def weather_data_get(weather_type,location):     #天气数据获取函数
             data_lifestyle[j]['type']=lifestyle_dict[data_lifestyle[j]['type']]
             j=j+1
         return data_lifestyle
+    app.logger.error('error')
     return 'error'
 
 def limit(mi,ma,data):   #数据大小限制函数
