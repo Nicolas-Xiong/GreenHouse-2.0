@@ -27,6 +27,7 @@ import json
 import random
 import re
 import cv2
+import logging
 
 
 
@@ -55,6 +56,7 @@ login_manager = LoginManager(app)  # 实例化扩展类
 
 login_manager.login_view = 'login'
 
+logging.basicConfig(filename="flask_log.txt",format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
 @app.context_processor 
@@ -556,7 +558,8 @@ def weather_data_get(weather_type,location):     #天气数据获取函数
     text=r.text
     dictionary=json.loads(text)
     request_data = dictionary['HeWeather6'][0]
-    print(request_data['status'])
+    #print(request_data['status'])
+    app.logger.info(request_data['status'])
     if request_data['status'] != 'ok':
         return 'status_error'
     
