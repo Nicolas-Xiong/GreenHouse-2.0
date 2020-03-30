@@ -502,12 +502,6 @@ class User(db.Model,UserMixin):  # 表名将会是 user（自动生成，小写�
     def validate_password(self, password):  # 用于验证密码的方法，接受密码作为参数        
         return check_password_hash(self.password_hash, password)  # 返回布尔值
 
-    
-class Movie(db.Model):  # 表名将会是 movie    
-    id = db.Column(db.Integer, primary_key=True)  # 主键    
-    title = db.Column(db.String(60))  # 电影标题    
-    year = db.Column(db.String(4))  # 电影年份
-
 class Greenhouse_data_day(db.Model):  #以天计数的表   
     id = db.Column(db.Integer, primary_key=True)  # 主键   
     Date = db.Column(db.String(10))  #日期
