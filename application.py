@@ -104,26 +104,14 @@ def data_day():
 @app.route('/video', methods=['GET'])    #视频窗口一
 def video():
     return render_template('video.html')
-@app.route('/video_feed')
-def video_feed():
-    VideoCamera.source_site="http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8"
-    return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/video_2', methods=['GET']) #视频窗口二
 def video_2():
     return render_template('video_2.html')
-@app.route('/video_feed2')
-def video_feed2():
-    VideoCamera.source_site='http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8'
-    return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/video_3', methods=['GET'])  #视频窗口三
 def video_3():
     return render_template('video_3.html')
-@app.route('/video_feed3')
-def video_feed3():
-    VideoCamera.source_site='http://ivi.bupt.edu.cn/hls/cctv5phd.m3u8'
-    return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/video_4', methods=['GET'])  #视频窗口四
 def video_4():
