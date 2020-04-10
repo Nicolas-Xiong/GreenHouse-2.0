@@ -142,8 +142,8 @@ hr{margin-top:30px;margin-bottom:30px}
 .side-nav .side-nav-inner .side-nav-menu li a{position:relative;display:block;padding:10px 15px;font-weight:500;font-size:15px;white-space:nowrap}
 .side-nav .side-nav-inner .side-nav-menu li a .icon-holder{display:inline-block;height:25px;width:25px;line-height:25px;text-align:center;position:relative;left:0;font-size:20px;margin-right:14px}
 .side-nav .side-nav-inner .side-nav-menu li a .icon-holder i{vertical-align:middle}
-.side-nav .side-nav-inner .side-nav-menu li.dropdown.open>a{color:#fff;background:#00ff00}
-.side-nav .side-nav-inner .side-nav-menu li a:hover,.side-nav .side-nav-inner .side-nav-menu li a:focus{color:#fff;background:#00ff00}
+.side-nav .side-nav-inner .side-nav-menu li.dropdown.open>a{color:#fff;background:#00aa00}
+.side-nav .side-nav-inner .side-nav-menu li a:hover,.side-nav .side-nav-inner .side-nav-menu li a:focus{color:#fff;background:#00aa00}
 .side-nav-folded .side-nav{width:65px}
 .side-nav-folded .side-nav .side-nav-menu{overflow-x:hidden}
 .side-nav-folded .side-nav .side-nav-menu li a{padding-left:20px}
