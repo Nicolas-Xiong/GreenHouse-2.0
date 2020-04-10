@@ -384,10 +384,10 @@
 	var myChart1 = echarts.init(document.getElementById('main1'));
 	var myChart2 = echarts.init(document.getElementById('main2'));
 	var myChart3 = echarts.init(document.getElementById('main3'));
-  	myChart.showLoading({color: '#00ff00'});
-	myChart1.showLoading({color: '#00ff00'});
-	myChart2.showLoading({color: '#00ff00'});
-	myChart3.showLoading({color: '#00ff00'});
+  	myChart.showLoading({color: '#00aa00'});
+	myChart1.showLoading({color: '#00aa00'});
+	myChart2.showLoading({color: '#00aa00'});
+	myChart3.showLoading({color: '#00aa00'});
 
 	//生成x轴轴标数据
 	var time = [];
@@ -396,10 +396,10 @@
 	}
 	
 	setInterval( function(){$.get('/data_hour',function (dic) {
-		myChart.hideLoading({color: '#00ff00'});
-		myChart1.hideLoading({color: '#00ff00'});
-		myChart2.hideLoading({color: '#00ff00'});
-		myChart3.hideLoading({color: '#00ff00'});
+		myChart.hideLoading({color: '#00aa00'});
+		myChart1.hideLoading({color: '#00aa00'});
+		myChart2.hideLoading({color: '#00aa00'});
+		myChart3.hideLoading({color: '#00aa00'});
 		document.getElementById("data").innerHTML = dic.temperature[dic.temperature.length - 1].toFixed(0);
 		document.getElementById("data1").innerHTML = dic.humidity[dic.humidity.length - 1].toFixed(0);
 		document.getElementById("data2").innerHTML = dic.lux[dic.lux.length - 1].toFixed(2);
@@ -437,9 +437,9 @@
 	            symbol: 'none',
 				smooth:true,
 	            stack: 'a',
-	            color: ['#00ff00'], //折线颜色
+	            color: ['#00aa00'], //折线颜色
 	            areaStyle: {
-	                color: '#00ff00' //折线下方色块颜色
+	                color: '#00aa00' //折线下方色块颜色
 	            },
 	            data: dic.temperature
 	        }]
@@ -478,9 +478,9 @@
 		        symbol: 'none',
 				smooth:true,
 		        stack: 'a',
-		        color: ['#00ff00'], //折线颜色
+		        color: ['#00aa00'], //折线颜色
 		        areaStyle: {
-		            color: '#00ff00' //折线下方色块颜色
+		            color: '#00aa00' //折线下方色块颜色
 		        },
 		        data: dic.humidity
 		    }]
@@ -518,9 +518,9 @@
 		        symbol: 'none',
 				smooth:true,
 		        stack: 'a',
-		        color: ['#00ff00'], //折线颜色
+		        color: ['#00aa00'], //折线颜色
 		        areaStyle: {
-		            color: '#00ff00' //折线下方色块颜色
+		            color: '#00aa00' //折线下方色块颜色
 		        },
 		        data: dic.lux
 		    }]
@@ -559,9 +559,9 @@
 		        symbol: 'none',
 				smooth:true,
 		        stack: 'a',
-		        color: ['#00ff00'], //折线颜色
+		        color: ['#00aa00'], //折线颜色
 		        areaStyle: {
-		            color: '#00ff00' //折线下方色块颜色
+		            color: '#00aa00' //折线下方色块颜色
 		        },
 		        data: dic.co2
 		    }]

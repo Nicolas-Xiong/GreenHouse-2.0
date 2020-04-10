@@ -187,18 +187,18 @@
 		var myChart1_day = echarts.init(document.getElementById('main1_day'));
 		var myChart2_day = echarts.init(document.getElementById('main2_day'));
 		var myChart3_day = echarts.init(document.getElementById('main3_day'));
-		myChart_day.showLoading({color: '#00ff00'});
-		myChart1_day.showLoading({color: '#00ff00'});
-		myChart2_day.showLoading({color: '#00ff00'});
-		myChart3_day.showLoading({color: '#00ff00'});
+		myChart_day.showLoading({color: '#00aa00'});
+		myChart1_day.showLoading({color: '#00aa00'});
+		myChart2_day.showLoading({color: '#00aa00'});
+		myChart3_day.showLoading({color: '#00aa00'});
 		
 		//异步加载数据
 		$(function(){
 		    $.get('/data_day',function (data) {
-				myChart_day.hideLoading({color: '#00ff00'});
-				myChart1_day.hideLoading({color: '#00ff00'});
-				myChart2_day.hideLoading({color: '#00ff00'});
-				myChart3_day.hideLoading({color: '#00ff00'});
+				myChart_day.hideLoading({color: '#00aa00'});
+				myChart1_day.hideLoading({color: '#00aa00'});
+				myChart2_day.hideLoading({color: '#00aa00'});
+				myChart3_day.hideLoading({color: '#00aa00'});
 		        myChart_day.setOption({
 					legend: {
 					    data: ['温度(℃)'],
@@ -249,7 +249,7 @@
 						//通常情况下：
 						normal: {
 						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-						    color: '#00ff00'
+						    color: '#00aa00'
 							}
 							},
 						data:data.temperature,
@@ -305,7 +305,7 @@
 						//通常情况下：
 						normal: {
 						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-						    color: '#00ff00'
+						    color: '#00aa00'
 							}
 							},
 						data:data.humidity,
@@ -361,7 +361,7 @@
 						//通常情况下：
 						normal: {
 						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-						    color: '#00ff00'
+						    color: '#00aa00'
 							}
 							},
 						data:data.lux,
@@ -417,7 +417,7 @@
 						//通常情况下：
 						normal: {
 						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-						    color: '#00ff00'
+						    color: '#00aa00'
 							}
 							},
 						data:data.co2,
