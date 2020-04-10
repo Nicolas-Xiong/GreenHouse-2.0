@@ -158,11 +158,11 @@
 				<div class="col-md-12">
 					{% if status==1 %} 
 					<div class="alert  alert-dismissible m-t-10">
-						<font color="#00ff00"><b>只有2020/1/1至昨天的数据哟</b></font>
+						<font color="#00aa00"><b>只有2020/1/1至昨天的数据哟</b></font>
 					</div>
 					{% elif status==2 %}
 					<div class="alert  alert-dismissible m-t-10">
-						<font color="#00ff00"><b>什么也没有输入</b></font>
+						<font color="#00aa00"><b>什么也没有输入</b></font>
 					</div>
 					{% endif %}
 				</div>
@@ -203,12 +203,12 @@
 				s += '<tr><td>' + data.time[i] + '</td><td style="color: #ff00ff;">' + data.co2[i] + 'ppm</td></tr>';
 			};
 			document.getElementById("tb").innerHTML = s;
-			myChart_carbon.showLoading({color: '#00ff00'});
+			myChart_carbon.showLoading({color: '#00aa00'});
             $(function () {
                 $('#datetimepicker3').datetimepicker({
                     locale: 'zh-cn',viewMode: 'days',format: 'YYYY/MM/DD'
                 });
-				myChart_carbon.hideLoading({color: '#00ff00'});
+				myChart_carbon.hideLoading({color: '#00aa00'});
 				myChart_carbon.setOption({
 					legend: {
 					    data: ['CO2含量(ppm)'],
@@ -259,7 +259,7 @@
 						//通常情况下：
 						normal: {
 						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-						    color: '#00ff00'
+						    color: '#00aa00'
 							}
 							},
 						data:data.co2,
