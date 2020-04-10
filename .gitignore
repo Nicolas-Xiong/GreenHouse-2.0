@@ -2,3 +2,4 @@
 *.db
 htmlcov/ 
 .coverage
+flask_log.txt
