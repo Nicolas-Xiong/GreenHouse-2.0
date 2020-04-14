@@ -176,9 +176,11 @@
 			</div>
 		</div>
 		<div class="card">
-			<a class="d-flex justify-content-center" href="{{ url_for('humidity_download') }}" download="humidity.xlsx">  
-				<div type="submit" class="btn btn-outline-success" style="margin: 20px;">以excel格式下载全部湿度数据</div>
-			</a>
+			<div type="submit" class="btn btn-outline-success" style="margin: 20px;">
+				<a class="d-flex justify-content-center" href="{{ url_for('humidity_download') }}" download="humidity.xlsx">  <!-- url_for获取函数所对应url -->
+					以excel格式下载全部湿度数据
+				</a>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-6">
