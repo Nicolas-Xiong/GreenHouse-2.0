@@ -151,7 +151,7 @@
 				<div class='col-md-12'>
 					<form method="POST">
 						<div class='input-group date custom-control custom-control-inline' >
-							<input type='text' class="form-control" name="date" placeholder="日期选择，只有2020/1/1至昨天的数据" id='datetimepicker3'/>
+							<input type='text' class="form-control" name="date" placeholder="2020/1/1到昨天的数据" id='datetimepicker3'/>
 							<button type="submit" class="btn btn-outline-success" style="margin-left: 20px;margin-right: 20px;">确定</button>
 						</div>
 					</form>
@@ -174,6 +174,11 @@
 			<div class='col-md-12'>
 				<div id="main_humidity" style="height: 300px"></div>
 			</div>
+		</div>
+		<div class="card">
+			<a class="d-flex justify-content-center" href="{{ url_for('humidity_download') }}" download="humidity.xlsx">  <!-- url_for获取函数所对应url -->
+				<div type="submit" class="btn btn-outline-success" style="margin: 20px;">以excel格式下载全部湿度数据</div>
+			</a>
 		</div>
 	</div>
 	<div class="col-md-6">
