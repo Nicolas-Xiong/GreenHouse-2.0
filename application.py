@@ -145,10 +145,10 @@ def weather_true():
     data_lifestyle = weather_data_get(weather_type='lifestyle',location=location_id)
     return render_template('weather.html',now=data_now,forecast=data_forecast,lifestyle=data_lifestyle,location_cn=location_cn)
 
-@app.route('/temperature', methods=['GET', 'POST'])   #温度历史数据
+@app.route('/temperature', methods=['GET', 'POST'])   #数据展示
 def temperature():
-    today = datetime.date.today()
     status=0
+    today = datetime.date.today()
     date = today - datetime.timedelta(days=1) 
     if request.method == 'POST':         #如果是post方式的请求
         date_post = request.form['date']
@@ -175,193 +175,176 @@ def temperature():
         lux.append('%.2f' % float(d.Lux))
         co2.append(int(float(d.Co2)))
     
-    dic={'date':date,'time':time_,'temperature':temperature,'humidity':humidity,'lux':lux,'co2':co2}
+    date_str=str(date)
+    date_formation=date_str.split('-')[0]+"年"+date_str.split('-')[1]+"月"+date_str.split('-')[2]+"日"
+    
+    dic={'date':date_formation,'time':time_,'temperature':temperature,'humidity':humidity,'lux':lux,'co2':co2}
     return render_template('temperature.html',data=dic,status=status)
+    
 
+@app.route('/humidity', methods=['GET', 'POST'])   #数据下载页面
+def humidity():
+    status=0
+    path = os.getcwd()  # 获取当前目录
+    path = path+r'\download_data\post_date.txt'
+    
+    begin = datetime.date(2020,1,1)
+    end = datetime.date.today() - datetime.timedelta(days=1) #今天减一天
+    txt_write(path,begin,end)
+    if request.method == 'POST':         #如果是post方式的请求
+        date_post1 = request.form['date1']
+        date_post2 = request.form['date2']
+        if date_post1 and date_post2 :
+            d1=list(date_post1)
+            d2=list(date_post2)
+            date_datetime1=datetime.date(int(d1[0]+d1[1]+d1[2]+d1[3]),int(d1[5]+d1[6]),int(d1[8]+d1[9]))
+            date_datetime2=datetime.date(int(d2[0]+d2[1]+d2[2]+d2[3]),int(d2[5]+d2[6]),int(d2[8]+d2[9]))
+            if date_datetime1 >= datetime.date(2020,1,1) and date_datetime1 <= end:
+                begin = date_datetime1
+            else:
+                status = 1
+            if date_datetime2 >= datetime.date(2020,1,1) and date_datetime2 <= end:
+                end = date_datetime2
+                txt_write(path,begin,end)
+            else:
+                status = 1
+        else :
+            status = 2
+    
+    return render_template('humidity.html',status=status)
+
+@app.route('/download_all',methods=['GET'])   #温度数据数据下载
+def download_all():  
+    path = os.getcwd()  # 获取当前目录
+    path = path+r'\download_data'
+    
+    day_data = Greenhouse_data_day.query.all()
+    
+    date_list = [str(d.Date).split('-')[0]+"年"+str(d.Date).split('-')[1]+"月"+str(d.Date).split('-')[2]+"日" for d in day_data]
+    time_list = [ti.Time+' 点' for ti in day_data]
+    temperature_list = [str(round(eval(te.Temperature)))+' ℃' for te in day_data]  #round四舍六入五留双
+    humidity_list = [str(round(eval(hu.Humidity)))+' %' for hu in day_data]  #round四舍六入五留双
+    lux_list = [str(round(eval(lu.Lux),2))+' klux' for lu in day_data]  #round四舍六入五留双
+    carbon_list = [str(round(eval(ca.Co2)))+' ppm' for ca in day_data]  #round四舍六入五留双
+    data = pd.DataFrame([date_list,time_list,temperature_list,humidity_list,lux_list,carbon_list])
+    data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
+    data_T.columns = ['日期','时间','温度','湿度','光照度','CO2含量'] #设置列标
+    writer = pd.ExcelWriter(r'download_data\all_data.xlsx')
+    data_T.to_excel(writer,index = None)  #不输出行标
+    writer.save()
+    
+    return send_from_directory(path,filename="all_data.xlsx",as_attachment=True)
+
+@app.route('/download',methods=['GET'])   #温度数据数据下载
+def download():  
+    path = os.getcwd()  # 获取当前目录
+    path = path+r'\download_data'
+    
+    f = open(path+r'\post_date.txt','r+')  #以读写方式打开 
+    post_date = f.read()
+    begin=post_date.split(' ')[0]
+    end=post_date.split(' ')[1]
+    
+    day_data = Greenhouse_data_day.query.filter(Greenhouse_data_day.Date.between(begin,end)).all()
+    
+    date_list = [str(d.Date).split('-')[0]+"年"+str(d.Date).split('-')[1]+"月"+str(d.Date).split('-')[2]+"日" for d in day_data]
+    time_list = [ti.Time+' 点' for ti in day_data]
+    temperature_list = [str(round(eval(te.Temperature)))+' ℃' for te in day_data]  #round四舍六入五留双
+    humidity_list = [str(round(eval(hu.Humidity)))+' %' for hu in day_data]  #round四舍六入五留双
+    lux_list = [str(round(eval(lu.Lux),2))+' klux' for lu in day_data]  #round四舍六入五留双
+    carbon_list = [str(round(eval(ca.Co2)))+' ppm' for ca in day_data]  #round四舍六入五留双
+    data = pd.DataFrame([date_list,time_list,temperature_list,humidity_list,lux_list,carbon_list])
+    data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
+    data_T.columns = ['日期','时间','温度','湿度','光照度','CO2含量'] #设置列标
+    writer = pd.ExcelWriter(r'download_data\section_data.xlsx')
+    data_T.to_excel(writer,index = None)  #不输出行标
+    writer.save()
+    
+    return send_from_directory(path,filename="section_data.xlsx",as_attachment=True)
 
 @app.route('/temperature/download',methods=['GET'])   #温度数据数据下载
 def temperature_download():  
     path = os.getcwd()  # 获取当前目录
+    path = path+r'\download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
     time = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Time)
     temperature = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Temperature)
     
-    date_list = [d[0] for d in date]
+    date_list = [str(d[0]).split('-')[0]+"年"+str(d[0]).split('-')[1]+"月"+str(d[0]).split('-')[2]+"日" for d in date]
     time_list = [ti[0]+' 点' for ti in time]
     temperature_list = [str(round(eval(te[0])))+' ℃' for te in temperature]  #round四舍六入五留双
     data = pd.DataFrame([date_list,time_list,temperature_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','温度'] #设置列标
-    writer = pd.ExcelWriter('temperature.xlsx')
+    writer = pd.ExcelWriter(r'download_data\temperature.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
     return send_from_directory(path,filename="temperature.xlsx",as_attachment=True)
-    
-
-@app.route('/humidity', methods=['GET', 'POST'])   #湿度历史数据
-def humidity():
-    today = datetime.date.today()
-    status=0
-    date = today - datetime.timedelta(days=1) 
-    if request.method == 'POST':         #如果是post方式的请求
-        date_post = request.form['date']
-        if date_post :
-            d=list(date_post)
-            date_datetime=datetime.date(int(d[0]+d[1]+d[2]+d[3]),int(d[5]+d[6]),int(d[8]+d[9]))
-            if date_datetime >= datetime.date(2020,1,1) and date_datetime <= date:
-                date = date_datetime
-            else:
-                status = 1
-        else :
-            status = 2
-    day_date = Greenhouse_data_day.query.filter(Greenhouse_data_day.Date==str(date)).all()
-    
-    time_=[]
-    temperature=[]
-    humidity=[]
-    lux=[]
-    co2=[]
-    for d in day_date:
-        time_.append(d.Time+'点')
-        temperature.append(int(float(d.Temperature)))
-        humidity.append(int(float(d.Humidity)))
-        lux.append('%.2f' % float(d.Lux))
-        co2.append(int(float(d.Co2)))
-        
-    dic={'date':date,'time':time_,'temperature':temperature,'humidity':humidity,'lux':lux,'co2':co2}    
-    
-    return render_template('humidity.html',data=dic,status=status)
 
 @app.route('/humidity/download',methods=['GET'])   #湿度数据数据下载
 def humidity_download():  
     path = os.getcwd()  # 获取当前目录
+    path = path+r'\download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
     time = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Time)
     humidity = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Humidity)
     
-    date_list = [d[0] for d in date]
+    date_list = [str(d[0]).split('-')[0]+"年"+str(d[0]).split('-')[1]+"月"+str(d[0]).split('-')[2]+"日" for d in date]
     time_list = [ti[0]+' 点' for ti in time]
     humidity_list = [str(round(eval(hu[0])))+' %' for hu in humidity]  #round四舍六入五留双
     data = pd.DataFrame([date_list,time_list,humidity_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','湿度'] #设置列标
-    writer = pd.ExcelWriter('humidity.xlsx')
+    writer = pd.ExcelWriter(r'download_data\humidity.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
     return send_from_directory(path,filename="humidity.xlsx",as_attachment=True)
 
-
-@app.route('/lux', methods=['GET', 'POST'])   #光照度历史数据
-def lux():
-    today = datetime.date.today()
-    status=0
-    date = today - datetime.timedelta(days=1)
-    if request.method == 'POST':         #如果是post方式的请求
-        date_post = request.form['date']
-        if date_post :
-            d=list(date_post)
-            date_datetime=datetime.date(int(d[0]+d[1]+d[2]+d[3]),int(d[5]+d[6]),int(d[8]+d[9]))
-            if date_datetime >= datetime.date(2020,1,1) and date_datetime <= date:
-                date = date_datetime
-            else:
-                status = 1
-        else :
-            status = 2
-    day_date = Greenhouse_data_day.query.filter(Greenhouse_data_day.Date==str(date)).all()
-    
-    time_=[]
-    temperature=[]
-    humidity=[]
-    lux=[]
-    co2=[]
-    for d in day_date:
-        time_.append(d.Time+'点')
-        temperature.append(int(float(d.Temperature)))
-        humidity.append(int(float(d.Humidity)))
-        lux.append('%.2f' % float(d.Lux))
-        co2.append(int(float(d.Co2)))
-    
-    dic={'date':date,'time':time_,'temperature':temperature,'humidity':humidity,'lux':lux,'co2':co2}
-    
-    return render_template('lux.html',data=dic,status=status)
-
 @app.route('/lux/download',methods=['GET'])   #光照度数据数据下载
 def lux_download():  
     path = os.getcwd()  # 获取当前目录
+    path = path+r'\download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
     time = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Time)
     lux = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Lux)
     
-    date_list = [d[0] for d in date]
+    date_list = [str(d[0]).split('-')[0]+"年"+str(d[0]).split('-')[1]+"月"+str(d[0]).split('-')[2]+"日" for d in date]
     time_list = [ti[0]+' 点' for ti in time]
     lux_list = [str(round(eval(lu[0]),2))+' klux' for lu in lux]  #round四舍六入五留双
     data = pd.DataFrame([date_list,time_list,lux_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','湿度'] #设置列标
-    writer = pd.ExcelWriter('lux.xlsx')
+    writer = pd.ExcelWriter(r'download_data\lux.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
     return send_from_directory(path,filename="lux.xlsx",as_attachment=True)
 
-@app.route('/carbon', methods=['GET', 'POST'])   #CO2历史数据
-def carbon():
-    today = datetime.date.today()
-    status=0
-    date = today - datetime.timedelta(days=1)
-    if request.method == 'POST':         #如果是post方式的请求
-        date_post = request.form['date']
-        if date_post :
-            d=list(date_post)
-            date_datetime=datetime.date(int(d[0]+d[1]+d[2]+d[3]),int(d[5]+d[6]),int(d[8]+d[9]))
-            if date_datetime >= datetime.date(2020,1,1) and date_datetime <= date:
-                date = date_datetime
-            else:
-                status = 1
-        else :
-            status = 2
-    day_date = Greenhouse_data_day.query.filter(Greenhouse_data_day.Date==str(date)).all()
-    
-    time_=[]
-    temperature=[]
-    humidity=[]
-    lux=[]
-    co2=[]
-    for d in day_date:
-        time_.append(d.Time+'点')
-        temperature.append(int(float(d.Temperature)))
-        humidity.append(int(float(d.Humidity)))
-        lux.append('%.2f' % float(d.Lux))
-        co2.append(int(float(d.Co2)))
-    
-    dic={'date':date,'time':time_,'temperature':temperature,'humidity':humidity,'lux':lux,'co2':co2}
-    
-    return render_template('carbon.html',data=dic,status=status)
-
 @app.route('/carbon/download',methods=['GET'])   #CO2数据数据下载
 def carbon_download():  
     path = os.getcwd()  # 获取当前目录
+    path = path+r'\download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
     time = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Time)
     carbon = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Co2)
     
-    date_list = [d[0] for d in date]
+    date_list = [str(d[0]).split('-')[0]+"年"+str(d[0]).split('-')[1]+"月"+str(d[0]).split('-')[2]+"日" for d in date]
     time_list = [ti[0]+' 点' for ti in time]
     carbon_list = [str(round(eval(ca[0])))+' ppm' for ca in carbon]  #round四舍六入五留双
     data = pd.DataFrame([date_list,time_list,carbon_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','CO2含量'] #设置列标
-    writer = pd.ExcelWriter('carbon.xlsx')
+    writer = pd.ExcelWriter(r'download_data\carbon.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
@@ -663,7 +646,12 @@ def limit(mi,ma,data):   #数据大小限制函数
         data = ma
     return data
 
-
+def txt_write(path,begin,end):  #读写txt文件
+    f1 = open(path,'r+')  #以读写方式打开  
+    f1.seek(0)  #标记到原点
+    f1.truncate()  #清空文件内容
+    f1.write(str(begin)+' '+str(end))  #写入内容
+    f1.close
 
 
 

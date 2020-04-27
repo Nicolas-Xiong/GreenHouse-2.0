@@ -79,16 +79,10 @@
 						</a>
 						<ul class="dropdown-menu sub-down">
 							<li>
-								<a href="temperature">历史温度</a>
+								<a href="temperature">数据展示</a>
 							</li>
-							<li   class="active">
-								<a href="humidity">历史湿度</a>
-							</li>
-							<li>
-								<a href="lux">历史光照度</a>
-							</li>
-							<li>
-								<a href="carbon">历史CO2含量</a>
+							<li class="active">
+								<a href="humidity">数据下载</a>
 							</li>
 						</ul>
 					</li>
@@ -131,12 +125,12 @@
 {% block b %} 
 				<div class="breadcrumb-wrapper row">
 					<div class="col-12 col-lg-3 col-md-6">
-						<h4 class="page-title">历史湿度</h4>
+						<h4 class="page-title">数据下载</h4>
 					</div>
 					<div class="col-12 col-lg-9 col-md-6">
 						<ol class="breadcrumb float-right">
 							<li><a href="temperature">历史数据</a></li>
-							<li class="active">/ 历史湿度</li>
+							<li class="active">/ 数据下载</li>
 						</ol>
 					</div>
 				</div>
@@ -145,55 +139,88 @@
 
 {% block c %} 
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-8">
 		<div class="card">
-			<div class="row m-t-20 m-b-20">
-				<div class='col-md-12'>
+			<div class="card-body">
+				<div>
+					<h2 class="text-muted" style="text-align:center;margin-top: 15px;">下载不同时间段数据</h2>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{% if status==1 %}
+						<div class="alert  alert-dismissible">
+							<font color="#00aa00"><b>只有2020/1/1至昨天的数据哟</b></font>
+						</div>
+						{% elif status==2 %}
+						<div class="alert  alert-dismissible">
+							<font color="#00aa00"><b>存在未输入的表单</b></font>
+						</div>
+						{% else %}
+						<div class="alert  alert-dismissible">
+							<font color="#00aa00"><b>输入2020/1/1至昨天的日期</b></font>
+						</div>
+						{% endif %}
+					</div>
+					<div class="col-md-12">
 					<form method="POST">
-						<div class='input-group date custom-control custom-control-inline' >
-							<input type='text' class="form-control" name="date" placeholder="2020/1/1到昨天的数据" id='datetimepicker3'/>
+						<div class="row">
+						<div class='col-8 col-md-5'>
+							   <input type='text' class="form-control" name="date1" placeholder="起始时间" id='datetimepicker12'/>
+						</div>
+						<div class='col-8 col-md-5'>
+							   <input type='text' class="form-control" name="date2" placeholder="截止时间" id='datetimepicker13'/>
+						</div>
+						<div class='col-4 col-md-2'>
 							<button type="submit" class="btn btn-outline-success" style="margin-left: 20px;margin-right: 20px;">确定</button>
 						</div>
+						</div>
 					</form>
-				</div>
-				<div class="col-md-12">
-					{% if status==1 %}
-					<div class="alert  alert-dismissible m-t-10">
-						<font color="#00aa00"><b>只有2020/1/1至昨天的数据哟</b></font>
 					</div>
-					{% elif status==2 %}
-					<div class="alert  alert-dismissible m-t-10">
-						<font color="#00aa00"><b>什么也没有输入</b></font>
+					<div class='col-md-12'>
+						<div class="d-flex justify-content-center" style="margin: 30px;">
+							<a class="btn btn-outline-success" href="{{ url_for('download') }}" download="section_data.xlsx">  <!-- url_for获取函数所对应url -->
+								以excel格式下载指定时间段数据
+							</a>
+						</div>
 					</div>
-					{% endif %}
+					<div class='col-md-12'>
+						<div class="d-flex justify-content-center" >
+							<a class="btn btn-outline-success" href="{{ url_for('download_all') }}" download="all_data.xlsx">  <!-- url_for获取函数所对应url -->
+								以excel格式下载全部数据
+							</a>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div>
-				<h2 class="text-muted" style="text-align:center;margin-top: 15px;">日期{{data.date}}</h2>
-			</div>
-			<div class='col-md-12'>
-				<div id="main_humidity" style="height: 300px"></div>
-			</div>
-		</div>
-		<div class="card">
-			<div class="d-flex justify-content-center" style="margin: 20px;">
-				<a class="btn btn-outline-success" href="{{ url_for('humidity_download') }}" download="humidity.xlsx">  <!-- url_for获取函数所对应url -->
-					以excel格式下载全部湿度数据
-				</a>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-4">	
 		<div class="card">
-			<div class="row m-b-20">
-				<div class='col-md-12'>
-					<div>
-						<h2 class="text-muted" style="text-align:center;margin-top: 15px;">日期{{data.date}}</h2>
-					</div>
-					<table id="tb" class="table table-hover table-light table-sm">
-					</table>
+			<div class="card-body">
+				<div>
+					<h2 class="text-muted" style="text-align:center;margin-top: 15px;">下载不同类别数据</h2>
 				</div>
-			</div>
+				<div class="d-flex justify-content-center" style="margin: 20px;">
+					<a class="btn btn-outline-success" href="{{ url_for('temperature_download') }}" download="temperature.xlsx">  <!-- url_for获取函数所对应url -->
+						以excel格式下载全部温度数据
+					</a>
+				</div>
+				<div class="d-flex justify-content-center" style="margin: 20px;">
+					<a class="btn btn-outline-success" href="{{ url_for('humidity_download') }}" download="humidity.xlsx">  <!-- url_for获取函数所对应url -->
+						以excel格式下载全部湿度数据
+					</a>
+				</div>
+				<div class="d-flex justify-content-center" style="margin: 20px;">
+					<a class="btn btn-outline-success" href="{{ url_for('lux_download') }}" download="lux.xlsx">  <!-- url_for获取函数所对应url -->
+						以excel格式下载全部光照度数据
+					</a>
+				</div>
+				<div class="d-flex justify-content-center" style="margin: 20px;">
+					<a class="btn btn-outline-success" href="{{ url_for('carbon_download') }}" download="carbon.xlsx">  <!-- url_for获取函数所对应url -->
+						以excel格式下载全部CO2含量数据
+					</a>
+				</div>
+		    </div>
 		</div>
 	</div>
 </div>
@@ -201,81 +228,19 @@
 
 {% block d %} 
 	<script src="../static/js/moment-with-locales.js"></script>
-		<script src="../static/js/bootstrap-datetimepicker.js"></script>
-		
-        <script type="text/javascript">
-			var myChart_humidity = echarts.init(document.getElementById('main_humidity'));
-			var data={{data|tojson}}
-			var s = '<thead class="thead-dark"> <tr><th style="color: #ffffff;">时间</th><th style="color: #ffffff;">湿度</th></tr></thead>';
-			for (var i = 0; i<24 ; i++) {
-				s += '<tr><td>' + data.time[i] + '</td><td style="color: #0055ff;">' + data.humidity[i] + '%</td></tr>';
-			};
-			document.getElementById("tb").innerHTML = s;
-			myChart_humidity.showLoading({color: '#00aa00'});
-            $(function () {
-                $('#datetimepicker3').datetimepicker({
-                    locale: 'zh-cn',viewMode: 'days',format: 'YYYY/MM/DD'
-                });
-				myChart_humidity.hideLoading({color: '#00aa00'});
-				myChart_humidity.setOption({
-					legend: {
-					    data: ['湿度(%)'],
-						textStyle: {
-						  color: "#000000"
-						},
-					},
-					tooltip: [{
-						trigger: 'axis', 						
-						axisPointer: {  //坐标轴指示器，坐标轴触发有效，
-						    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
-							crossStyle: {
-						        color: '#000000'//白色
-							}
-						},
-					}],
-				    xAxis: [
-						{
-							type:'category',
-							data:data.time,
-							axisLabel: {
-							  textStyle: {
-							    color: "#000000"
-							  },
-							},
-						}
-					],
-					yAxis: [
-						{
-							type:'value',
-							name: '湿度',
-							min: 0,
-							max: 100,
-							splitLine:{
-							　　　　show:false
-							　　},
-							axisLabel: {
-							    textStyle: {
-								    color: "#000000"
-								              },
-							    formatter: '{value}'
-						}
-						}],
-					series: [{//默认第一个图第一个轴
-					    name: '湿度(%)',
-					    type: 'bar',
-						itemStyle: {
-						//通常情况下：
-						normal: {
-						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-						    color: '#00aa00'
-							}
-							},
-						data:data.humidity,
-					}],
-				});
-            });
-        </script>
-		<script src="../static/js/base.js"></script>
+	<script src="../static/js/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript">
+	    $(function () {
+	        $('#datetimepicker12').datetimepicker({locale: 'zh-cn', viewMode: 'days', format: 'YYYY/MM/DD'});
+	        $('#datetimepicker13').datetimepicker({locale: 'zh-cn', viewMode: 'days', format: 'YYYY/MM/DD'});
+	        $("#datetimepicker12").on("dp.change",function (e) {
+	            $('#datetimepicker13').data("DateTimePicker").minDate(e.date);
+	        });
+	        $("#datetimepicker13").on("dp.change",function (e) {
+	            $('#datetimepicker12').data("DateTimePicker").maxDate(e.date);
+	        });
+	    });
+	</script>
 {% endblock %}
 
 

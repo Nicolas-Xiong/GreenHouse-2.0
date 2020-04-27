@@ -79,16 +79,10 @@
 						</a>
 						<ul class="dropdown-menu sub-down">
 							<li   class="active">
-								<a href="temperature">历史温度</a>
+								<a href="temperature">数据展示</a>
 							</li>
 							<li>
-								<a href="humidity">历史湿度</a>
-							</li>
-							<li>
-								<a href="lux">历史光照度</a>
-							</li>
-							<li>
-								<a href="carbon">历史CO2含量</a>
+								<a href="humidity">数据下载</a>
 							</li>
 						</ul>
 					</li>
@@ -131,12 +125,12 @@
 {% block b %} 
 				<div class="breadcrumb-wrapper row">
 					<div class="col-12 col-lg-3 col-md-6">
-						<h4 class="page-title">历史温度</h4>
+						<h4 class="page-title">数据展示</h4>
 					</div>
 					<div class="col-12 col-lg-9 col-md-6">
 						<ol class="breadcrumb float-right">
 							<li><a href="temperature">历史数据</a></li>
-							<li class="active">/ 历史温度</li>
+							<li class="active">/ 数据展示</li>
 						</ol>
 					</div>
 				</div>
@@ -145,41 +139,47 @@
 
 {% block c %} 
 <div class="row">
-	<div class="col-md-6">
+	<div class='col-md-12'>
 		<div class="card">
-			<div class="row m-t-20 m-b-20">
-				<div class='col-md-12'>
-					<form method="POST">
-						<div class='input-group date custom-control custom-control-inline' >
-							<input type='text' class="form-control" name="date" placeholder="2020/1/1到昨天的数据" id='datetimepicker3'/>
-							<button type="submit" class="btn btn-outline-success" style="margin-left: 20px;margin-right: 20px;">确定</button>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-8">
+						<form method="POST">
+							<div class='input-group date custom-control custom-control-inline' style="margin-top: 10px;">
+								<input type='text' class="form-control" name="date" placeholder="2020/1/1到昨天的数据" id='datetimepicker3'/>
+								<button type="submit" class="btn btn-outline-success" style="margin-left: 20px;margin-right: 20px;">确定</button>
+							</div>
+						</form>
+					</div>
+					<div class="col-md-4">
+						{% if status==1 %}
+						<div class="alert  alert-dismissible">
+							<font color="#00aa00"><b>只有2020/1/1至昨天的数据哟</b></font>
 						</div>
-					</form>
-				</div>
-				<div class="col-md-12">
-					{% if status==1 %}
-					<div class="alert  alert-dismissible m-t-10">
-						<font color="#00aa00"><b>只有2020/1/1至昨天的数据哟</b></font>
+						{% elif status==2 %}
+						<div class="alert  alert-dismissible">
+							<font color="#00aa00"><b>什么也没有输入</b></font>
+						</div>
+						{% else %}
+						<div class="alert  alert-dismissible">
+							<font color="#00aa00"><b>输入2020/1/1至昨天的日期</b></font>
+						</div>
+						{% endif %}
 					</div>
-					{% elif status==2 %}
-					<div class="alert  alert-dismissible m-t-10">
-						<font color="#00aa00"><b>什么也没有输入</b></font>
-					</div>
-					{% endif %}
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="card">
 			<div>
-				<h2 class="text-muted" style="text-align:center;margin-top: 15px;">日期{{data.date}}</h2>
+				<h2 class="text-muted" style="text-align:center;margin-top: 15px;">{{data.date}}</h2>
 			</div>
 			<div class='col-md-12'>
 				<div id="main_temperature" style="height: 300px"></div>
-			</div>
-		</div>
-		<div class="card">
-			<div class="d-flex justify-content-center" style="margin: 20px;">
-				<a class="btn btn-outline-success" href="{{ url_for('temperature_download') }}" download="temperature.xlsx">  <!-- url_for获取函数所对应url -->
-					以excel格式下载全部温度数据
-				</a>
+				<div id="main_humidity" style="height: 300px"></div>
+				<div id="main_lux" style="height: 300px"></div>
+				<div id="main_carbon" style="height: 300px"></div>
 			</div>
 		</div>
 	</div>
@@ -188,7 +188,7 @@
 			<div class="row m-b-20">
 				<div class='col-md-12'>
 					<div>
-						<h2 class="text-muted" style="text-align:center;margin-top: 15px;">日期{{data.date}}</h2>
+						<h2 class="text-muted" style="text-align:center;margin-top: 15px;">{{data.date}}</h2>
 					</div>
 					<table id="tb" class="table table-hover table-light table-sm">
 					</table>
@@ -205,18 +205,27 @@
 		
         <script type="text/javascript">
 			var myChart_temperature = echarts.init(document.getElementById('main_temperature'));
+			var myChart_humidity = echarts.init(document.getElementById('main_humidity'));
+			var myChart_lux = echarts.init(document.getElementById('main_lux'));
+			var myChart_carbon = echarts.init(document.getElementById('main_carbon'));
 			var data={{data|tojson}}
-			var s = '<thead class="thead-dark"> <tr><th style="color: #ffffff;">时间</th><th style="color: #ffffff;">温度</th></tr></thead>';
+			var s = '<thead class="thead-dark"> <tr><th style="color: #ffffff;">时间</th><th style="color: #ffffff;">温度</th><th style="color: #ffffff;">湿度</th><th style="color: #ffffff;">光照度</th><th style="color: #ffffff;">CO2含量</th></tr></thead>';
 			for (var i = 0; i<24 ; i++) {
-				s += '<tr><td>' + data.time[i] + '</td><td style="color: #ff5500;">' + data.temperature[i] + '℃</td></tr>';
+				s += '<tr><td>' + data.time[i] + '</td><td style="color: #ff5500;">' + data.temperature[i] + '℃</td><td style="color: #0055ff;">' + data.humidity[i] + '%</td><td style="color: #00aa00;">' + data.lux[i] + 'klux</td><td style="color: #ff00ff;">' + data.co2[i] + 'ppm</td></tr>';
 			};
 			document.getElementById("tb").innerHTML = s;
 			myChart_temperature.showLoading({color: '#00aa00'});
+			myChart_humidity.showLoading({color: '#00aa00'});
+			myChart_lux.showLoading({color: '#00aa00'});
+			myChart_carbon.showLoading({color: '#00aa00'});
             $(function () {
                 $('#datetimepicker3').datetimepicker({
                     locale: 'zh-cn',viewMode: 'days',format: 'YYYY/MM/DD'
                 });
 				myChart_temperature.hideLoading({color: '#00aa00'});
+				myChart_humidity.hideLoading({color: '#00aa00'});
+				myChart_lux.hideLoading({color: '#00aa00'});
+				myChart_carbon.hideLoading({color: '#00aa00'});
 				myChart_temperature.setOption({
 					legend: {
 					    data: ['温度(℃)'],
@@ -271,6 +280,174 @@
 							}
 							},
 						data:data.temperature,
+					}],
+				});
+				myChart_humidity.setOption({
+					legend: {
+					    data: ['湿度(%)'],
+						textStyle: {
+						  color: "#000000"
+						},
+					},
+					tooltip: [{
+						trigger: 'axis', 						
+						axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+						    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+							crossStyle: {
+						        color: '#000000'//白色
+							}
+						},
+					}],
+				    xAxis: [
+						{
+							type:'category',
+							data:data.time,
+							axisLabel: {
+							  textStyle: {
+							    color: "#000000"
+							  },
+							},
+						}
+					],
+					yAxis: [
+						{
+							type:'value',
+							name: '湿度',
+							min: 0,
+							max: 100,
+							splitLine:{
+							　　　　show:false
+							　　},
+							axisLabel: {
+							    textStyle: {
+								    color: "#000000"
+								              },
+							    formatter: '{value}'
+						}
+						}],
+					series: [{//默认第一个图第一个轴
+					    name: '湿度(%)',
+					    type: 'bar',
+						itemStyle: {
+						//通常情况下：
+						normal: {
+						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+						    color: '#00aa00'
+							}
+							},
+						data:data.humidity,
+					}],
+				});
+				myChart_lux.setOption({
+					legend: {
+					    data: ['光照度(klux)'],
+						textStyle: {
+						  color: "#000000"
+						},
+					},
+					tooltip: [{
+						trigger: 'axis', 						
+						axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+						    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+							crossStyle: {
+						        color: '#000000'//白色
+							}
+						},
+					}],
+				    xAxis: [
+						{
+							type:'category',
+							data:data.time,
+							axisLabel: {
+							  textStyle: {
+							    color: "#000000"
+							  },
+							},
+						}
+					],
+					yAxis: [
+						{
+							type:'value',
+							name: '光照度',
+							min: 0,
+							max: 80,
+							splitLine:{
+							　　　　show:false
+							　　},
+							axisLabel: {
+							    textStyle: {
+								    color: "#000000"
+								              },
+							    formatter: '{value}'
+						}
+						}],
+					series: [{//默认第一个图第一个轴
+					    name: '光照度(klux)',
+					    type: 'bar',
+						itemStyle: {
+						//通常情况下：
+						normal: {
+						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+						    color: '#00aa00'
+							}
+							},
+						data:data.lux,
+					}],
+				});
+				myChart_carbon.setOption({
+					legend: {
+					    data: ['CO2含量(ppm)'],
+						textStyle: {
+						  color: "#000000"
+						},
+					},
+					tooltip: [{
+						trigger: 'axis', 						
+						axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+						    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+							crossStyle: {
+						        color: '#000000'//白色
+							}
+						},
+					}],
+				    xAxis: [
+						{
+							type:'category',
+							data:data.time,
+							axisLabel: {
+							  textStyle: {
+							    color: "#000000"
+							  },
+							},
+						}
+					],
+					yAxis: [
+						{
+							type:'value',
+							name: 'CO2含量',
+							min: 0,
+							max: 800,
+							splitLine:{
+							　　　　show:false
+							　　},
+							axisLabel: {
+							    textStyle: {
+								    color: "#000000"
+								              },
+							    formatter: '{value}'
+						}
+						}],
+					series: [{//默认第一个图第一个轴
+					    name: 'CO2含量(ppm)',
+					    type: 'bar',
+						itemStyle: {
+						//通常情况下：
+						normal: {
+						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+						    color: '#00aa00'
+							}
+							},
+						data:data.co2,
 					}],
 				});
             });

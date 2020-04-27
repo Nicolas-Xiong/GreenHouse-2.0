@@ -79,16 +79,10 @@
 						</a>
 						<ul class="dropdown-menu sub-down">
 							<li>
-								<a href="temperature">历史温度</a>
+								<a href="temperature">数据展示</a>
 							</li>
 							<li>
-								<a href="humidity">历史湿度</a>
-							</li>
-							<li>
-								<a href="lux">历史光照度</a>
-							</li>
-							<li>
-								<a href="carbon">历史CO2含量</a>
+								<a href="humidity">数据下载</a>
 							</li>
 						</ul>
 					</li>
@@ -204,87 +198,6 @@
 				</div>
 				<div class="col-md-6">
 					<div class="row">
-						<div class="col-12 stretch-card">
-							<div class="card">
-								<div class="card-body">
-								<div>
-									<h3 class="text-muted" style="text-align:center;">{{forecast[0].date}}&nbsp;天气预报</h3>
-								</div>
-								<div class="row">
-									<div class="col-6">
-										<ul class="list-media">
-											<li class="list-item">
-												<div class="client-item">
-													<div class="media-img">
-														<img src="../static/images/weather/{{forecast[0].cond_code_d}}.png" alt="">
-													</div>
-													<div class="info">
-														<p class="m-0"><b>白天</b></p>
-														<p class="m-0"><b>天气&nbsp;{{forecast[0].cond_txt_d}}</b></p>
-													</div>
-												</div>
-											</li>
-											<li class="list-item">
-												<div class="client-item">
-													<p class="m-0"><b>{{forecast[0].sr}}日出</b></p>
-												</div>
-											</li>
-											<li class="list-item">
-												<div class="client-item">
-													<p class="m-0"><b>{{forecast[0].ss}}日落</b></p>
-												</div>
-											</li>
-											<li class="list-item">
-												<div class="client-item">
-													<p class="m-0"><b>最高温度&nbsp;{{forecast[0].tmp_max}}℃</b></p>
-												</div>
-											</li>
-											<li class="list-item">
-												<div class="client-item">
-													<p class="m-0"><b>降水量&nbsp;{{forecast[0].pcpn}}mm</b></p>
-												</div>
-											</li>
-										</ul>
-									</div>
-									<div class="col-6">
-										<ul class="list-media">
-											<li class="list-item">
-												<div class="client-item">
-													<div class="media-img">
-														<img src="../static/images/weather/{{forecast[0].cond_code_n}}.png" alt="">
-													</div>
-													<div class="info">
-														<p class="m-0"><b>夜晚</b></p>
-														<p class="m-0"><b>天气&nbsp;{{forecast[0].cond_txt_n}}</b></p>
-													</div>
-												</div>
-											</li>
-											<li class="list-item">
-												<div class="client-item">
-													<p class="m-0"><b>{{forecast[0].ms}}月落</b></p>
-												</div>
-											</li>
-											<li class="list-item">
-												<div class="client-item">
-													<p class="m-0"><b>{{forecast[0].mr}}月出</b></p>
-												</div>
-											</li>
-											<li class="list-item">
-												<div class="client-item">
-													<p class="m-0"><b>最低温度&nbsp;{{forecast[0].tmp_min}}℃</b></p>
-												</div>
-											</li>
-											<li class="list-item">
-												<div class="client-item">
-													<p class="m-0"><b>风力&nbsp;{{forecast[0].wind_sc}}级</b></p>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</div>
-								</div>
-							</div>
-						</div>
 						<div class="col-12 stretch-card">
 							<div class="card">
 								<div class="card-body">
