@@ -186,7 +186,7 @@ def temperature():
 def humidity():
     status=0
     path = os.getcwd()  # 获取当前目录
-    path = path+r'\download_data\post_date.txt'
+    path = path+r'/download_data/post_date.txt'
     
     begin = datetime.date(2020,1,1)
     end = datetime.date.today() - datetime.timedelta(days=1) #今天减一天
@@ -216,7 +216,7 @@ def humidity():
 @app.route('/download_all',methods=['GET'])   #温度数据数据下载
 def download_all():  
     path = os.getcwd()  # 获取当前目录
-    path = path+r'\download_data'
+    path = path+r'/download_data'
     
     day_data = Greenhouse_data_day.query.all()
     
@@ -238,9 +238,9 @@ def download_all():
 @app.route('/download',methods=['GET'])   #温度数据数据下载
 def download():  
     path = os.getcwd()  # 获取当前目录
-    path = path+r'\download_data'
+    path = path+r'/download_data'
     
-    f = open(path+r'\post_date.txt','r+')  #以读写方式打开 
+    f = open(path+r'/post_date.txt','r+')  #以读写方式打开 
     post_date = f.read()
     begin=post_date.split(' ')[0]
     end=post_date.split(' ')[1]
@@ -265,7 +265,7 @@ def download():
 @app.route('/temperature/download',methods=['GET'])   #温度数据数据下载
 def temperature_download():  
     path = os.getcwd()  # 获取当前目录
-    path = path+r'\download_data'
+    path = path+r'/download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
@@ -287,7 +287,7 @@ def temperature_download():
 @app.route('/humidity/download',methods=['GET'])   #湿度数据数据下载
 def humidity_download():  
     path = os.getcwd()  # 获取当前目录
-    path = path+r'\download_data'
+    path = path+r'/download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
@@ -309,7 +309,7 @@ def humidity_download():
 @app.route('/lux/download',methods=['GET'])   #光照度数据数据下载
 def lux_download():  
     path = os.getcwd()  # 获取当前目录
-    path = path+r'\download_data'
+    path = path+r'/download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
@@ -331,7 +331,7 @@ def lux_download():
 @app.route('/carbon/download',methods=['GET'])   #CO2数据数据下载
 def carbon_download():  
     path = os.getcwd()  # 获取当前目录
-    path = path+r'\download_data'
+    path = path+r'/download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
