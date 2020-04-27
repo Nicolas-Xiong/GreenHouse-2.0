@@ -214,9 +214,10 @@ def humidity():
     return render_template('humidity.html',status=status)
 
 @app.route('/download_all',methods=['GET'])   #温度数据数据下载
-def download_all():
+def download_all():  
     path = os.getcwd()  # 获取当前目录
     path = path+'/download_data'
+    os.chdir(path)  #修改工作目录
     
     day_data = Greenhouse_data_day.query.all()
     
@@ -229,7 +230,7 @@ def download_all():
     data = pd.DataFrame([date_list,time_list,temperature_list,humidity_list,lux_list,carbon_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','温度','湿度','光照度','CO2含量'] #设置列标
-    writer = pd.ExcelWriter(path+os.sep+'all_data.xlsx')
+    writer = pd.ExcelWriter('all_data.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
