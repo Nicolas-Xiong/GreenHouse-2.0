@@ -229,7 +229,7 @@ def download_all():
     data = pd.DataFrame([date_list,time_list,temperature_list,humidity_list,lux_list,carbon_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','温度','湿度','光照度','CO2含量'] #设置列标
-    writer = pd.ExcelWriter(r'download_data\all_data.xlsx')
+    writer = pd.ExcelWriter(r'download_data/all_data.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
@@ -256,7 +256,7 @@ def download():
     data = pd.DataFrame([date_list,time_list,temperature_list,humidity_list,lux_list,carbon_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','温度','湿度','光照度','CO2含量'] #设置列标
-    writer = pd.ExcelWriter(r'download_data\section_data.xlsx')
+    writer = pd.ExcelWriter(r'download_data/section_data.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
@@ -278,7 +278,7 @@ def temperature_download():
     data = pd.DataFrame([date_list,time_list,temperature_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','温度'] #设置列标
-    writer = pd.ExcelWriter(r'download_data\temperature.xlsx')
+    writer = pd.ExcelWriter(r'download_data/temperature.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
@@ -300,7 +300,7 @@ def humidity_download():
     data = pd.DataFrame([date_list,time_list,humidity_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','湿度'] #设置列标
-    writer = pd.ExcelWriter(r'download_data\humidity.xlsx')
+    writer = pd.ExcelWriter(r'download_data/humidity.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
@@ -322,7 +322,7 @@ def lux_download():
     data = pd.DataFrame([date_list,time_list,lux_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','湿度'] #设置列标
-    writer = pd.ExcelWriter(r'download_data\lux.xlsx')
+    writer = pd.ExcelWriter(r'download_data/lux.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
@@ -344,7 +344,7 @@ def carbon_download():
     data = pd.DataFrame([date_list,time_list,carbon_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','CO2含量'] #设置列标
-    writer = pd.ExcelWriter(r'download_data\carbon.xlsx')
+    writer = pd.ExcelWriter(r'download_data/carbon.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
