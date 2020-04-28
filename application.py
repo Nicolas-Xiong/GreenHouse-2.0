@@ -20,7 +20,7 @@ import requests  #这个是用来获取其他网站的数据，与flask自带req
 import numpy as np
 import pandas as pd
 import datetime 
-import os
+import os,shutil
 import sys
 import click
 import json
@@ -215,9 +215,8 @@ def humidity():
 
 @app.route('/download_all',methods=['GET'])   #温度数据数据下载
 def download_all():  
-    path = os.getcwd()  # 获取当前目录
-    path = path+'/download_data'
-    os.chdir(path)  #修改工作目录
+    path1 = os.getcwd()  # 获取当前目录
+    path2 = path1 + '/download_data'
     
     day_data = Greenhouse_data_day.query.all()
     
@@ -234,7 +233,11 @@ def download_all():
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
-    return send_from_directory(path,filename="all_data.xlsx",as_attachment=True)
+    if(os.path.exists(path2+'/all_data.xlsx')):
+        os.remove(path2+'/all_data.xlsx')
+    shutil.move('all_data.xlsx',path2) #将生成文件移动到指定文件夹
+    
+    return send_from_directory(path2,filename="all_data.xlsx",as_attachment=True)
 
 @app.route('/download',methods=['GET'])   #温度数据数据下载
 def download():  
