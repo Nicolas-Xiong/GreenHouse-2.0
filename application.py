@@ -241,10 +241,10 @@ def download_all():
 
 @app.route('/download',methods=['GET'])   #温度数据数据下载
 def download():  
-    path = os.getcwd()  # 获取当前目录
-    path = path+r'/download_data'
+    path1 = os.getcwd()  # 获取当前目录
+    path2 = path1 + '/download_data'
     
-    f = open(path+r'/post_date.txt','r+')  #以读写方式打开 
+    f = open(path2+'/post_date.txt','r+')  #以读写方式打开 
     post_date = f.read()
     begin=post_date.split(' ')[0]
     end=post_date.split(' ')[1]
@@ -260,16 +260,20 @@ def download():
     data = pd.DataFrame([date_list,time_list,temperature_list,humidity_list,lux_list,carbon_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','温度','湿度','光照度','CO2含量'] #设置列标
-    writer = pd.ExcelWriter(r'download_data/section_data.xlsx')
+    writer = pd.ExcelWriter('section_data.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
-    return send_from_directory(path,filename="section_data.xlsx",as_attachment=True)
+    if(os.path.exists(path2+'/section_data.xlsx')):
+        os.remove(path2+'/section_data.xlsx')
+    shutil.move('section_data.xlsx',path2) #将生成文件移动到指定文件夹
+    
+    return send_from_directory(path2,filename="section_data.xlsx",as_attachment=True)
 
 @app.route('/temperature/download',methods=['GET'])   #温度数据数据下载
 def temperature_download():  
-    path = os.getcwd()  # 获取当前目录
-    path = path+r'/download_data'
+    path1 = os.getcwd()  # 获取当前目录
+    path2 = path1+'/download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
@@ -282,16 +286,20 @@ def temperature_download():
     data = pd.DataFrame([date_list,time_list,temperature_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','温度'] #设置列标
-    writer = pd.ExcelWriter(r'download_data/temperature.xlsx')
+    writer = pd.ExcelWriter('temperature.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
-    return send_from_directory(path,filename="temperature.xlsx",as_attachment=True)
+    if(os.path.exists(path2+'/temperature.xlsx')):
+        os.remove(path2+'/temperature.xlsx')
+    shutil.move('temperature.xlsx',path2) #将生成文件移动到指定文件夹
+    
+    return send_from_directory(path2,filename="temperature.xlsx",as_attachment=True)
 
 @app.route('/humidity/download',methods=['GET'])   #湿度数据数据下载
 def humidity_download():  
-    path = os.getcwd()  # 获取当前目录
-    path = path+r'/download_data'
+    path1 = os.getcwd()  # 获取当前目录
+    path2 = path1+'/download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
@@ -304,16 +312,20 @@ def humidity_download():
     data = pd.DataFrame([date_list,time_list,humidity_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','湿度'] #设置列标
-    writer = pd.ExcelWriter(r'download_data/humidity.xlsx')
+    writer = pd.ExcelWriter('humidity.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
-    return send_from_directory(path,filename="humidity.xlsx",as_attachment=True)
+    if(os.path.exists(path2+'/humidity.xlsx')):
+        os.remove(path2+'/humidity.xlsx')
+    shutil.move('humidity.xlsx',path2) #将生成文件移动到指定文件夹
+    
+    return send_from_directory(path2,filename="humidity.xlsx",as_attachment=True)
 
 @app.route('/lux/download',methods=['GET'])   #光照度数据数据下载
 def lux_download():  
-    path = os.getcwd()  # 获取当前目录
-    path = path+r'/download_data'
+    path1 = os.getcwd()  # 获取当前目录
+    path2 = path1+'/download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
@@ -326,16 +338,20 @@ def lux_download():
     data = pd.DataFrame([date_list,time_list,lux_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','湿度'] #设置列标
-    writer = pd.ExcelWriter(r'download_data/lux.xlsx')
+    writer = pd.ExcelWriter('lux.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
-    return send_from_directory(path,filename="lux.xlsx",as_attachment=True)
+    if(os.path.exists(path2+'/lux.xlsx')):
+        os.remove(path2+'/lux.xlsx')
+    shutil.move('lux.xlsx',path2) #将生成文件移动到指定文件夹
+    
+    return send_from_directory(path2,filename="lux.xlsx",as_attachment=True)
 
 @app.route('/carbon/download',methods=['GET'])   #CO2数据数据下载
 def carbon_download():  
-    path = os.getcwd()  # 获取当前目录
-    path = path+r'/download_data'
+    path1 = os.getcwd()  # 获取当前目录
+    path2 = path1+'/download_data'
     
     #获取某列数据
     date = Greenhouse_data_day.query.with_entities(Greenhouse_data_day.Date)  
@@ -348,11 +364,15 @@ def carbon_download():
     data = pd.DataFrame([date_list,time_list,carbon_list])
     data_T = pd.DataFrame(data.values.T,index=None)  #矩阵转置
     data_T.columns = ['日期','时间','CO2含量'] #设置列标
-    writer = pd.ExcelWriter(r'download_data/carbon.xlsx')
+    writer = pd.ExcelWriter('carbon.xlsx')
     data_T.to_excel(writer,index = None)  #不输出行标
     writer.save()
     
-    return send_from_directory(path,filename="carbon.xlsx",as_attachment=True)
+    if(os.path.exists(path2+'/carbon.xlsx')):
+        os.remove(path2+'/carbon.xlsx')
+    shutil.move('carbon.xlsx',path2) #将生成文件移动到指定文件夹
+    
+    return send_from_directory(path2,filename="carbon.xlsx",as_attachment=True)
 
 @app.route('/profile', methods=['GET']) #显示简介
 def profile():
