@@ -248,8 +248,7 @@ def download():
     post_date = f.read()
     begin=post_date.split(' ')[0]
     end=post_date.split(' ')[1]
-    
-    day_data = Greenhouse_data_day.query.filter(Greenhouse_data_day.Date.between(begin,end)).all()
+    day_data = Greenhouse_data_day.query.filter(Greenhouse_data_day.Date.between(begin,end)).all()#获取指定区间所有数据
     
     date_list = [str(d.Date).split('-')[0]+"年"+str(d.Date).split('-')[1]+"月"+str(d.Date).split('-')[2]+"日" for d in day_data]
     time_list = [ti.Time+' 点' for ti in day_data]
