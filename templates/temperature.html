@@ -139,48 +139,21 @@
 
 {% block c %} 
 <div class="row">
-	<div class='col-md-12'>
-		<div class="card">
-			<div class="card-body">
-				<div class="row">
-					<div class="col-md-8">
-						<form method="POST">
-							<div class='input-group date custom-control custom-control-inline' style="margin-top: 10px;">
-								<input type='text' class="form-control" name="date" placeholder="选择日期" id='datetimepicker3'/>
-								<button type="submit" class="btn btn-common" style="margin-left: 20px;margin-right: 20px;">确定</button>
-							</div>
-						</form>
-					</div>
-					<div class="col-md-4">
-						{% if status==1 %}
-						<div class="alert  alert-dismissible">
-							<font color="#00aa00"><b>日期超出范围</b></font>
-						</div>
-						{% elif status==2 %}
-						<div class="alert  alert-dismissible">
-							<font color="#00aa00"><b>什么也没有输入</b></font>
-						</div>
-						{% else %}
-						<div class="alert  alert-dismissible">
-							<font color="#00aa00"><b>2020/1/1到昨天的日期</b></font>
-						</div>
-						{% endif %}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="col-md-6">
 		<div class="card">
+			<form method="POST">
+				<div class='input-group date custom-control custom-control-inline' style="margin-top: 15px;">
+					<input type='text' class="form-control" name="date" placeholder="选择日期" id='datetimepicker3'/>
+					<button type="submit" class="btn btn-common" style="margin-left: 20px;margin-right: 20px;">确定</button>
+				</div>
+			</form>
 			<div>
 				<h2 class="text-muted" style="text-align:center;margin-top: 15px;">{{data.date}}</h2>
 			</div>
-			<div class='col-md-12'>
-				<div id="main_temperature" style="height: 300px"></div>
-				<div id="main_humidity" style="height: 300px"></div>
-				<div id="main_lux" style="height: 300px"></div>
-				<div id="main_carbon" style="height: 300px"></div>
-			</div>
+			<div id="main_temperature" style="height: 300px"></div>
+			<div id="main_humidity" style="height: 300px"></div>
+			<div id="main_lux" style="height: 300px"></div>
+			<div id="main_carbon" style="height: 300px"></div>
 		</div>
 	</div>
 	<div class="col-md-6">
@@ -209,6 +182,7 @@
 			var myChart_lux = echarts.init(document.getElementById('main_lux'));
 			var myChart_carbon = echarts.init(document.getElementById('main_carbon'));
 			var data={{data|tojson}}
+			var status={{status}}
 			var s = '<thead class="thead-dark"> <tr><th style="color: #ffffff;">时间</th><th style="color: #ffffff;">温度</th><th style="color: #ffffff;">湿度</th><th style="color: #ffffff;">光照度</th><th style="color: #ffffff;">CO2含量</th></tr></thead>';
 			for (var i = 0; i<24 ; i++) {
 				s += '<tr><td>' + data.time[i] + '</td><td style="color: #ff5500;">' + data.temperature[i] + '℃</td><td style="color: #0055ff;">' + data.humidity[i] + '%</td><td style="color: #00aa00;">' + data.lux[i] + 'klux</td><td style="color: #ff00ff;">' + data.co2[i] + 'ppm</td></tr>';
@@ -218,6 +192,12 @@
 			myChart_humidity.showLoading({color: '#00aa00'});
 			myChart_lux.showLoading({color: '#00aa00'});
 			myChart_carbon.showLoading({color: '#00aa00'});
+			if (status==1){
+				alert("日期超出范围!")
+			}
+			else if(status==2){
+				alert("什么也没有输入!")
+			}
             $(function () {
                 $('#datetimepicker3').datetimepicker({
                     locale: 'zh-cn',viewMode: 'days',format: 'YYYY/MM/DD'

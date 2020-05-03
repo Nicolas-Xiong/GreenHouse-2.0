@@ -147,21 +147,6 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						{% if status==1 %}
-						<div class="alert  alert-dismissible">
-							<font color="#00aa00"><b>日期超出范围</b></font>
-						</div>
-						{% elif status==2 %}
-						<div class="alert  alert-dismissible">
-							<font color="#00aa00"><b>存在未输入的表单</b></font>
-						</div>
-						{% else %}
-						<div class="alert  alert-dismissible">
-							<font color="#00aa00"><b>2020/1/1到昨天的日期</b></font>
-						</div>
-						{% endif %}
-					</div>
-					<div class="col-md-12">
 					<form method="POST">
 						<div class="row">
 						<div class='col-7 col-md-5' style="margin-top: 10px;">
@@ -230,6 +215,13 @@
 	<script src="../static/js/moment-with-locales.js"></script>
 	<script src="../static/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript">
+		var status={{status}}
+		if (status==1){
+			alert("日期超出范围!")
+		}
+		else if(status==2){
+			alert("存在未输入的表单!")
+		}
 	    $(function () {
 	        $('#datetimepicker12').datetimepicker({locale: 'zh-cn', viewMode: 'days', format: 'YYYY/MM/DD'});
 	        $('#datetimepicker13').datetimepicker({locale: 'zh-cn', viewMode: 'days', format: 'YYYY/MM/DD'});
