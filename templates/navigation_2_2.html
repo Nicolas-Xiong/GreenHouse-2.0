@@ -12,17 +12,36 @@
 							<span class="icon-holder">
 								<i class="lni-dashboard"></i>
 							</span>
-							<span class="title">近期数据</span>
+							<span class="title">系统总控</span>
 							<span class="arrow">
 							<i class="lni-chevron-right"></i>
 							</span>
 						</a>
 						<ul class="dropdown-menu sub-down">
 							<li>
-								<a href="navigation_2">一小时内</a>
+								<a href="navigation_2">近期数据</a>
 							</li>
 							<li class="active">
-								<a href="navigation_2_2">一天内</a>
+								<a href="navigation_2_2">环境控制</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+						<span class="icon-holder">
+							<i class="lni-timer"></i>
+						</span>
+						<span class="title">历史数据</span>
+						<span class="arrow">
+						<i class="lni-chevron-right"></i>
+						</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li>
+								<a href="temperature">数据展示</a>
+							</li>
+							<li>
+								<a href="humidity">数据下载</a>
 							</li>
 						</ul>
 					</li>
@@ -63,27 +82,8 @@
 						</a>
 						<ul class="dropdown-menu sub-down">
 						<li>
-							<a href="weather_true">天气</a>
+							<a href="weather_true">天气预报</a>
 						</li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="dropdown-toggle" href="#">
-						<span class="icon-holder">
-							<i class="lni-timer"></i>
-						</span>
-						<span class="title">历史数据</span>
-						<span class="arrow">
-						<i class="lni-chevron-right"></i>
-						</span>
-						</a>
-						<ul class="dropdown-menu sub-down">
-							<li>
-								<a href="temperature">数据展示</a>
-							</li>
-							<li>
-								<a href="humidity">数据下载</a>
-							</li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -125,12 +125,12 @@
 {% block b %} 
 				<div class="breadcrumb-wrapper row">
 					<div class="col-12 col-lg-3 col-md-6">
-						<h4 class="page-title">一天内</h4>
+						<h4 class="page-title">环境控制</h4>
 					</div>
 					<div class="col-12 col-lg-9 col-md-6">
 						<ol class="breadcrumb float-right">
-							<li><a href="video">视频监控</a></li>
-							<li class="active">/ 一天内</li>
+							<li><a href="navigation_2">系统总控</a></li>
+							<li class="active">/ 环境控制</li>
 						</ol>
 					</div>
 				</div>
@@ -138,287 +138,413 @@
 
 {% block c %}
 <div class="row">
+				<div class="col-6 col-md-2">
+					<div class="info-box">
+						<div style="text-align: center;">
+							<div>
+								<div>
+									<h2 class="text-muted" style="text-align:center;margin-bottom: 10px;">热风机</h2>
+								</div>
+								<label class="el-switch el-switch-lg el-switch-green">
+									<input type="checkbox" name="switch" id="check1">
+									<span class="el-switch-style check"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-6 col-md-2">
+					<div class="info-box">
+						<div style="text-align: center;">
+							<div>
+								<div>
+									<h2 class="text-muted" style="text-align:center;margin-bottom: 10px;">水帘</h2>
+								</div>
+								<label class="el-switch el-switch-lg el-switch-green">
+									<input type="checkbox" name="switch" id="check2">
+									<span class="el-switch-style check"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-6 col-md-2">
+					<div class="info-box">
+						<div style="text-align: center;">
+							<div>
+								<div>
+									<h2 class="text-muted" style="text-align:center;margin-bottom: 10px;">通风风扇</h2>
+								</div>
+								<label class="el-switch el-switch-lg el-switch-green">
+									<input type="checkbox" name="switch" id="check3">
+									<span class="el-switch-style check"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-6 col-md-2">
+					<div class="info-box">
+						<div style="text-align: center;">
+							<div>
+								<div>
+									<h2 class="text-muted" style="text-align:center;margin-bottom: 10px;">补光灯</h2>
+								</div>
+								<label class="el-switch el-switch-lg el-switch-green">
+									<input type="checkbox" name="switch" id="check4">
+									<span class="el-switch-style check"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-6 col-md-2">
+					<div class="info-box">
+						<div style="text-align: center;">
+							<div>
+								<div>
+									<h2 class="text-muted" style="text-align:center;margin-bottom: 10px;">卷帘</h2>
+								</div>
+								<label class="el-switch el-switch-lg el-switch-green">
+									<input type="checkbox" name="switch" id="check5">
+									<span class="el-switch-style check"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-6 col-md-2">
+					<div class="info-box">
+						<div style="text-align: center;">
+							<div>
+								<div>
+									<h2 class="text-muted" style="text-align:center;margin-bottom: 10px;">CO2发生器</h2>
+								</div>
+								<label class="el-switch el-switch-lg el-switch-green">
+									<input type="checkbox" name="switch" id="check6">
+									<span class="el-switch-style check"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+</div>
+<div class="row">
 				<div class="col-md-6">
 					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">温度</h5>
+						<form method="POST">
+						<div>
+							<h2 class="text-muted" style="text-align:center;margin: 10px 0;">自动调节设置</h2>
 						</div>
-						<div id="main_day" style="height: 300px"></div>
+						<div class="row">
+							<div class="col-4">
+								<h2 class="text-muted" style="text-align:center;"><small>自动调节：</small></h2>
+							</div>
+							<div class="col-7">
+								<div class="row">
+									<div class="col-3">
+										<h2 class="text-muted" style="text-align:center;"><small>关闭</small></h2>
+									</div>
+									<div class="col-3">
+										<label class="el-switch el-switch-lg el-switch-green">
+											<input type="checkbox" name="switch" id="check7">
+											<span class="el-switch-style check_s"></span>
+										</label>
+									</div>
+									<div class="col-3">
+										<h2 class="text-muted" style="text-align:center;"><small>开启</small></h2>
+									</div>
+								</div>
+							</div>
+							<div class="col-4">
+								<h2 class="text-muted" style="text-align:center;"><small>温度范围：</small></h2>
+							</div>
+							<div class="col-7">
+								<div class="row">
+										<h2 class="text-muted" style="text-align:center;"><small>min</small></h2>
+									<div class="col-4">
+										<select id="temperature_min" class="form-control p-1" type="text" name="temperature_min">
+										  <option>0℃</option>
+										</select>
+									</div>
+										<h2 class="text-muted" style="text-align:center;"><small>max</small></h2>
+									<div class="col-4">
+										<select id="temperature_max" class="form-control p-1" type="text" name="temperature_max">
+										  <option>0℃</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-4">
+								<h2 class="text-muted" style="text-align:center;"><small>湿度范围：</small></h2>
+							</div>
+							<div class="col-7">
+								<div class="row">
+										<h2 class="text-muted" style="text-align:center;"><small>min</small></h2>
+									<div class="col-4">
+										<select id="humidity_min" class="form-control p-1" type="text" name="humidity_min">
+										  <option>0%</option>
+										</select>
+									</div>
+										<h2 class="text-muted" style="text-align:center;"><small>max</small></h2>
+									<div class="col-4">
+										<select id="humidity_max" class="form-control p-1" type="text" name="humidity_max">
+										  <option>0%</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-4">
+								<h2 class="text-muted" style="text-align:center;"><small>光照范围：</small></h2>
+							</div>
+							<div class="col-7">
+								<div class="row">
+										<h2 class="text-muted" style="text-align:center;"><small>min</small></h2>
+									<div class="col-4">
+										<select id="lux_min" class="form-control p-1" type="text" name="lux_min">
+										  <option>0klux</option>
+										</select>
+									</div>
+										<h2 class="text-muted" style="text-align:center;"><small>max</small></h2>
+									<div class="col-4">
+										<select id="lux_max" class="form-control p-1" type="text" name="lux_max">
+										  <option>0klux</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-4">
+								<h2 class="text-muted" style="text-align:center;"><small>CO2范围：</small></h2>
+							</div>
+							<div class="col-7">
+								<div class="row">
+										<h2 class="text-muted" style="text-align:center;"><small>min</small></h2>
+									<div class="col-4">
+										<select id="carbon_min" class="form-control p-1" type="text" name="carbon_min">
+										  <option>0ppm</option>
+										</select>
+									</div>
+										<h2 class="text-muted" style="text-align:center;"><small>max</small></h2>
+									<div class="col-4">
+										<select id="carbon_max" class="form-control p-1" type="text" name="carbon_max">
+										  <option>0ppm</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group text-center m-t-20">
+							<button class="btn btn-common" type="submit" style="width:100px">提交</button>
+						</div>
+						</form>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">湿度</h5>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-7">
+									<h2 class="text-muted" style="margin: 10px 0;">设置信息</h2>
+									<p class="m-0"><b>自动调节处于<span id="z7" style="color:#00ff00;">开启</span>状态</b></p>
+									<p class="m-0"><b>温度超出<span id="d1" style="color:#00ff00;">0℃~0℃</span>自动调节</b></p>
+									<p class="m-0"><b>湿度超出<span id="d2" style="color:#00ff00;">0%~0%</span>自动调节</b></p>
+									<p class="m-0"><b>光照度超出<span id="d3" style="color:#00ff00;">0klux~0klux</span>自动调节</b></p>
+									<p class="m-0"><b>CO2含量超出<span id="d4" style="color:#00ff00;">0ppm~0ppm</span>自动调节</b></p>
+								</div>
+								<div class="col-md-5">
+									<h2 class="text-muted" style="margin: 10px 0;">设备信息</h2>
+									<p class="m-0"><b>热风机处于<span id="z1" style="color:#00ff00;">开启</span>状态</b></p>
+									<p class="m-0"><b>水帘处于<span id="z2" style="color:#00ff00;">开启</span>状态</b></p>
+									<p class="m-0"><b>通风风扇处于<span id="z3" style="color:#00ff00;">开启</span>状态</b></p>
+									<p class="m-0"><b>补光灯处于<span id="z4" style="color:#00ff00;">开启</span>状态</b></p>
+									<p class="m-0"><b>卷帘处于<span id="z5" style="color:#00ff00;">开启</span>状态</b></p>
+									<p class="m-0"><b>CO2发生器处于<span id="z6" style="color:#00ff00;">开启</span>状态</b></p>
+								</div>
+							</div>
 						</div>
-						<div id="main1_day" style="height: 300px"></div>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">光照度</h5>
-						</div>
-						<div id="main2_day" style="height: 300px"></div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">CO2含量</h5>
-						</div>
-						<div id="main3_day" style="height: 300px"></div>
-					</div>
-				</div>
-			</div>
+</div>
 {% endblock %}
 
 
 {% block d %}
   <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart_day = echarts.init(document.getElementById('main_day'));
-		var myChart1_day = echarts.init(document.getElementById('main1_day'));
-		var myChart2_day = echarts.init(document.getElementById('main2_day'));
-		var myChart3_day = echarts.init(document.getElementById('main3_day'));
-		myChart_day.showLoading({color: '#00aa00'});
-		myChart1_day.showLoading({color: '#00aa00'});
-		myChart2_day.showLoading({color: '#00aa00'});
-		myChart3_day.showLoading({color: '#00aa00'});
-		
-		//异步加载数据
-		$(function(){
-		    $.get('/data_day',function (data) {
-				myChart_day.hideLoading({color: '#00aa00'});
-				myChart1_day.hideLoading({color: '#00aa00'});
-				myChart2_day.hideLoading({color: '#00aa00'});
-				myChart3_day.hideLoading({color: '#00aa00'});
-		        myChart_day.setOption({
-					legend: {
-					    data: ['温度(℃)'],
-						textStyle: {
-						  color: "#000000"
-						},
-					},
-					tooltip: [{
-						trigger: 'axis', 						
-						axisPointer: {  //坐标轴指示器，坐标轴触发有效，
-						    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
-							crossStyle: {
-						        color: '#000000'//白色
-							}
-						},
-					}],
-		            xAxis: [
-						{
-							type:'category',
-							data:data.time,
-							axisLabel: {
-							  textStyle: {
-							    color: "#000000"
-							  },
-							},
-						}
-					],
-					yAxis: [
-						{
-							type:'value',
-							name: '温度',
-							min: 0,
-							max: 40,
-							splitLine:{
-							　　　　show:false
-							　　},
-							axisLabel: {
-							    textStyle: {
-								    color: "#000000"
-								              },
-							    formatter: '{value}'
-						}
-						}],
-					series: [{//默认第一个图第一个轴
-					    name: '温度(℃)',
-					    type: 'bar',
-						itemStyle: {
-						//通常情况下：
-						normal: {
-						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-						    color: '#00aa00'
-							}
-							},
-						data:data.temperature,
-					}],
-		        });
-				myChart1_day.setOption({
-					legend: {
-					    data: ['湿度(%)'],
-						textStyle: {
-						  color: "#000000"
-						},
-					},
-					tooltip: [{
-						trigger: 'axis', 						
-						axisPointer: {  //坐标轴指示器，坐标轴触发有效，
-						    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
-							crossStyle: {
-						        color: '#000000'//白色
-							}
-						},
-					}],
-				    xAxis: [
-						{
-							type:'category',
-							data:data.time,
-							axisLabel: {
-							  textStyle: {
-							    color: "#000000"
-							  },
-							},
-						}
-					],
-					yAxis: [
-						{
-							type:'value',
-							name: '湿度',
-							min: 0,
-							max: 100,
-							splitLine:{
-							　　　　show:false
-							　　},
-							axisLabel: {
-							    textStyle: {
-								    color: "#000000"
-								              },
-							    formatter: '{value}'
-						}
-						}],
-					series: [{//默认第一个图第一个轴
-					    name: '湿度(%)',
-					    type: 'bar',
-						itemStyle: {
-						//通常情况下：
-						normal: {
-						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-						    color: '#00aa00'
-							}
-							},
-						data:data.humidity,
-					}],
-				});
-				myChart2_day.setOption({
-					legend: {
-					    data: ['光照度(klux)'],
-						textStyle: {
-						  color: "#000000"
-						},
-					},
-					tooltip: [{
-						trigger: 'axis', 						
-						axisPointer: {  //坐标轴指示器，坐标轴触发有效，
-						    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
-							crossStyle: {
-						        color: '#000000'//白色
-							}
-						},
-					}],
-				    xAxis: [
-						{
-							type:'category',
-							data:data.time,
-							axisLabel: {
-							  textStyle: {
-							    color: "#000000"
-							  },
-							},
-						}
-					],
-					yAxis: [
-						{
-							type:'value',
-							name: '光照度',
-							min: 0,
-							max: 80,
-							splitLine:{
-							　　　　show:false
-							　　},
-							axisLabel: {
-							    textStyle: {
-								    color: "#000000"
-								              },
-							    formatter: '{value}'
-						}
-						}],
-					series: [{//默认第一个图第一个轴
-					    name: '光照度(klux)',
-					    type: 'bar',
-						itemStyle: {
-						//通常情况下：
-						normal: {
-						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-						    color: '#00aa00'
-							}
-							},
-						data:data.lux,
-					}],
-				});
-				myChart3_day.setOption({
-					legend: {
-					    data: ['CO2含量(ppm)'],
-						textStyle: {
-						  color: "#000000"
-						},
-					},
-					tooltip: [{
-						trigger: 'axis', 						
-						axisPointer: {  //坐标轴指示器，坐标轴触发有效，
-						    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
-							crossStyle: {
-						        color: '#000000'//白色
-							}
-						},
-					}],
-				    xAxis: [
-						{
-							type:'category',
-							data:data.time,
-							axisLabel: {
-							  textStyle: {
-							    color: "#000000"
-							  },
-							},
-						}
-					],
-					yAxis: [
-						{
-							type:'value',
-							name: 'CO2含量',
-							min: 0,
-							max: 800,
-							splitLine:{
-							　　　　show:false
-							　　},
-							axisLabel: {
-							    textStyle: {
-								    color: "#000000"
-								              },
-							    formatter: '{value}'
-						}
-						}],
-					series: [{//默认第一个图第一个轴
-					    name: 'CO2含量(ppm)',
-					    type: 'bar',
-						itemStyle: {
-						//通常情况下：
-						normal: {
-						    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-						    color: '#00aa00'
-							}
-							},
-						data:data.co2,
-					}],
-				});
-		    });
-		}); 
-    </script>
-
+	var check=document.getElementsByTagName("input");
+	var dic={{dic|tojson}}
+	var flag1=0;
+	var flag2=0;
+	var temperature_min = 0;
+	var temperature_max = 0;
+	var humidity_min = 0;
+	var humidity_max = 0;
+	var lux_min = 0;
+	var lux_max = 0;
+	var carbon_min = 0;
+	var carbon_max = 0;
+	for (var t_min = 5;t_min <= 14;t_min++){
+		temperature_min += '<option>'+t_min+'℃</option>';
+	}
+	for (var t_max = 25;t_max <= 34;t_max++){
+		temperature_max += '<option>'+t_max+'℃</option>';
+	}
+	for (var h_min = 50;h_min <= 59;h_min++){
+		humidity_min += '<option>'+h_min+'%</option>';
+	}
+	for (var h_max = 90;h_max <= 99;h_max++){
+		humidity_max += '<option>'+h_max+'%</option>';
+	}
+	for (var l_min = 0;l_min <= 9;l_min++){
+		lux_min += '<option>'+l_min+'klux</option>';
+	}
+	for (var l_max = 70;l_max <= 79;l_max++){
+		lux_max += '<option>'+l_max+'klux</option>';
+	}
+	for (var c_min = 10;c_min <= 19;c_min++){
+		carbon_min += '<option>'+c_min*10+'ppm</option>';
+	}
+	for (var c_max = 60;c_max <= 69;c_max++){
+		carbon_max += '<option>'+c_max*10+'ppm</option>';
+	}
+	document.getElementById("temperature_min").innerHTML = temperature_min;
+	document.getElementById("temperature_max").innerHTML = temperature_max;
+	document.getElementById("humidity_min").innerHTML = humidity_min;
+	document.getElementById("humidity_max").innerHTML = humidity_max;
+	document.getElementById("lux_min").innerHTML = lux_min;
+	document.getElementById("lux_max").innerHTML = lux_max;
+	document.getElementById("carbon_min").innerHTML = carbon_min;
+	document.getElementById("carbon_max").innerHTML = carbon_max;
+	document.getElementById("d1").innerHTML = dic.temperature_min+'~'+dic.temperature_max;
+	document.getElementById("d2").innerHTML = dic.humidity_min+'~'+dic.humidity_max;
+	document.getElementById("d3").innerHTML = dic.lux_min+'~'+dic.lux_max;
+	document.getElementById("d4").innerHTML = dic.co2_min+'~'+dic.co2_max;
+	check[6].checked = true;
+	setInterval(function () {
+	if (check[0].checked){
+	document.getElementById("z1").innerHTML='开启'
+	}
+	else{
+	document.getElementById("z1").innerHTML='关闭'
+	};
+	if (check[1].checked){
+	document.getElementById("z2").innerHTML='开启'
+	}
+	else{
+	document.getElementById("z2").innerHTML='关闭'
+	};
+	if (check[2].checked){
+	document.getElementById("z3").innerHTML='开启'
+	}
+	else{
+	document.getElementById("z3").innerHTML='关闭'
+	};
+	if (check[3].checked){
+	document.getElementById("z4").innerHTML='开启'
+	}
+	else{
+	document.getElementById("z4").innerHTML='关闭'
+	};
+	if (check[4].checked){
+	document.getElementById("z5").innerHTML='开启'
+	}
+	else{
+	document.getElementById("z5").innerHTML='关闭'
+	};
+	if (check[5].checked){
+	document.getElementById("z6").innerHTML='开启'
+	}
+	else{
+	document.getElementById("z6").innerHTML='关闭'
+	};
+	if (check[6].checked){
+	document.getElementById("z7").innerHTML='开启'
+	}
+	else{
+	document.getElementById("z7").innerHTML='关闭'
+	};
+	$(function(){
+		$.get('/expert_system',function (last_data) {
+			if(check[6].checked){
+				//console.log(parseInt(last_data.humidity)>parseInt(dic.humidity_max))
+				if(parseInt(last_data.temperature)<parseInt(dic.temperature_min)){
+					check[0].checked=true;
+					check[1].checked=false;
+				}
+				else if(parseInt(last_data.temperature)>parseInt(dic.temperature_max)){
+					check[1].checked=true;
+					check[0].checked=false;
+					flag1=1;
+				}
+				else{
+					check[0].checked=false;
+					check[1].checked=false;
+				}
+				if(parseInt(last_data.humidity)<parseInt(dic.humidity_min)){
+					check[1].checked=true;
+					check[2].checked=false;
+				}
+				else if(parseInt(last_data.humidity)>parseInt(dic.humidity_max)){
+					check[2].checked=true;
+					if(!flag1){   //前面需要打开时不要关了
+						check[1].checked=false;
+						flag1=0;
+					}
+					flag2=1;
+				}
+				else{
+					if(!flag1){   //前面需要打开时不要关了
+						check[1].checked=false;
+						flag1=0;
+					}
+					check[2].checked=false;
+				}
+				if(parseFloat(last_data.lux)<parseFloat(dic.lux_min)){
+					check[3].checked=true;
+					check[4].checked=false;
+				}
+				else if(parseFloat(last_data.lux)>parseFloat(dic.lux_max)){
+					check[4].checked=true;
+					check[3].checked=false;
+				}
+				else{
+					check[3].checked=false;
+					check[4].checked=false;
+				}
+				if(parseInt(last_data.co2)<parseInt(dic.co2_min)){
+					check[5].checked=true;
+					if(!flag2){   //前面需要打开时不要关了
+						check[2].checked=false;
+						flag2=0;
+					}
+				}
+				else if(parseInt(last_data.co2)>parseInt(dic.co2_max)){
+					check[2].checked=true
+					check[5].checked=false;
+				}
+				else{
+					if(!flag2){   //前面需要打开时不要关了
+						check[2].checked=false;
+						flag2=0;
+					}
+					check[5].checked=false;
+				}
+			}
+		})
+	})
+	}, 100);
+	$(".check").on("click",function(e){
+		if (check[6].checked){
+				alert("此操作将关闭自动调节");
+				check[6].checked= false;
+			}
+	});
+	$(".check_s").on("click",function(e){
+		if (check[6].checked){
+				alert("此操作将关闭自动调节");
+			}
+		else {
+			alert("此操作将打开自动调节");
+		}
+	});
+  </script>
 {% endblock %}

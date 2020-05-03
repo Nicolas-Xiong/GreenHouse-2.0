@@ -16,6 +16,7 @@
 	<link href="../static/css/prettify-1.0.css" rel="stylesheet">
 	<link href="../static/css/base.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../static/css/default.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/checkbox.css">
 </head>
 <body>
 <div class="app header-default side-nav-dark">
@@ -131,17 +132,36 @@
 							<span class="icon-holder">
 								<i class="lni-dashboard"></i>
 							</span>
-							<span class="title">近期数据</span>
+							<span class="title">系统总控</span>
 							<span class="arrow">
 							<i class="lni-chevron-right"></i>
 							</span>
 						</a>
 						<ul class="dropdown-menu sub-down">
 							<li class="active">
-								<a href="navigation_2">一小时内</a>
+								<a href="navigation_2">近期数据</a>
 							</li>
 							<li>
-								<a href="navigation_2_2">一天内</a>
+								<a href="navigation_2_2">环境控制</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+						<span class="icon-holder">
+							<i class="lni-timer"></i>
+						</span>
+						<span class="title">历史数据</span>
+						<span class="arrow">
+						<i class="lni-chevron-right"></i>
+						</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li>
+								<a href="temperature">数据展示</a>
+							</li>
+							<li>
+								<a href="humidity">数据下载</a>
 							</li>
 						</ul>
 					</li>
@@ -182,27 +202,8 @@
 						</a>
 						<ul class="dropdown-menu sub-down">
 						<li>
-							<a href="weather_true">天气</a>
+							<a href="weather_true">天气预报</a>
 						</li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="dropdown-toggle" href="#">
-						<span class="icon-holder">
-							<i class="lni-timer"></i>
-						</span>
-						<span class="title">历史数据</span>
-						<span class="arrow">
-						<i class="lni-chevron-right"></i>
-						</span>
-						</a>
-						<ul class="dropdown-menu sub-down">
-							<li>
-								<a href="temperature">数据展示</a>
-							</li>
-							<li>
-								<a href="humidity">数据下载</a>
-							</li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -249,12 +250,12 @@
 {% block b %}
 				<div class="breadcrumb-wrapper row">
 					<div class="col-12 col-lg-3 col-md-6">
-						<h4 class="page-title">一小时内</h4>
+						<h4 class="page-title">近期数据</h4>
 					</div>
 					<div class="col-12 col-lg-9 col-md-6">
 						<ol class="breadcrumb float-right">
-							<li><a href="navigation_2">近期数据</a></li>
-							<li class="active">/ 一小时内</li>
+							<li><a href="navigation_2">系统总控</a></li>
+							<li class="active">/ 近期数据</li>
 						</ol>
 					</div>
 				</div>
@@ -264,47 +265,47 @@
 			<div class="container-fluid">
 {% block c %}
 			<div class="row">
-				<div class="col-lg-3 col-md-6 col-xs-12">
+				<div class="col-md-3">
 					<div class="info-box bg-warning">
 						<div class="icon-box">
 							<img class="img-fluid" src="../static/images/data-icon/temperature.png">
 						</div>
 						<div class="info-box-content" style="text-align: center;">
 							<h4 class="number"><span  id="data">25</span>&nbsp;℃</h4>
-							<p class="info-text">一分钟内温度</p>
+							<p class="info-text">温度</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-xs-12">
+				<div class="col-md-3">
 					<div class="info-box bg-success">
 						<div class="icon-box">
 							<img class="img-fluid" src="../static/images/data-icon/humidity.png">
 						</div>
 						<div class="info-box-content" style="text-align: center;">
 							<h4 class="number"><span  id="data1">90</span>&nbsp;%</h4>
-							<p class="info-text">一分钟内湿度</p>
+							<p class="info-text">湿度</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-xs-12">
+				<div class="col-md-3">
 					<div class="info-box bg-info">
 						<div class="icon-box">
 							<img class="img-fluid" src="../static/images/data-icon/lux.png">
 						</div>
 						<div class="info-box-content" style="text-align: center;">
 							<h4 class="number"><span  id="data2">50</span>&nbsp;klux</h4>
-							<p class="info-text">一分钟内光照度</p>
+							<p class="info-text">光照度</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-xs-12">
+				<div class="col-md-3">
 					<div class="info-box bg-purple">
 						<div class="icon-box">
 							<img class="img-fluid" src="../static/images/data-icon/co2.png">
 						</div>
 						<div class="info-box-content" style="text-align: center;">
 							<h4 class="number"><span  id="data3">774</span>&nbsp;ppm</h4>
-							<p class="info-text">一分钟内CO2含量</p>
+							<p class="info-text">CO2含量</p>
 						</div>
 					</div>
 				</div>
@@ -314,33 +315,43 @@
 				<div class="col-md-6">
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title">温度</h5>
+							<h5 class="card-title">一小时内数据</h5>
 						</div>
-						<div id="main" style="height: 300px"></div>
+						<div class="row">
+							<div class="col-md-6">
+								<div id="main" style="height: 250px"></div>
+							</div>
+							<div class="col-md-6">
+								<div id="main1" style="height: 250px"></div>
+							</div>
+							<div class="col-md-6">
+								<div id="main2" style="height: 250px"></div>
+							</div>
+							<div class="col-md-6">
+								<div id="main3" style="height: 250px"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="card">
 						<div class="card-header">
-							<h5 class="card-title">湿度</h5>
+							<h5 class="card-title">一天内数据</h5>
 						</div>
-						<div id="main1" style="height: 300px"></div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">光照度</h5>
+						<div class="row">
+							<div class="col-md-6">
+								<div id="main_day" style="height: 250px"></div>
+							</div>
+							<div class="col-md-6">
+								<div id="main1_day" style="height: 250px"></div>
+							</div>
+							<div class="col-md-6">
+								<div id="main2_day" style="height: 250px"></div>
+							</div>
+							<div class="col-md-6">
+								<div id="main3_day" style="height: 250px"></div>
+							</div>
 						</div>
-						<div id="main2" style="height: 300px"></div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">CO2含量</h5>
-						</div>
-						<div id="main3" style="height: 300px"></div>
 					</div>
 				</div>
 			</div>
@@ -378,10 +389,18 @@
 	var myChart1 = echarts.init(document.getElementById('main1'));
 	var myChart2 = echarts.init(document.getElementById('main2'));
 	var myChart3 = echarts.init(document.getElementById('main3'));
+	var myChart_day = echarts.init(document.getElementById('main_day'));
+	var myChart1_day = echarts.init(document.getElementById('main1_day'));
+	var myChart2_day = echarts.init(document.getElementById('main2_day'));
+	var myChart3_day = echarts.init(document.getElementById('main3_day'));
   	myChart.showLoading({color: '#00aa00'});
 	myChart1.showLoading({color: '#00aa00'});
 	myChart2.showLoading({color: '#00aa00'});
 	myChart3.showLoading({color: '#00aa00'});
+	myChart_day.showLoading({color: '#00aa00'});
+	myChart1_day.showLoading({color: '#00aa00'});
+	myChart2_day.showLoading({color: '#00aa00'});
+	myChart3_day.showLoading({color: '#00aa00'});
 
 	//生成x轴轴标数据
 	var time = [];
@@ -389,15 +408,16 @@
 	    time.push(j+'分钟前')
 	}
 	
-	setInterval( function(){$.get('/data_hour',function (dic) {
+	$(function(){
+	  $.get('/data_hour',function (dic) {
 		myChart.hideLoading({color: '#00aa00'});
 		myChart1.hideLoading({color: '#00aa00'});
 		myChart2.hideLoading({color: '#00aa00'});
 		myChart3.hideLoading({color: '#00aa00'});
-		document.getElementById("data").innerHTML = dic.temperature[dic.temperature.length - 1].toFixed(0);
-		document.getElementById("data1").innerHTML = dic.humidity[dic.humidity.length - 1].toFixed(0);
-		document.getElementById("data2").innerHTML = dic.lux[dic.lux.length - 1].toFixed(2);
-		document.getElementById("data3").innerHTML = dic.co2[dic.co2.length - 1].toFixed(0);
+		document.getElementById("data").innerHTML = dic.temperature[dic.temperature.length - 1];
+		document.getElementById("data1").innerHTML = dic.humidity[dic.humidity.length - 1];
+		document.getElementById("data2").innerHTML = dic.lux[dic.lux.length - 1];
+		document.getElementById("data3").innerHTML = dic.co2[dic.co2.length - 1];
 	    myChart.setOption({
 			legend: {
 			    data: ['温度(℃)'],
@@ -405,6 +425,15 @@
 				  color: "#000000"
 				},
 			},
+			tooltip: [{
+				trigger: 'axis', 						
+				axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+				    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+					crossStyle: {
+				        color: '#000000'//白色
+					}
+				},
+			}],
 	        xAxis: {
 	            data: time,
 				axisLabel: {
@@ -445,6 +474,15 @@
 				  color: "#000000"
 				},
 			},
+			tooltip: [{
+				trigger: 'axis', 						
+				axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+				    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+					crossStyle: {
+				        color: '#000000'//白色
+					}
+				},
+			}],
 		    xAxis: {
 		        data: time,
 				axisLabel: {
@@ -486,6 +524,15 @@
 				  color: "#000000"
 				},
 			},
+			tooltip: [{
+				trigger: 'axis', 						
+				axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+				    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+					crossStyle: {
+				        color: '#000000'//白色
+					}
+				},
+			}],
 		    xAxis: {
 		        data: time,
 				axisLabel: {
@@ -526,6 +573,15 @@
 				  color: "#000000"
 				},
 			},
+			tooltip: [{
+				trigger: 'axis', 						
+				axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+				    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+					crossStyle: {
+				        color: '#000000'//白色
+					}
+				},
+			}],
 		    xAxis: {
 		        data: time,
 				axisLabel: {
@@ -560,7 +616,238 @@
 		        data: dic.co2
 		    }]
 		});
-	})}, 100);
+	});
+	$.get('/data_day',function (data) {
+		myChart_day.hideLoading({color: '#00aa00'});
+		myChart1_day.hideLoading({color: '#00aa00'});
+		myChart2_day.hideLoading({color: '#00aa00'});
+		myChart3_day.hideLoading({color: '#00aa00'});
+	    myChart_day.setOption({
+			legend: {
+			    data: ['温度(℃)'],
+				textStyle: {
+				  color: "#000000"
+				},
+			},
+			tooltip: [{
+				trigger: 'axis', 						
+				axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+				    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+					crossStyle: {
+				        color: '#000000'//白色
+					}
+				},
+			}],
+	        xAxis: [
+				{
+					type:'category',
+					data:data.time,
+					axisLabel: {
+					  textStyle: {
+					    color: "#000000"
+					  },
+					},
+				}
+			],
+			yAxis: [
+				{
+					type:'value',
+					name: '温度',
+					min: 0,
+					max: 40,
+					splitLine:{
+					　　　　show:false
+					　　},
+					axisLabel: {
+					    textStyle: {
+						    color: "#000000"
+						              },
+					    formatter: '{value}'
+				}
+				}],
+			series: [{//默认第一个图第一个轴
+			    name: '温度(℃)',
+			    type: 'bar',
+				itemStyle: {
+				//通常情况下：
+				normal: {
+				    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+				    color: '#00aa00'
+					}
+					},
+				data:data.temperature,
+			}],
+	    });
+		myChart1_day.setOption({
+			legend: {
+			    data: ['湿度(%)'],
+				textStyle: {
+				  color: "#000000"
+				},
+			},
+			tooltip: [{
+				trigger: 'axis', 						
+				axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+				    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+					crossStyle: {
+				        color: '#000000'//白色
+					}
+				},
+			}],
+		    xAxis: [
+				{
+					type:'category',
+					data:data.time,
+					axisLabel: {
+					  textStyle: {
+					    color: "#000000"
+					  },
+					},
+				}
+			],
+			yAxis: [
+				{
+					type:'value',
+					name: '湿度',
+					min: 0,
+					max: 100,
+					splitLine:{
+					　　　　show:false
+					　　},
+					axisLabel: {
+					    textStyle: {
+						    color: "#000000"
+						              },
+					    formatter: '{value}'
+				}
+				}],
+			series: [{//默认第一个图第一个轴
+			    name: '湿度(%)',
+			    type: 'bar',
+				itemStyle: {
+				//通常情况下：
+				normal: {
+				    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+				    color: '#00aa00'
+					}
+					},
+				data:data.humidity,
+			}],
+		});
+		myChart2_day.setOption({
+			legend: {
+			    data: ['光照度(klux)'],
+				textStyle: {
+				  color: "#000000"
+				},
+			},
+			tooltip: [{
+				trigger: 'axis', 						
+				axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+				    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+					crossStyle: {
+				        color: '#000000'//白色
+					}
+				},
+			}],
+		    xAxis: [
+				{
+					type:'category',
+					data:data.time,
+					axisLabel: {
+					  textStyle: {
+					    color: "#000000"
+					  },
+					},
+				}
+			],
+			yAxis: [
+				{
+					type:'value',
+					name: '光照度',
+					min: 0,
+					max: 80,
+					splitLine:{
+					　　　　show:false
+					　　},
+					axisLabel: {
+					    textStyle: {
+						    color: "#000000"
+						              },
+					    formatter: '{value}'
+				}
+				}],
+			series: [{//默认第一个图第一个轴
+			    name: '光照度(klux)',
+			    type: 'bar',
+				itemStyle: {
+				//通常情况下：
+				normal: {
+				    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+				    color: '#00aa00'
+					}
+					},
+				data:data.lux,
+			}],
+		});
+		myChart3_day.setOption({
+			legend: {
+			    data: ['CO2含量(ppm)'],
+				textStyle: {
+				  color: "#000000"
+				},
+			},
+			tooltip: [{
+				trigger: 'axis', 						
+				axisPointer: {  //坐标轴指示器，坐标轴触发有效，
+				    type: 'cross', //默认为line，line直线，cross十字准星，shadow阴影
+					crossStyle: {
+				        color: '#000000'//白色
+					}
+				},
+			}],
+		    xAxis: [
+				{
+					type:'category',
+					data:data.time,
+					axisLabel: {
+					  textStyle: {
+					    color: "#000000"
+					  },
+					},
+				}
+			],
+			yAxis: [
+				{
+					type:'value',
+					name: 'CO2含量',
+					min: 0,
+					max: 800,
+					splitLine:{
+					　　　　show:false
+					　　},
+					axisLabel: {
+					    textStyle: {
+						    color: "#000000"
+						              },
+					    formatter: '{value}'
+				}
+				}],
+			series: [{//默认第一个图第一个轴
+			    name: 'CO2含量(ppm)',
+			    type: 'bar',
+				itemStyle: {
+				//通常情况下：
+				normal: {
+				    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+				    color: '#00aa00'
+					}
+					},
+				data:data.co2,
+			}],
+		});
+	});
+	});
   </script>
 {% endblock %}
 

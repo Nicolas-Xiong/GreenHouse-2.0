@@ -12,17 +12,36 @@
 							<span class="icon-holder">
 								<i class="lni-dashboard"></i>
 							</span>
-							<span class="title">近期数据</span>
+							<span class="title">系统总控</span>
 							<span class="arrow">
 							<i class="lni-chevron-right"></i>
 							</span>
 						</a>
 						<ul class="dropdown-menu sub-down">
 							<li>
-								<a href="navigation_2">一小时内</a>
+								<a href="navigation_2">近期数据</a>
 							</li>
 							<li>
-								<a href="navigation_2_2">一天内</a>
+								<a href="navigation_2_2">环境控制</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+						<span class="icon-holder">
+							<i class="lni-timer"></i>
+						</span>
+						<span class="title">历史数据</span>
+						<span class="arrow">
+						<i class="lni-chevron-right"></i>
+						</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li>
+								<a href="temperature">数据展示</a>
+							</li>
+							<li>
+								<a href="humidity">数据下载</a>
 							</li>
 						</ul>
 					</li>
@@ -63,27 +82,8 @@
 						</a>
 						<ul class="dropdown-menu sub-down">
 						<li  class="active">
-							<a href="weather_true">天气</a>
+							<a href="weather_true">天气预报</a>
 						</li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="dropdown-toggle" href="#">
-						<span class="icon-holder">
-							<i class="lni-timer"></i>
-						</span>
-						<span class="title">历史数据</span>
-						<span class="arrow">
-						<i class="lni-chevron-right"></i>
-						</span>
-						</a>
-						<ul class="dropdown-menu sub-down">
-							<li>
-								<a href="temperature">数据展示</a>
-							</li>
-							<li>
-								<a href="humidity">数据下载</a>
-							</li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -146,7 +146,7 @@
 								<form method="POST">
 									<div class='input-group date custom-control custom-control-inline' >
 										<input type='text' class="form-control" name="search" placeholder="搜索城市"/>
-										<button type="submit" class="btn btn-outline-success" style="margin-left: 20px;margin-right: 20px;">确定</button>
+										<button type="submit" class="btn btn-common" style="margin-left: 20px;margin-right: 20px;">确定</button>
 									</div>
 								</form>
 							</div>

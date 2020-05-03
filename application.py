@@ -64,21 +64,22 @@ def inject_user():           #这个函数返回的变量（以字典键值对�
     user=current_user    #当前用户信息
     return dict(user=user)
 
-@app.route('/navigation_2', methods=['GET'])    #一小时内的数据
+@app.route('/navigation_2', methods=['GET'])    #近期数据
 def navigation_2():
     return render_template('navigation_2.html')
-@app.route('/data_hour',methods=['GET'])
+
+@app.route('/data_hour',methods=['GET']) #一小时数据获取
 def data_hour():
     hour_data = Greenhouse_data_hour.query.all()[0]
     #eval去除字符串的引号并执行内部内容
-    dic={'temperature':eval(hour_data.Temperature_hour),'humidity':eval(hour_data.Humidity_hour),'lux':eval(hour_data.Lux_hour),'co2':eval(hour_data.Co2_hour)}
+    dic={'temperature':[int(t) for t in eval(hour_data.Temperature_hour)],
+         'humidity':[int(h)for h in eval(hour_data.Humidity_hour)],
+         'lux':['%.2f' % float(l)for l in eval(hour_data.Lux_hour)],
+         'co2':[int(c) for c in eval(hour_data.Co2_hour)]}
  
     return jsonify(dic)
 
-@app.route('/navigation_2_2', methods=['GET'])   #一天内的数据
-def navigation_2_2():
-    return render_template('navigation_2_2.html')
-@app.route('/data_day',methods=['GET'])
+@app.route('/data_day',methods=['GET'])#一天数据获取
 def data_day():  
     max_id = db.session.query(func.max(Greenhouse_data_day.id)).all()[0][0] #获取最大id值
     before_id = max_id - 24
@@ -100,6 +101,54 @@ def data_day():
     dic={'time':time_,'temperature':temperature,'humidity':humidity,'lux':lux,'co2':co2}
     
     return jsonify(dic)
+
+@app.route('/navigation_2_2', methods=['GET','POST'])   #环境控制
+def navigation_2_2():
+    path = os.getcwd()  # 获取当前目录
+    path = path + '/expert_system/user.txt'
+    if request.method == 'POST': 
+        temperature_min = request.form['temperature_min']
+        temperature_max = request.form['temperature_max']
+        humidity_min = request.form['humidity_min']
+        humidity_max = request.form['humidity_max']
+        lux_min = request.form['lux_min']
+        lux_max = request.form['lux_max']
+        carbon_min = request.form['carbon_min']
+        carbon_max = request.form['carbon_max']
+        begin=temperature_min+' '+temperature_max+' '+humidity_min+' '+humidity_max
+        end=lux_min+' '+lux_max+' '+carbon_min+' '+carbon_max
+        txt_write(path,begin,end)  #自编函数，数据写入相应路径
+        
+    f = open(path,'r+')  #以读写方式打开 
+    user_data = f.read()
+    
+    data={'temperature_min':user_data.split(' ')[0],
+         'temperature_max':user_data.split(' ')[1],
+         'humidity_min':user_data.split(' ')[2],
+         'humidity_max':user_data.split(' ')[3],
+         'lux_min':user_data.split(' ')[4],
+         'lux_max':user_data.split(' ')[5],
+         'co2_min':user_data.split(' ')[6],
+         'co2_max':user_data.split(' ')[7]}
+    
+    return render_template('navigation_2_2.html',dic=data)
+
+@app.route('/expert_system', methods=['GET'])
+def expert_system():
+    hour_data = Greenhouse_data_hour.query.all()[0]
+    #eval去除字符串的引号并执行内部内容
+    last_data={'temperature':int(eval(hour_data.Temperature_hour)[len(eval(hour_data.Temperature_hour))-1]),
+         'humidity':int(eval(hour_data.Humidity_hour)[len(eval(hour_data.Humidity_hour))-1]),
+         'lux':'%.2f' % float(eval(hour_data.Lux_hour)[len(eval(hour_data.Lux_hour))-1]),
+         'co2':int(eval(hour_data.Co2_hour)[len(eval(hour_data.Co2_hour))-1])}
+    
+    last_data['temperature']=20
+    last_data['humidity']=99
+    last_data['lux']=80
+    last_data['co2']=800
+    
+    print(last_data)
+    return jsonify(last_data)
 
 @app.route('/video', methods=['GET'])    #视频窗口一
 def video():
