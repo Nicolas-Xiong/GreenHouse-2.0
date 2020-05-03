@@ -147,7 +147,7 @@ def expert_system():
     last_data['lux']=80
     last_data['co2']=800
     
-    print(last_data)
+    #print(last_data)
     return jsonify(last_data)
 
 @app.route('/video', methods=['GET'])    #视频窗口一
