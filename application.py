@@ -143,8 +143,8 @@ def expert_system():
          'co2':int(eval(hour_data.Co2_hour)[len(eval(hour_data.Co2_hour))-1])}
     
     #last_data['temperature']=20
-    last_data['humidity']=99
-    last_data['lux']=80
+    # last_data['humidity']=99
+    # last_data['lux']=80
     #last_data['co2']=800
     
     #print(last_data)
