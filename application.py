@@ -74,9 +74,15 @@ def data_hour():
     #eval去除字符串的引号并执行内部内容
     dic={'temperature':[int(t) for t in eval(hour_data.Temperature_hour)],
          'humidity':[int(h)for h in eval(hour_data.Humidity_hour)],
-         'lux':['%.2f' % float(l)for l in eval(hour_data.Lux_hour)],
+         'lux':[round(float(l),2) for l in eval(hour_data.Lux_hour)],
          'co2':[int(c) for c in eval(hour_data.Co2_hour)]}
- 
+    
+        
+    dic['max']=[max(dic['temperature']),max(dic['humidity']),max(dic['lux']),max(dic['co2'])]
+    dic['min']=[min(dic['temperature']),min(dic['humidity']),min(dic['lux']),min(dic['co2'])]
+    dic['ave']=[mean(dic['temperature'],2),mean(dic['humidity'],2),mean(dic['lux'],2),mean(dic['co2'],2)]
+    dic['var_']=[round(np.var(dic['temperature']),2),round(np.var(dic['humidity']),2),round(np.var(dic['lux']),2),round(np.var(dic['co2']),2)]
+    
     return jsonify(dic)
 
 @app.route('/data_day',methods=['GET'])#一天数据获取
@@ -95,10 +101,15 @@ def data_day():
           time_.append(day_date.Time+'点')
           temperature.append(int(float(day_date.Temperature)))
           humidity.append(int(float(day_date.Humidity)))
-          lux.append('%.2f' % float(day_date.Lux))
+          lux.append(round(float(day_date.Lux),2))
           co2.append(int(float(day_date.Co2)))
     
     dic={'time':time_,'temperature':temperature,'humidity':humidity,'lux':lux,'co2':co2}
+    
+    dic['max']=[max(dic['temperature']),max(dic['humidity']),max(dic['lux']),max(dic['co2'])]
+    dic['min']=[min(dic['temperature']),min(dic['humidity']),min(dic['lux']),min(dic['co2'])]
+    dic['ave']=[mean(dic['temperature'],2),mean(dic['humidity'],2),mean(dic['lux'],2),mean(dic['co2'],2)]
+    dic['var_']=[round(np.var(dic['temperature']),2),round(np.var(dic['humidity']),2),round(np.var(dic['lux']),2),round(np.var(dic['co2']),2)]
     
     return jsonify(dic)
 
@@ -221,13 +232,20 @@ def temperature():
         time_.append(d.Time+'点')
         temperature.append(int(float(d.Temperature)))
         humidity.append(int(float(d.Humidity)))
-        lux.append('%.2f' % float(d.Lux))
+        lux.append(round(float(d.Lux),2))
         co2.append(int(float(d.Co2)))
     
     date_str=str(date)
     date_formation=date_str.split('-')[0]+"年"+date_str.split('-')[1]+"月"+date_str.split('-')[2]+"日"
     
     dic={'date':date_formation,'time':time_,'temperature':temperature,'humidity':humidity,'lux':lux,'co2':co2}
+    
+    dic['max']=[max(dic['temperature']),max(dic['humidity']),max(dic['lux']),max(dic['co2'])]
+    dic['min']=[min(dic['temperature']),min(dic['humidity']),min(dic['lux']),min(dic['co2'])]
+    dic['ave']=[mean(dic['temperature'],2),mean(dic['humidity'],2),mean(dic['lux'],2),mean(dic['co2'],2)]
+    dic['var_']=[round(np.var(dic['temperature']),2),round(np.var(dic['humidity']),2),round(np.var(dic['lux']),2),round(np.var(dic['co2']),2)]
+
+    
     return render_template('temperature.html',data=dic,status=status)
     
 
@@ -725,7 +743,8 @@ def txt_write(path,begin,end):  #读写txt文件
     f1.write(str(begin)+' '+str(end))  #写入内容
     f1.close
 
-
+def mean(list_,fraction):   #求列表均值
+    return round(float(sum(list_))/len(list_),fraction)
 
 
 

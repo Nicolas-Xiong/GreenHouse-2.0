@@ -354,6 +354,24 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title">一小时内数据的统计</h5>
+						</div>
+						<table id="tb1" class="table table-hover table-light table-sm">
+						</table>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title">一天内数据的统计</h5>
+						</div>
+						<table id="tb2" class="table table-hover table-light table-sm">
+						</table>
+					</div>
+				</div>
 			</div>
 {% endblock %}
 			</div>
@@ -408,6 +426,15 @@
 	    time.push(j+'分钟前')
 	}
 	
+	function table(max, min, ave,var_) {
+		s = '<thead class="thead-dark"><tr><th style="color: #ffffff;"></th><th style="color: #ffffff;">温度</th><th style="color: #ffffff;">湿度</th><th style="color: #ffffff;">光照度</th><th style="color: #ffffff;">CO2含量</th></tr></thead>';
+	    s1 = '<tr><td>最大值</td><td>' + max[0] + '℃</td><td>' + max[1] + '%</td><td>' + max[2] + 'klux</td><td>' + max[3] + 'ppm</td></tr>';
+		s2 = '<tr><td>最小值</td><td>' + min[0] + '℃</td><td>' + min[1] + '%</td><td>' + min[2] + 'klux</td><td>' + min[3] + 'ppm</td></tr>';
+		s3 = '<tr><td>平均值</td><td>' + ave[0] + '℃</td><td>' + ave[1] + '%</td><td>' + ave[2] + 'klux</td><td>' + ave[3] + 'ppm</td></tr>';
+		s4 = '<tr><td>方差</td><td>' + var_[0] + '</td><td>' + var_[1] + '</td><td>' + var_[2] + '</td><td>' + var_[3] + '</td></tr>';
+		return s+s1+s2+s3+s4
+	}
+	
 	$(function(){
 	  $.get('/data_hour',function (dic) {
 		myChart.hideLoading({color: '#00aa00'});
@@ -418,6 +445,7 @@
 		document.getElementById("data1").innerHTML = dic.humidity[dic.humidity.length - 1];
 		document.getElementById("data2").innerHTML = dic.lux[dic.lux.length - 1];
 		document.getElementById("data3").innerHTML = dic.co2[dic.co2.length - 1];
+		document.getElementById("tb1").innerHTML = table(dic.max,dic.min,dic.ave,dic.var_);
 	    myChart.setOption({
 			legend: {
 			    data: ['温度(℃)'],
@@ -622,6 +650,7 @@
 		myChart1_day.hideLoading({color: '#00aa00'});
 		myChart2_day.hideLoading({color: '#00aa00'});
 		myChart3_day.hideLoading({color: '#00aa00'});
+		document.getElementById("tb2").innerHTML = table(data.max,data.min,data.ave,data.var_);
 	    myChart_day.setOption({
 			legend: {
 			    data: ['温度(℃)'],
