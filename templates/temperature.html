@@ -19,6 +19,9 @@
 						</a>
 						<ul class="dropdown-menu sub-down">
 							<li>
+								<a href="navigation">温室选择</a>
+							</li>
+							<li>
 								<a href="navigation_2">近期数据</a>
 							</li>
 							<li>
@@ -37,7 +40,10 @@
 						</span>
 						</a>
 						<ul class="dropdown-menu sub-down">
-							<li class="active">
+							<li>
+								<a href="navigation_history">温室选择</a>
+							</li>
+							<li  class="active">
 								<a href="temperature">数据展示</a>
 							</li>
 							<li>
@@ -57,16 +63,19 @@
 						</a>
 						<ul class="dropdown-menu sub-down">
 							<li>
-								<a href="video">窗口一</a>
+								<a href="video">一号温室</a>
 							</li>
 							<li>
-								<a href="video_2">窗口二</a>
+								<a href="video_2">二号温室</a>
 							</li>
 							<li>
-								<a href="video_3">窗口三</a>
+								<a href="video_3">三号温室</a>
 							</li>
 							<li>
-								<a href="video_4">窗口四</a>
+								<a href="video_4">四号温室</a>
+							</li>
+							<li>
+								<a href="video_5">五号温室</a>
 							</li>
 						</ul>
 					</li>
@@ -129,7 +138,7 @@
 					</div>
 					<div class="col-12 col-lg-9 col-md-6">
 						<ol class="breadcrumb float-right">
-							<li><a href="temperature">历史数据</a></li>
+							<li><a href="navigation_history">历史数据</a></li>
 							<li class="active">/ 数据展示</li>
 						</ol>
 					</div>
@@ -167,7 +176,7 @@
 		</div>
 		<div class="card">
 			<div class="card-header">
-				<h5 class="card-title">{{data.date}}</h5>
+				<h2 class="text-muted" style="text-align:center;margin-top: 15px;">{{data.date}}</h2>
 			</div>
 			<table id="tb2" class="table table-hover table-light table-sm">
 			</table>

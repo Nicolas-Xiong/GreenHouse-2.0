@@ -64,6 +64,10 @@ def inject_user():           #这个函数返回的变量（以字典键值对�
     user=current_user    #当前用户信息
     return dict(user=user)
 
+@app.route('/navigation', methods=['GET'])    #温室选择
+def navigation():
+    return render_template('navigation.html')
+
 @app.route('/navigation_2', methods=['GET'])    #近期数据
 def navigation_2():
     return render_template('navigation_2.html')
@@ -177,6 +181,10 @@ def video_3():
 def video_4():
     return render_template('video_4.html')
 
+@app.route('/video_5', methods=['GET'])  #视频窗口五
+def video_5():
+    return render_template('video_5.html')
+
 @app.route('/weather_true', methods=['GET','POST'])
 def weather_true():
     location_id="CN101200101" #默认显示武汉的天气情况
@@ -204,6 +212,10 @@ def weather_true():
     data_forecast = weather_data_get(weather_type='forecast',location=location_id)
     data_lifestyle = weather_data_get(weather_type='lifestyle',location=location_id)
     return render_template('weather.html',now=data_now,forecast=data_forecast,lifestyle=data_lifestyle,location_cn=location_cn)
+
+@app.route('/navigation_history', methods=['GET'])    #历史温室选择
+def navigation_history():
+    return render_template('navigation_history.html')
 
 @app.route('/temperature', methods=['GET', 'POST'])   #数据展示
 def temperature():
@@ -244,7 +256,6 @@ def temperature():
     dic['min']=[min(dic['temperature']),min(dic['humidity']),min(dic['lux']),min(dic['co2'])]
     dic['ave']=[mean(dic['temperature'],2),mean(dic['humidity'],2),mean(dic['lux'],2),mean(dic['co2'],2)]
     dic['var_']=[round(np.var(dic['temperature']),2),round(np.var(dic['humidity']),2),round(np.var(dic['lux']),2),round(np.var(dic['co2']),2)]
-
     
     return render_template('temperature.html',data=dic,status=status)
     
@@ -453,7 +464,7 @@ def settings():
         profile = request.form['profile']
         goback = request.form['submit']
         if goback=='返回':             
-            return redirect(url_for('navigation_2'))
+            return redirect(url_for('navigation'))
         if len(username)>20 or len(profile)>100:
             return render_template('settings.html',status_error=2)  #用户名或者简介过长
         if not username or not profile: 
@@ -483,7 +494,7 @@ def login():
         visitor = request.form['submit']
         if visitor=='游客':            #游客登录  
             logout_user() #若已经登录则会登出
-            return redirect(url_for('navigation_2'))
+            return redirect(url_for('navigation'))
         if not username or not password or len(username)>20:   #未输入或者输入过长     
             #flash('无效的输入')           
             return render_template('login.html',status_error=1) 
@@ -494,7 +505,7 @@ def login():
         if user!=None and user.validate_password(password):      
             login_user(user)  # 登入用户            
             #flash('登录成功')           
-            return redirect(url_for('navigation_2'))  #登录成功  
+            return redirect(url_for('navigation'))  #登录成功  
         #flash('用户名或密码错误')  # 如果验证失败，显示错误消息        
         return render_template('login.html',status_error=2)  # 用户名或者密码错误
     return render_template('login.html') 
@@ -526,7 +537,7 @@ def sign_up():
         db.session.add(user)  #添加用户到数据库
         db.session.commit()  # 提交数据库会话
         login_user(user)  # 登入用户
-        return redirect(url_for('navigation_2'))  #登录成功
+        return redirect(url_for('navigation'))  #登录成功
     return render_template('sign_up.html')
 
 @app.route('/forgot_password', methods=['GET','POST'])  #修改密码函数
@@ -544,7 +555,7 @@ def forgot_password():
             user.password_hash=generate_password_hash(password1) #修改密码
             db.session.commit()  # 提交数据库会话
             login_user(user)  # 登入用户 
-            return redirect(url_for('navigation_2'))  #登录成功
+            return redirect(url_for('navigation'))  #登录成功
         return render_template('forgot_password.html',status_error=2) 
     return render_template('forgot_password.html')
 

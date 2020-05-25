@@ -1,0 +1,830 @@
+{% extends 'navigation_2.html' %}
+
+{% block a %} 
+<div class="side-nav expand-lg">
+			<div class="side-nav-inner">
+				<ul class="side-nav-menu">
+					<li class="side-nav-header">
+						<h2 style="color:#c5c5c5">导航栏</h2>
+					</li>
+					<li class="nav-item dropdown  open">
+						<a href="#" class="dropdown-toggle">
+							<span class="icon-holder">
+								<i class="lni-dashboard"></i>
+							</span>
+							<span class="title">系统总控</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li class="active">
+								<a href="navigation">温室选择</a>
+							</li>
+							<li>
+								<a href="navigation_2">近期数据</a>
+							</li>
+							<li>
+								<a href="navigation_2_2">环境控制</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+						<span class="icon-holder">
+							<i class="lni-timer"></i>
+						</span>
+						<span class="title">历史数据</span>
+						<span class="arrow">
+						<i class="lni-chevron-right"></i>
+						</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li>
+								<a href="navigation_history">温室选择</a>
+							</li>
+							<li>
+								<a href="temperature">数据展示</a>
+							</li>
+							<li>
+								<a href="humidity">数据下载</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+							<span class="icon-holder">
+								<i class="lni-camera"></i>
+							</span>
+							<span class="title">视频监控</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+							<li>
+								<a href="video">一号温室</a>
+							</li>
+							<li>
+								<a href="video_2">二号温室</a>
+							</li>
+							<li>
+								<a href="video_3">三号温室</a>
+							</li>
+							<li>
+								<a href="video_4">四号温室</a>
+							</li>
+							<li>
+								<a href="video_5">五号温室</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+							<span class="icon-holder">
+								<i class="lni-cloud"></i>
+							</span>
+							<span class="title">天气预报</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu sub-down">
+						<li>
+							<a href="weather_true">天气预报</a>
+						</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" href="#">
+							<span class="icon-holder">
+								<i class="lni-files"></i>
+							</span>
+							<span class="title">特殊页面</span>
+							<span class="arrow">
+							<i class="lni-chevron-right"></i>
+							</span>
+						</a>
+					<ul class="dropdown-menu sub-down">
+						<li>
+							<a href="profile">简介</a>
+						</li>
+						<li>
+							<a href="settings">设置</a>
+						</li>
+						<li>
+							<a href="{{ url_for('login') }}">登录</a>
+						</li>
+						<li>
+							<a href="sign_up">注册</a>
+						</li>
+						<li>
+							<a href="forgot_password">忘记密码</a>
+						</li>
+						<li>
+							<a href="_404">404错误</a>
+						</li>
+					</ul>
+					</li>
+					</ul>
+			</div>
+		</div>
+{% endblock %}
+
+{% block b %} 
+				<div class="breadcrumb-wrapper row">
+					<div class="col-12 col-lg-3 col-md-6">
+						<h4 class="page-title">温室选择</h4>
+					</div>
+					<div class="col-12 col-lg-9 col-md-6">
+						<ol class="breadcrumb float-right">
+							<li><a href="navigation">系统总控</a></li>
+							<li class="active">/ 温室选择</li>
+						</ol>
+					</div>
+				</div>
+{% endblock %}
+
+{% block c %}
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			 <section>
+				<div class="tabs tabs-style-bar">
+					<nav>
+						<ul>
+							<li class="click_0"><a  href="#section-bar-1" ><span>一号温室</span></a></li>
+							<li class="click_1"><a  href="#section-bar-2" ><span>二号温室</span></a></li>
+							<li class="click_2"><a  href="#section-bar-3" ><span>三号温室</span></a></li>
+							<li class="click_3"><a  href="#section-bar-4" ><span>四号温室</span></a></li>
+							<li class="click_4"><a  href="#section-bar-5" ><span>五号温室</span></a></li>
+						</ul>
+					</nav>
+					<div class="content-wrap">
+						<section id="section-bar-1">
+							<div class="row">
+								<div class="col-12 col-md-6" id='0'>
+								</div>
+								<div class="col-12 col-md-6 0">
+									<h2 class="text-muted" style="margin-top: 15px;">IP与端口</h2>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											 <table>
+												<thead>
+												  <tr>
+													<th>服务端</th>
+													<th></th>
+												  </tr>
+												</thead>
+												<tbody>
+												  <tr>
+													<td>外网IP：</td>
+													<td>47.100.91.71</td>
+												  </tr>
+												  <tr>
+													<td>内网IP：</td>
+													<td>172.17.52.129</td>
+												  </tr>
+												  <tr>
+													<td>端口：</td>
+													<td>8000</td>
+												  </tr>
+												</tbody>
+											  </table>
+									    </div>
+										<div class="col-12 col-md-6">
+											  <table>
+												 <thead>
+												   <tr>
+													 <th>采集端</th>
+													 <th></th>
+												   </tr>
+												 </thead>
+												 <tbody>
+												   <tr>
+													 <td>外网IP：</td>
+													 <td>47.100.91.71</td>
+												   </tr>
+												   <tr>
+													 <td>内网IP：</td>
+													 <td>172.17.52.129</td>
+												   </tr>
+												   <tr>
+													 <td>端口：</td>
+													 <td>8001</td>
+												   </tr>
+												 </tbody>
+											   </table>
+										</div>
+									</div>
+									<h2 class="text-muted" style="margin-top: 15px;">位置</h2>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											 <table>
+												<tbody>
+												  <tr>
+													<td>位置：</td>
+													<td>工程楼</td>
+												  </tr>
+												  <tr>
+													<td>经度：</td>
+													<td>114.36550223303016</td>
+												  </tr>
+												  <tr>
+													<td>纬度：</td>
+													<td>30.479438816626306</td>
+												  </tr>
+												</tbody>
+											  </table>
+									    </div>
+									</div>
+									<h2 class="text-muted" style="margin-top: 15px;">选择温室</h2>
+									<div class="row">
+										<div class="col-4">
+										</div>
+										<div class="col-2">
+											<label class="el-switch el-switch-lg el-switch-green">
+												<input type="checkbox" name="switch" id="check0">
+												<span class="el-switch-style check_s"></span>
+											</label>
+										</div>
+										<div class="col-4">
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section id="section-bar-2">
+							<div class="row">
+								<div class="col-12 col-md-6" id='1'>
+								</div>
+								<div class="col-12 col-md-6 1 hidden">
+									<h2 class="text-muted" style="margin-top: 15px;">IP与端口</h2>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											 <table>
+												<thead>
+												  <tr>
+													<th>服务端</th>
+													<th></th>
+												  </tr>
+												</thead>
+												<tbody>
+												  <tr>
+													<td>外网IP：</td>
+													<td>47.100.91.71</td>
+												  </tr>
+												  <tr>
+													<td>内网IP：</td>
+													<td>172.17.52.129</td>
+												  </tr>
+												  <tr>
+													<td>端口：</td>
+													<td>8000</td>
+												  </tr>
+												</tbody>
+											  </table>
+									    </div>
+										<div class="col-12 col-md-6">
+											  <table>
+												 <thead>
+												   <tr>
+													 <th>采集端</th>
+													 <th></th>
+												   </tr>
+												 </thead>
+												 <tbody>
+												   <tr>
+													 <td>外网IP：</td>
+													 <td>47.100.91.71</td>
+												   </tr>
+												   <tr>
+													 <td>内网IP：</td>
+													 <td>172.17.52.129</td>
+												   </tr>
+												   <tr>
+													 <td>端口：</td>
+													 <td>8002</td>
+												   </tr>
+												 </tbody>
+											   </table>
+										</div>
+									</div>
+									<h2 class="text-muted" style="margin-top: 15px;">位置</h2>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											 <table>
+												<tbody>
+												  <tr>
+													<td>位置：</td>
+													<td>创新创业实践中心</td>
+												  </tr>
+												  <tr>
+													<td>经度：</td>
+													<td>114.36960889944658</td>
+												  </tr>
+												  <tr>
+													<td>纬度：</td>
+													<td>30.47470000592645</td>
+												  </tr>
+												</tbody>
+											  </table>
+									    </div>
+									</div>
+									<h2 class="text-muted" style="margin-top: 15px;">选择温室</h2>
+									<div class="row">
+										<div class="col-4">
+										</div>
+										<div class="col-2">
+											<label class="el-switch el-switch-lg el-switch-green">
+												<input type="checkbox" name="switch" id="check1">
+												<span class="el-switch-style check_s"></span>
+											</label>
+										</div>
+										<div class="col-4">
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section id="section-bar-3">
+							<div class="row">
+								<div class="col-12 col-md-6" id='2'>
+								</div>
+								<div class="col-12 col-md-6 2 hidden">
+									<h2 class="text-muted" style="margin-top: 15px;">IP与端口</h2>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											 <table>
+												<thead>
+												  <tr>
+													<th>服务端</th>
+													<th></th>
+												  </tr>
+												</thead>
+												<tbody>
+												  <tr>
+													<td>外网IP：</td>
+													<td>47.100.91.71</td>
+												  </tr>
+												  <tr>
+													<td>内网IP：</td>
+													<td>172.17.52.129</td>
+												  </tr>
+												  <tr>
+													<td>端口：</td>
+													<td>8000</td>
+												  </tr>
+												</tbody>
+											  </table>
+									    </div>
+										<div class="col-12 col-md-6">
+											  <table>
+												 <thead>
+												   <tr>
+													 <th>采集端</th>
+													 <th></th>
+												   </tr>
+												 </thead>
+												 <tbody>
+												   <tr>
+													 <td>外网IP：</td>
+													 <td>Under construction</td>
+												   </tr>
+												   <tr>
+													 <td>内网IP：</td>
+													 <td>Under construction</td>
+												   </tr>
+												   <tr>
+													 <td>端口：</td>
+													 <td>Under construction</td>
+												   </tr>
+												 </tbody>
+											   </table>
+										</div>
+									</div>
+									<h2 class="text-muted" style="margin-top: 15px;">位置</h2>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											 <table>
+												<tbody>
+												  <tr>
+													<td>位置：</td>
+													<td>真菌楼</td>
+												  </tr>
+												  <tr>
+													<td>经度：</td>
+													<td>114.36639767257222</td>
+												  </tr>
+												  <tr>
+													<td>纬度：</td>
+													<td>30.48357182397223</td>
+												  </tr>
+												</tbody>
+											  </table>
+									    </div>
+									</div>
+									<h2 class="text-muted" style="margin-top: 15px;">选择温室</h2>
+									<div class="row">
+										<div class="col-4">
+										</div>
+										<div class="col-2">
+											<label class="el-switch el-switch-lg el-switch-green">
+												<input type="checkbox" name="switch" id="check2">
+												<span class="el-switch-style check_s"></span>
+											</label>
+										</div>
+										<div class="col-4">
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section id="section-bar-4">
+							<div class="row">
+								<div class="col-12 col-md-6" id='3'>
+								</div>
+								<div class="col-12 col-md-6 3 hidden">
+									<h2 class="text-muted" style="margin-top: 15px;">IP与端口</h2>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											 <table>
+												<thead>
+												  <tr>
+													<th>服务端</th>
+													<th></th>
+												  </tr>
+												</thead>
+												<tbody>
+												  <tr>
+													<td>外网IP：</td>
+													<td>47.100.91.71</td>
+												  </tr>
+												  <tr>
+													<td>内网IP：</td>
+													<td>172.17.52.129</td>
+												  </tr>
+												  <tr>
+													<td>端口：</td>
+													<td>8000</td>
+												  </tr>
+												</tbody>
+											  </table>
+									    </div>
+										<div class="col-12 col-md-6">
+											  <table>
+												 <thead>
+												   <tr>
+													 <th>采集端</th>
+													 <th></th>
+												   </tr>
+												 </thead>
+												 <tbody>
+												   <tr>
+													 <td>外网IP：</td>
+													 <td>Under construction</td>
+												   </tr>
+												   <tr>
+													 <td>内网IP：</td>
+													 <td>Under construction</td>
+												   </tr>
+												   <tr>
+													 <td>端口：</td>
+													 <td>Under construction</td>
+												   </tr>
+												 </tbody>
+											   </table>
+										</div>
+									</div>
+									<h2 class="text-muted" style="margin-top: 15px;">位置</h2>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											 <table>
+												<tbody>
+												  <tr>
+													<td>位置：</td>
+													<td>作物楼</td>
+												  </tr>
+												  <tr>
+													<td>经度：</td>
+													<td>114.37028052142382</td>
+												  </tr>
+												  <tr>
+													<td>纬度：</td>
+													<td>30.483880959901516</td>
+												  </tr>
+												</tbody>
+											  </table>
+									    </div>
+									</div>
+									<h2 class="text-muted" style="margin-top: 15px;">选择温室</h2>
+									<div class="row">
+										<div class="col-4">
+										</div>
+										<div class="col-2">
+											<label class="el-switch el-switch-lg el-switch-green">
+												<input type="checkbox" name="switch" id="check3">
+												<span class="el-switch-style check_s"></span>
+											</label>
+										</div>
+										<div class="col-4">
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section id="section-bar-5">
+							<div class="row">
+								<div class="col-12 col-md-6" id='4'>
+								</div>
+								<div class="col-12 col-md-6 4 hidden">
+									<h2 class="text-muted" style="margin-top: 15px;">IP与端口</h2>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											 <table>
+												<thead>
+												  <tr>
+													<th>服务端</th>
+													<th></th>
+												  </tr>
+												</thead>
+												<tbody>
+												  <tr>
+													<td>外网IP：</td>
+													<td>47.100.91.71</td>
+												  </tr>
+												  <tr>
+													<td>内网IP：</td>
+													<td>172.17.52.129</td>
+												  </tr>
+												  <tr>
+													<td>端口：</td>
+													<td>8000</td>
+												  </tr>
+												</tbody>
+											  </table>
+									    </div>
+										<div class="col-12 col-md-6">
+											  <table>
+												 <thead>
+												   <tr>
+													 <th>采集端</th>
+													 <th></th>
+												   </tr>
+												 </thead>
+												 <tbody>
+												   <tr>
+													 <td>外网IP：</td>
+													 <td>Under construction</td>
+												   </tr>
+												   <tr>
+													 <td>内网IP：</td>
+													 <td>Under construction</td>
+												   </tr>
+												   <tr>
+													 <td>端口：</td>
+													 <td>Under construction</td>
+												   </tr>
+												 </tbody>
+											   </table>
+										</div>
+									</div>
+									<h2 class="text-muted" style="margin-top: 15px;">位置</h2>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											 <table>
+												<tbody>
+												  <tr>
+													<td>位置：</td>
+													<td>荟园8楼</td>
+												  </tr>
+												  <tr>
+													<td>经度：</td>
+													<td>114.36994330238623</td>
+												  </tr>
+												  <tr>
+													<td>纬度：</td>
+													<td>30.477996791323704</td>
+												  </tr>
+												</tbody>
+											  </table>
+									    </div>
+									</div>
+									<h2 class="text-muted" style="margin-top: 15px;">选择温室</h2>
+									<div class="row">
+										<div class="col-4">
+										</div>
+										<div class="col-2">
+											<label class="el-switch el-switch-lg el-switch-green">
+												<input type="checkbox" name="switch" id="check4">
+												<span class="el-switch-style check_s"></span>
+											</label>
+										</div>
+										<div class="col-4">
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div><!-- /content -->
+				</div><!-- /tabs -->
+			 </section>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+
+{% block d %}
+<!--公告样式-->
+<link rel="stylesheet" type="text/css" href="../static/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="../static/css/demo.css" />
+
+<!--必要样式-->
+<link rel="stylesheet" type="text/css" href="../static/css/tabs.css" />
+<link rel="stylesheet" type="text/css" href="../static/css/tabstyles.css" />
+  <script src="../static/js/modernizr.custom.js"></script>
+  <script type="text/javascript" src="../static/js/cbpFWTabs.js"></script>
+  <script type="text/javascript" src="https://api.map.baidu.com/getscript?v=2.0&type=webgl&ak=75S2vmKZaXNV6PrMLVYMrx3lvsO3MSoZ">
+  </script>
+  <style>.hidden{display:none}</style>
+  <script type="text/javascript">
+	    var s="<div id='container' style='height:500px'></div>"
+	    document.getElementById('0').innerHTML = s;
+		function init(i){
+			var sites=["工程楼","创新创业实践中心","真菌楼","作物楼","荟园8楼"]
+			var point0 = new BMapGL.Point(114.36550223303016, 30.479438816626306);  // 创建点坐标 
+			var point1 = new BMapGL.Point(114.36960889944658, 30.47470000592645);  // 创建点坐标 
+			var point2 = new BMapGL.Point(114.36639767257222, 30.48357182397223);  // 创建点坐标 
+			var point3 = new BMapGL.Point(114.37028052142382, 30.483880959901516);  // 创建点坐标 
+			var point4 = new BMapGL.Point(114.36994330238623, 30.477996791323704);  // 创建点坐标 
+			var marker0 = new BMapGL.Marker(point0);        // 创建标注 
+			var marker1 = new BMapGL.Marker(point1);        // 创建标注
+			var marker2 = new BMapGL.Marker(point2);        // 创建标注
+			var marker3 = new BMapGL.Marker(point3);        // 创建标注
+			var marker4 = new BMapGL.Marker(point4);        // 创建标注
+			var map = new BMapGL.Map("container");  // 创建地图实例
+			map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+			map.addOverlay(marker0);                     // 将标注添加到地图中
+			map.addOverlay(marker1);                     // 将标注添加到地图中
+			map.addOverlay(marker2);                     // 将标注添加到地图中
+			map.addOverlay(marker3);                     // 将标注添加到地图中
+			map.addOverlay(marker4);                     // 将标注添加到地图中
+			marker0.addEventListener("click", function(){   //为标注添加点击事件
+				alert("这里是华中农业大学"+sites[0]);   
+			});
+			marker1.addEventListener("click", function(){   //为标注添加点击事件
+				alert("这里是华中农业大学"+sites[1]);   
+			});
+			marker2.addEventListener("click", function(){   //为标注添加点击事件
+				alert("这里是华中农业大学"+sites[2]);   
+			});
+			marker3.addEventListener("click", function(){   //为标注添加点击事件
+				alert("这里是华中农业大学"+sites[3]);   
+			});
+			marker4.addEventListener("click", function(){   //为标注添加点击事件
+				alert("这里是华中农业大学"+sites[4]);   
+			});
+			if (i == 0){
+				map.centerAndZoom(point0, 18);   // 初始化地图，设置中心点坐标和地图级别 
+			}
+			else if(i==1){
+				map.centerAndZoom(point1, 18);   // 初始化地图，设置中心点坐标和地图级别 
+			}
+			else if(i==2){
+				map.centerAndZoom(point2, 18);   // 初始化地图，设置中心点坐标和地图级别 
+			}
+			else if(i==3){
+				map.centerAndZoom(point3, 18);   // 初始化地图，设置中心点坐标和地图级别 
+			}
+			else{
+				map.centerAndZoom(point4, 18);   // 初始化地图，设置中心点坐标和地图级别 
+			}
+			//map.setHeading(10);   //设置地图旋转角度
+			//map.setTilt(45);       //设置地图的倾斜角度
+		}
+		init(0)
+		
+		$(".click_0").on("click",function(e){   //标题点击事件处理
+				document.getElementById('0').innerHTML = s;
+				document.getElementById('1').innerHTML = null;
+				document.getElementById('2').innerHTML = null;
+				document.getElementById('3').innerHTML = null;
+				document.getElementById('4').innerHTML = null;
+				$(".0").removeClass("hidden");
+				$(".1").addClass("hidden");
+				$(".2").addClass("hidden");
+				$(".3").addClass("hidden");
+				$(".4").addClass("hidden");
+				setTimeout(function(){ init(0); }, 50); //加入延时执行解决中心坐标bug
+		});
+		$(".click_1").on("click",function(e){
+				document.getElementById('0').innerHTML = null;
+				document.getElementById('1').innerHTML = s;
+				document.getElementById('2').innerHTML = null;
+				document.getElementById('3').innerHTML = null;
+				document.getElementById('4').innerHTML = null;
+				$(".0").addClass("hidden");
+				$(".1").removeClass("hidden");
+				$(".2").addClass("hidden");
+				$(".3").addClass("hidden");
+				$(".4").addClass("hidden");
+				setTimeout(function(){ init(1); }, 50);
+		});
+		$(".click_2").on("click",function(e){
+				document.getElementById('0').innerHTML = null;
+				document.getElementById('1').innerHTML = null;
+				document.getElementById('2').innerHTML = s;
+				document.getElementById('3').innerHTML = null;
+				document.getElementById('4').innerHTML = null;
+				$(".0").addClass("hidden");
+				$(".1").addClass("hidden");
+				$(".2").removeClass("hidden");
+				$(".3").addClass("hidden");
+				$(".4").addClass("hidden");
+				setTimeout(function(){ init(2); }, 50);
+		});
+		$(".click_3").on("click",function(e){
+				document.getElementById('0').innerHTML = null;
+				document.getElementById('1').innerHTML = null;
+				document.getElementById('2').innerHTML = null;
+				document.getElementById('3').innerHTML = s;
+				document.getElementById('4').innerHTML = null;
+				$(".0").addClass("hidden");
+				$(".1").addClass("hidden");
+				$(".2").addClass("hidden");
+				$(".3").removeClass("hidden");
+				$(".4").addClass("hidden");
+				setTimeout(function(){ init(3); }, 50);
+		});
+		$(".click_4").on("click",function(e){
+				document.getElementById('0').innerHTML = null;
+				document.getElementById('1').innerHTML = null;
+				document.getElementById('2').innerHTML = null;
+				document.getElementById('3').innerHTML = null;
+				document.getElementById('4').innerHTML = s;
+				$(".0").addClass("hidden");
+				$(".1").addClass("hidden");
+				$(".2").addClass("hidden");
+				$(".3").addClass("hidden");
+				$(".4").removeClass("hidden");
+				setTimeout(function(){ init(4); }, 50);
+		});
+		// map.addEventListener('click', function(e) {  //任意地方点击事件
+		//     alert('点击的经纬度：' + e.latlng.lng + ', ' + e.latlng.lat);
+		// });
+		
+		(function() {   //对内部导航栏的操作
+			[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+				new CBPFWTabs( el );
+			});
+		})();
+		
+		var check=document.getElementsByTagName("input");
+		check[0].checked = true;
+		
+		$("#check0").on("click",function(e){
+			if (!check[0].checked){
+					alert("选择其他温室会自动关闭");
+					check[0].checked= true;
+				}
+			else{
+				for (i=0;i<5;i++){
+					if (i == 0 ) {continue}
+					check[i].checked=false;
+				}
+			}
+		});
+		$("#check1").on("click",function(e){
+			if (!check[1].checked){
+					alert("选择其他温室会自动关闭");
+					check[1].checked= true;
+				}
+			else{
+				for (i=0;i<5;i++){
+					if (i == 1 ) {continue}
+					check[i].checked=false;
+				}
+			}	
+		});
+		$("#check2").on("click",function(e){
+			if (check[2].checked){
+					alert("温室建设中");
+					check[2].checked= false;
+				}
+		});
+		$("#check3").on("click",function(e){
+			if (check[3].checked){
+					alert("温室建设中");
+					check[3].checked= false;
+				}
+		});
+		$("#check4").on("click",function(e){
+			if (check[4].checked){
+					alert("温室建设中");
+					check[4].checked= false;
+				}
+		});
+  </script>
+{% endblock %}
